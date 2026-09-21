@@ -21,11 +21,15 @@ public class Maestro {
     /** Correo electrónico del maestro. */
     private String correo;
 
+    private String correoInstitucional;
+
     /** Matrícula de registro del maestro. */
     private String matricula;
 
     /** Número de empleado del maestro en la institución. */
     private String numeroEmpleado;
+
+    private String contrasena;
 
     /**
      * Crea un maestro sin datos iniciales.
@@ -43,13 +47,15 @@ public class Maestro {
      * @param matricula matrícula del maestro
      * @param numeroEmpleado número de empleado
      */
-    public Maestro(String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String matricula, String numeroEmpleado) {
+    public Maestro(String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String matricula, String numeroEmpleado, String correoInstitucional, String contrasena) {
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
         this.correo = correo;
         this.matricula = matricula;
         this.numeroEmpleado = numeroEmpleado;
+        this.correoInstitucional = correoInstitucional;
+        this.contrasena = contrasena;
     }
 
     /**
@@ -160,6 +166,22 @@ public class Maestro {
         this.numeroEmpleado = numeroEmpleado;
     }
 
+    public String getCorreoInstitucional() {
+        return correoInstitucional;
+    }
+
+    public void setCorreoInstitucional(String correoInstitucional) {
+        this.correoInstitucional = correoInstitucional;
+    }
+
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
+
     /**
      * Devuelve una representación en texto del maestro.
      *
@@ -172,8 +194,10 @@ public class Maestro {
                 ", apellidoPaterno='" + apellidoPaterno + '\'' +
                 ", apellidoMaterno='" + apellidoMaterno + '\'' +
                 ", correo='" + correo + '\'' +
+                ", correoInstitucional='" + correoInstitucional + '\'' +
                 ", matricula='" + matricula + '\'' +
                 ", numeroEmpleado='" + numeroEmpleado + '\'' +
+                ", contrasena='" + contrasena + '\'' +
                 '}';
     }
 }
