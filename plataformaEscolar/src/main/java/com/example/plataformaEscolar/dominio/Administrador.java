@@ -1,33 +1,46 @@
 package com.example.plataformaEscolar.dominio;
 
 /**
- * Representa a un administrador dentro de la plataforma escolar.
- * El administrador se encarga de gestionar información dentro del sistema.
+ * Representa a un administrador de la plataforma escolar.
+ * Contiene la información básica para identificarlo
+ * e iniciar sesión.
  *
  * @author Equipo 2 - Amarillo
  */
 public class Administrador {
 
-    /** Nombre del administrador. */
+    /**
+     * Nombre del administrador.
+     */
     private String nombre;
 
-    /** Apellido paterno del administrador. */
+    /**
+     * Apellido paterno del administrador.
+     */
     private String apellidoPaterno;
 
-    /** Apellido materno del administrador. */
+    /**
+     * Apellido materno del administrador.
+     */
     private String apellidoMaterno;
 
-    /** Correo electrónico del administrador. */
+    /**
+     * Correo electrónico del administrador.
+     */
     private String correo;
 
-    /** Nombre de usuario del administrador. */
+    /**
+     * Nombre de usuario del administrador.
+     */
     private String usuario;
 
-    /** Contraseña del administrador. */
+    /**
+     * Contraseña del administrador.
+     */
     private String contrasena;
 
     /**
-     * Crea un administrador sin datos iniciales.
+     * Crea un administrador vacío.
      */
     public Administrador() {
     }
@@ -42,7 +55,9 @@ public class Administrador {
      * @param usuario nombre de usuario del administrador
      * @param contrasena contraseña del administrador
      */
-    public Administrador(String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String usuario, String contrasena) {
+    public Administrador(String nombre, String apellidoPaterno,
+                         String apellidoMaterno, String correo,
+                         String usuario, String contrasena) {
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
@@ -52,7 +67,7 @@ public class Administrador {
     }
 
     /**
-     * Obtiene el nombre del administrador.
+     * Regresa el nombre del administrador.
      *
      * @return nombre del administrador
      */
@@ -61,7 +76,7 @@ public class Administrador {
     }
 
     /**
-     * Establece el nombre del administrador.
+     * Cambia el nombre del administrador.
      *
      * @param nombre nuevo nombre del administrador
      */
@@ -70,7 +85,7 @@ public class Administrador {
     }
 
     /**
-     * Obtiene el apellido paterno del administrador.
+     * Regresa el apellido paterno.
      *
      * @return apellido paterno del administrador
      */
@@ -79,16 +94,16 @@ public class Administrador {
     }
 
     /**
-     * Establece el apellido paterno del administrador.
+     * Cambia el apellido paterno.
      *
-     * @param apellidoPaterno nuevo apellido paterno del administrador
+     * @param apellidoPaterno nuevo apellido paterno
      */
     public void setApellidoPaterno(String apellidoPaterno) {
         this.apellidoPaterno = apellidoPaterno;
     }
 
     /**
-     * Obtiene el apellido materno del administrador.
+     * Regresa el apellido materno.
      *
      * @return apellido materno del administrador
      */
@@ -97,34 +112,34 @@ public class Administrador {
     }
 
     /**
-     * Establece el apellido materno del administrador.
+     * Cambia el apellido materno.
      *
-     * @param apellidoMaterno nuevo apellido materno del administrador
+     * @param apellidoMaterno nuevo apellido materno
      */
     public void setApellidoMaterno(String apellidoMaterno) {
         this.apellidoMaterno = apellidoMaterno;
     }
 
     /**
-     * Obtiene el correo electrónico del administrador.
+     * Regresa el correo electrónico.
      *
-     * @return correo electrónico del administrador
+     * @return correo del administrador
      */
     public String getCorreo() {
         return correo;
     }
 
     /**
-     * Establece el correo electrónico del administrador.
+     * Cambia el correo electrónico.
      *
-     * @param correo nuevo correo electrónico del administrador
+     * @param correo nuevo correo del administrador
      */
     public void setCorreo(String correo) {
         this.correo = correo;
     }
 
     /**
-     * Obtiene el nombre de usuario del administrador.
+     * Regresa el nombre de usuario.
      *
      * @return nombre de usuario del administrador
      */
@@ -133,16 +148,16 @@ public class Administrador {
     }
 
     /**
-     * Establece el nombre de usuario del administrador.
+     * Cambia el nombre de usuario.
      *
-     * @param usuario nuevo nombre de usuario del administrador
+     * @param usuario nuevo nombre de usuario
      */
     public void setUsuario(String usuario) {
         this.usuario = usuario;
     }
 
     /**
-     * Obtiene la contraseña del administrador.
+     * Regresa la contraseña.
      *
      * @return contraseña del administrador
      */
@@ -151,18 +166,18 @@ public class Administrador {
     }
 
     /**
-     * Establece la contraseña del administrador.
+     * Cambia la contraseña.
      *
-     * @param contrasena nueva contraseña del administrador
+     * @param contrasena nueva contraseña
      */
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
     }
 
     /**
-     * Devuelve una representación en texto del administrador.
+     * Regresa la información del administrador.
      *
-     * @return representación en texto del administrador
+     * @return datos del administrador en texto
      */
     @Override
     public String toString() {
