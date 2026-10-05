@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portal de acceso de la Universidad Nexus">
+    <title>Universidad Nexus | Iniciar sesión</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Estilos del proyecto -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<main class="mobile-screen">
+    <div class="screen-content login-page">
+        <header class="login-header">
+            <div class="logo-box" aria-hidden="true">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <span class="subtitle-small">Institución Educativa</span>
+            <h1>Universidad Nexus</h1>
+            <p class="login-description">
+                Portal de Carga Académica y Servicios Escolares
+            </p>
+        </header>
+        <section class="role-toggle" aria-label="Tipo de usuario">
+            <button type="button" class="role-btn is-active" aria-pressed="true">
+                <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
+                <span>Alumno</span>
+            </button>
+            <button type="button" class="role-btn" aria-pressed="false">
+                <i class="fa-solid fa-user-tie" aria-hidden="true"></i>
+                <span>Administrador</span>
+            </button>
+        </section>
+
+        <section class="card login-form-card">
+            <form action="#" method="post">
+                <div class="form-group">
+                    <label class="form-label" for="student-id">Matrícula Estudiantil</label>
+                    <div class="input-wrapper">
+                        <i class="fa-regular fa-id-badge input-icon input-icon-left" aria-hidden="true"></i>
+                        <input type="text" id="student-id" name="student_id" class="form-control" placeholder="Ej. 2022091448" inputmode="numeric" maxlength="10" autocomplete="username" required>
+                    </div>
+                    <span class="input-helper">Ingresa tus 10 dígitos institucionales sin guiones.</span>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="password">Contraseña Institucional</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-lock input-icon input-icon-left" aria-hidden="true"></i>
+                        <input type="password" id="password" name="password" class="form-control has-right-icon" placeholder="••••••••••••" autocomplete="current-password" required>
+                        <button type="button" class="input-action" aria-label="Mostrar contraseña">
+                            <i class="fa-regular fa-eye" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="form-options">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="remember">
+                        <span>Recordar mis datos</span>
+                    </label>
+                    <a href="#">¿Olvidaste tu contraseña?</a>
+                </div>
+                <button type="submit" class="btn-primary">
+                    <span>Iniciar sesión</span>
+                    <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                </button>
+            </form>
+        </section>
+
+
+        <aside class="info-card">
+            <i class="fa-regular fa-calendar-check info-icon" aria-hidden="true"></i>
+            <div class="info-card-content">
+                <h2>Turno de Inscripción 2026-1</h2>
+                <p>
+                    La plataforma se encuentra habilitada para consulta
+                    de oferta y preselección de materias prioritarias.
+                </p>
+            </div>
+        </aside>
+
+        <footer class="login-footer">
+            <p>
+                <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+                Acceso Seguro SSL • Mesa de Ayuda TIC (ext. 4402)
+            </p>
+            <p>
+                v3.4.1 • Periodo 2026-1 • DSI Campus Central
+            </p>
+        </footer>
+    </div>
+</main>
+</body>
+</html>

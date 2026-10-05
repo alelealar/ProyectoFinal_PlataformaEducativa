@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Inicio</title>
+</head>
+<body>
+<div class="mobile-screen">
+    <div class="screen-content">
+
+        <header class="top-bar">
+            <div class="brand">
+                <div class="brand-icon">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <div class="brand-text">
+                    <h2>Portal Nexus</h2>
+                    <span>Inicio</span>
+                </div>
+            </div>
+            <div class="header-actions">
+                <i class="fa-solid fa-gear"></i>
+                <div class="notification-icon">
+                    <i class="fa-regular fa-bell"></i>
+                    <div class="notification-dot"></div>
+                </div>
+                <!-- en un furuo: th:src="@{/img/user.jpg}" -->
+                <div class="avatar">
+                    <img src="https://ui-avatars.com/api/?name=Valeria+Mendez&background=3182CE&color=fff" alt="User">
+                </div>
+            </div>
+        </header>
+
+        <section class="greeting-section">
+            <div class="greeting-header">
+                <!-- en un futuro: th:text="'Hola, ' + ${user.name}" -->
+                <h1>Hola, Valeria Méndez 👋</h1>
+                <span class="period-pill">Periodo 2026-1</span>
+            </div>
+            <p class="user-id">ID: 2022091448 • Lic. en Ingeniería de Software</p>
+
+            <div class="stats-pills">
+                <div class="stat-pill">
+                    <i class="fa-solid fa-star"></i> Promedio Acumulado: <span style="color: var(--color-secondary);">9.4</span>
+                </div>
+                <div class="stat-pill">
+                    <i class="fa-solid fa-shield-halved"></i> Regular • 6º Semestre
+                </div>
+            </div>
+        </section>
+
+        <div class="alert-box">
+            <div class="alert-title">
+                <div class="alert-icon"><i class="fa-solid fa-bullhorn"></i></div>
+                Inscripciones Abiertas — Periodo 2026-1
+            </div>
+            <p class="alert-text">El periodo de selección de materias cierra el <strong>15 de Octubre a las 23:59 hrs</strong>. Revisa tus prerrequisitos y créditos disponibles.</p>
+            <div class="alert-footer">
+                <a href="#">Ver calendario completo <i class="fa-solid fa-arrow-right"></i></a>
+                <span>Cierre en 4 días</span>
+            </div>
+        </div>
+
+        <section class="progress-section">
+            <div class="progress-header">
+                <div class="progress-title">
+                    <i class="fa-solid fa-circle-notch"></i> Resumen de Créditos
+                </div>
+                <span class="progress-percent">66% completado</span>
+            </div>
+            <div class="progress-bar-bg">
+                <!-- Se va poninedo para un futuro -->
+                <div class="progress-bar-fill"></div>
+            </div>
+            <div class="progress-labels">
+                <span>24 seleccionados</span>
+                <span>36 créditos máximos permitidos</span>
+            </div>
+
+            <div class="next-class">
+                <div class="next-class-icon"><i class="fa-regular fa-clock"></i></div>
+                <div class="next-class-info">
+                    <h5>Próxima Sesión</h5>
+                    <h4>Estructuras de Datos Avanzadas</h4>
+                    <p>Aula B-204 • Mañana 08:00 AM</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-header">
+            <h3>Gestión Académica</h3>
+            <span>Accesos Rápidos</span>
+        </div>
+
+        <!-- Links individuales -->
+        <div class="academic-grid">
+            <div class="grid-card">
+                <div class="grid-card-header">
+                    <div class="grid-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                    <span class="grid-pill active">Turno Activo</span>
+                </div>
+                <h4>Realizar Carga</h4>
+                <p>6 materias disponibles</p>
+                <div class="grid-card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+            </div>
+
+            <div class="grid-card">
+                <div class="grid-card-header">
+                    <div class="grid-icon" style="color:var(--text-muted); background:var(--bg-tertiary);"><i class="fa-regular fa-calendar"></i></div>
+                    <span class="grid-pill">Lun - Vie</span>
+                </div>
+                <h4>Horario Semanal</h4>
+                <p>5 clases programadas</p>
+                <div class="grid-card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+            </div>
+
+            <div class="grid-card">
+                <div class="grid-card-header">
+                    <div class="grid-icon" style="color:var(--text-muted); background:var(--bg-tertiary);"><i class="fa-regular fa-rectangle-list"></i></div>
+                </div>
+                <h4>Materias Inscritas</h4>
+                <p>3 registradas • 24 créd.</p>
+                <div class="grid-card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+            </div>
+
+            <div class="grid-card">
+                <div class="grid-card-header">
+                    <div class="grid-icon" style="color:var(--text-muted); background:var(--bg-tertiary);"><i class="fa-solid fa-folder-open"></i></div>
+                </div>
+                <h4>Historial & Kardex</h4>
+                <p>Ciclos y actas anteriores</p>
+                <div class="grid-card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+            </div>
+        </div>
+
+        <div class="help-banner">
+            <div class="help-info">
+                <h5>Mesa de Ayuda Nexus</h5>
+                <h4>¿Tienes dudas con tus prerrequisitos?</h4>
+                <p>Chatea con tu asesor académico asignado hoy mismo.</p>
+            </div>
+            <div class="help-icon">
+                <i class="fa-solid fa-headset"></i>
+            </div>
+        </div>
+
+    </div>
+
+    <nav class="bottom-nav">
+        <div class="nav-item active">
+            <div class="nav-icon"><i class="fa-solid fa-house"></i></div>
+            <span>Inicio</span>
+        </div>
+        <div class="nav-item">
+            <div class="nav-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+            <span>Inscripción</span>
+        </div>
+        <div class="nav-item">
+            <div class="nav-icon"><i class="fa-regular fa-calendar"></i></div>
+            <span>Horario</span>
+        </div>
+        <div class="nav-item">
+            <div class="nav-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+            <span>Historial</span>
+        </div>
+    </nav>
+</div>
+</body>
+</html>
