@@ -1217,6 +1217,40 @@ input {
         border-radius: 0;
     }
 
+    .contenedor-historial{
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .contenedor-informacion-historial{
+        display: flex;
+        flex-direction: row;
+        height: 120px;
+        justify-content: space-between;
+    }
+
+    .tarjeta-informacion-header{
+        flex-direction: row;
+        padding-left: 10px;
+    }
+
+    .tarjeta-informacion{
+        background-color: #FFFFFF;
+        width: 110px;
+        border-radius: 20px;
+        box-shadow: var(--shadow-sm);
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    .text-footer-tarjeta{
+        color: var(--text-primary);
+        font-size: 12px;
+        font-weight: bold;
+    }
+
 }
 
 
