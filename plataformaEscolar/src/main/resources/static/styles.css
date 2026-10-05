@@ -1,0 +1,129 @@
+/*
+para la typo en los html
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+*/
+
+:root {
+    --font-primary: 'Plus Jakarta Sans', -apple-system, sans-serif;
+
+    /*LIGHT MODE*/
+
+    /* Fondos generales y de tarjetas */
+    --bg-primary: #F7F3E8;
+    --bg-secondary: #FFFFFF;
+    --bg-tertiary: #ECE7D8;
+    --bg-card-selected: #EBF5FF;
+
+    /* Colores de marca y botones */
+    --color-primary: #1F2A44;
+    --color-secondary: #2C5282;
+    --color-accent: #3182CE;
+
+    /* Textos */
+    --text-primary: #1F2A44;
+    --text-secondary: #4A5568;
+    --text-muted: #718096;
+    --text-disabled: #A0AEC0;
+    --text-on-primary: #FFFFFF;
+
+    /* Estados: Éxito / Selección */
+    --status-success-bg: #E6F4EA;
+    --status-success-text: #137333;
+    --status-selected-bg: #DBEAFE;
+    --status-selected-text: #1E40AF;
+
+    /* Estados: Advertencia / Cupos / Revisión */
+    --status-warning-bg: #FEF3C7;
+    --status-warning-text: #D97706;
+    --status-warning-border: #F59E0B;
+
+    /* Estados: Empalme / Error / Solapamiento */
+    --status-danger-bg: #FEE2E2;
+    --status-danger-text: #DC2626;
+    --status-danger-border: #EF4444;
+    --status-danger-inner-bg: #FCA5A5;
+
+    /* Filtros, Píldoras y Badges secundarias */
+    --pill-bg-inactive: #E2E8F0;
+    --pill-text-inactive: #475569;
+    --pill-bg-active: #1F2A44;
+    --pill-text-active: #FFFFFF;
+
+    /* Bordes, Sombras y Separadores */
+    --border-color: #E2E8F0;
+    --border-focus: #3182CE;
+    --border-selected: #2563EB;
+    --overlay-bg: rgba(0, 0, 0, 0.4);
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/*DARK MODE*/
+body.dark-mode, /*Los tenemos que activar con JS*/
+:root.dark-beta {
+    /* Fondos generales y de tarjetas */
+    --bg-primary: #0B101D;
+    --bg-secondary: #131B2E;
+    --bg-tertiary: #192338;
+    --bg-card-selected: #12233D;
+
+    /* Colores de marca y botones */
+    --color-primary: #7BAFD4;
+    --color-secondary: #5B9BD5;
+    --color-accent: #3B82F6;
+
+    /* Textos */
+    --text-primary: #FFFFFF;
+    --text-secondary: #94A3B8;
+    --text-muted: #64748B;
+    --text-disabled: #475569;
+    --text-on-primary: #0B101D;
+
+    /* Estados: Éxito / Selección */
+    --status-success-bg: #112A20;
+    --status-success-text: #4ADE80;
+    --status-selected-bg: #1E3A5F;
+    --status-selected-text: #93C5FD;
+
+    /* Estados: Advertencia / Cupos / Revisión */
+    --status-warning-bg: #211B11;
+    --status-warning-text: #F59E0B;
+    --status-warning-border: #B45309;
+
+    /* Estados: Empalme / Error / Solapamiento */
+    --status-danger-bg: #221217;
+    --status-danger-text: #F87171;
+    --status-danger-border: #7F1D1D;
+    --status-danger-inner-bg: #2A141A;
+
+    /* Filtros, Píldoras y Badges secundarias */
+    --pill-bg-inactive: #1E293B;
+    --pill-text-inactive: #94A3B8;
+    --pill-bg-active: #7BAFD4;
+    --pill-text-active: #0B101D;
+
+    /* Bordes, Sombras y Separadores */
+    --border-color: #1E293D;
+    --border-focus: #3B82F6;
+    --border-selected: #3B82F6;
+    --overlay-bg: rgba(0, 0, 0, 0.7);
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.6);
+}
+
+h1 {
+    font-weight: 800;
+}
+
+h2 {
+    font-weight: 700;
+}
+
+h3 {
+    font-weight: 600;
+}
