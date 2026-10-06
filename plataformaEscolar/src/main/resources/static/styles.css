@@ -1220,13 +1220,13 @@ input {
     .contenedor-historial{
         display: grid;
         grid-template-columns: 1fr;
-        gap: 15px;
+        gap: 20px;
     }
 
     .contenedor-informacion-historial{
         display: flex;
         flex-direction: row;
-        height: 120px;
+        height: 110px;
         justify-content: space-between;
     }
 
@@ -1242,13 +1242,75 @@ input {
         box-shadow: var(--shadow-sm);
         display: flex;
         flex-direction: column;
-
+        align-items: center;
+        justify-content: space-evenly;
     }
 
     .text-footer-tarjeta{
         color: var(--text-primary);
         font-size: 12px;
         font-weight: bold;
+    }
+
+    .span-promedio-numero{
+        color: #7D5700;
+        font-size: 32px;
+        font-weight: bold;
+    }
+
+    .span-creditos-numero{
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .span-estado{
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    #periodo-escolar{
+        width: 100%;
+        height: 40px;
+        font: var(--font-primary);
+        font-weight: bold;
+        border-radius: 10px;
+    }
+
+    .contenedor-avance-reticular{
+        background-color: #FFFFFF;
+        width: 100%;
+        height: 110px;
+        border-radius: 20px;
+        box-shadow: var(--shadow-sm);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+
+    .text-avance-reticular{
+        font: var(--font-primary);
+        font-weight: bold;
+    }
+
+    .porcentaje-avance-reticular{
+        color: var(--color-accent);
+        font: var(--font-primary);
+        font-weight: bold;
+    }
+
+    .avance-reticular-linea-texto{
+        display: flex;
+        justify-content: space-between;
+        padding-left: 20px;
+        padding-right: 20px;
+        font: var(--font-primary);
+    }
+
+    .avance-reticular-body{
+        height: 20px;
+        border-radius: 15px;
+        background-color: var(--text-disabled);
+        width: 100%;
     }
 
 }
