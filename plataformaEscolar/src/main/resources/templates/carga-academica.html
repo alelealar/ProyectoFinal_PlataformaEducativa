@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selección de Carga Académica</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../static/styles.css">
+</head>
+<body>
+<main class="mobile-screen">
+    <div class="screen-content screen-carga">
+
+        <!-- Header Principal -->
+        <header class="top-bar">
+            <div class="brand">
+                <div class="brand-icon">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <div class="brand-text">
+                    <h2>Portal Nexus</h2>
+                    <span>INICIO</span>
+                </div>
+            </div>
+            <div class="header-actions">
+                <i class="fa-solid fa-gear"></i>
+                <div class="notification-icon">
+                    <i class="fa-regular fa-bell"></i>
+                    <div class="notification-dot"></div>
+                </div>
+                <div class="avatar">
+                    <img src="https://ui-avatars.com/api/?name=Valeria+Mendez&background=3182CE&color=fff" alt="User">
+                </div>
+            </div>
+        </header>
+
+        <!-- Título de sección -->
+        <section class="carga-header">
+            <div class="carga-badge-row">
+                <span class="period-pill"><i class="fa-regular fa-calendar"></i> Periodo Académico 2026-1</span>
+            </div>
+            <h1>Carga Académica 2026–1</h1>
+            <p class="carga-subtitle">Selecciona el grupo ideal para cada una de tus asignaturas disponibles.</p>
+        </section>
+
+        <!-- Tarjeta Resumen de Créditos -->
+        <section class="card creditos-card">
+            <div class="creditos-header">
+                <div>
+                    <span class="creditos-label">CRÉDITOS ACUMULADOS</span>
+                    <div class="creditos-val"><strong>24</strong> <small>/ 36 cr máx</small></div>
+                </div>
+                <span class="pill-status-success"><i class="fa-solid fa-gauge"></i> 66% Carga Normal</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-bar-fill" style="width: 66%;"></div>
+            </div>
+            <div class="creditos-scale">
+                <span>• Mínimo: 12 cr</span>
+                <span class="scale-active"><i class="fa-regular fa-circle-check"></i> En rango permitido</span>
+                <span>Máx: 36 cr •</span>
+            </div>
+        </section>
+
+        <!-- Buscador y Filtros -->
+        <section class="search-filter-section">
+            <div class="input-wrapper search-box">
+                <i class="fa-solid fa-magnifying-glass input-icon input-icon-left"></i>
+                <input type="text" class="form-control" placeholder="Buscar por materia, docente o NRC (ej. ARC)">
+                <button class="filter-btn-icon"><i class="fa-solid fa-sliders"></i></button>
+            </div>
+            <div class="pills-scroll">
+                <input type="radio" id="pill-todas" name="filtro-materia" checked>
+                <label for="pill-todas" class="filter-pill">Todas (8)</label>
+
+                <input type="radio" id="pill-semestre" name="filtro-materia">
+                <label for="pill-semestre" class="filter-pill">Semestre (6)</label>
+
+                <input type="radio" id="pill-optativas" name="filtro-materia">
+                <label for="pill-optativas" class="filter-pill">Optativas (2)</label>
+            </div>
+        </section>
+
+        <!-- Materia 1: Arquitectura de Software -->
+        <details class="materia-item" open>
+            <!-- Encabezado desplegable -->
+            <summary class="materia-header">
+                <div class="header-content">
+                    <div class="materia-tags">
+                        <span class="code-tag">ARQ-401</span>
+                        <span class="credits-tag">• 8 Créditos</span>
+                        <span class="badge-status-selected"><i class="fa-regular fa-circle-check"></i> 1 Seleccionado</span>
+                    </div>
+                    <h3>Arquitectura de Software</h3>
+                    <p class="materia-area">Tocar para ver horarios y disponibilidad</p>
+                </div>
+                <span class="toggle-btn">
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </span>
+            </summary>
+
+            <!-- Cuerpo desplegable con secciones y grupos -->
+            <div class="materia-details-body">
+                <div class="materia-sub-header">
+                    <span>Secciones Disponibles (2)</span>
+                    <span class="req-link">Requisito Obligatorio</span>
+                </div>
+
+                <!-- Grupo 1 (Inscrito / Seleccionado por defecto) -->
+                <div class="grupo-card grupo-selected">
+                    <div class="grupo-header">
+                        <label for="grupo-5502" class="grupo-title">
+                            <input type="radio" id="grupo-5502" name="materia_arq_401" value="5502" class="grupo-radio" checked>
+                            <span class="custom-radio"><i class="fa-solid fa-check"></i></span>
+                            <div class="grupo-info-text">
+                                <h4>Grupo 01</h4>
+                                <span class="nrc">NRC 5502</span>
+                            </div>
+                        </label>
+                        <span class="status-pill-blue">• Inscrito</span>
+                    </div>
+
+                    <ul class="grupo-info-list">
+                        <li><i class="fa-solid fa-graduation-cap"></i> Dr. Alejandro Morales</li>
+                        <li><i class="fa-regular fa-clock"></i> Lun y Mié 08:00 – 10:00 hrs</li>
+                        <li><i class="fa-solid fa-city"></i> Edificio C • Lab TIC-3</li>
+                    </ul>
+
+                    <div class="cupos-box">
+                        <div class="cupos-labels">
+                            <span>Capacidad: <strong>28 / 30 cupos</strong></span>
+                            <strong>2 libres</strong>
+                        </div>
+                        <div class="cupos-bar">
+                            <div class="cupos-fill" style="width: 93%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grupo 2 (Disponible) -->
+                <div class="grupo-card">
+                    <div class="grupo-header">
+                        <label for="grupo-5503" class="grupo-title">
+                            <input type="radio" id="grupo-5503" name="materia_arq_401" value="5503" class="grupo-radio">
+                            <span class="custom-radio"><i class="fa-solid fa-check"></i></span>
+                            <div class="grupo-info-text">
+                                <h4>Grupo 02</h4>
+                                <span class="nrc">NRC 5503</span>
+                            </div>
+                        </label>
+                        <span class="status-pill-gray">Disponible</span>
+                    </div>
+
+                    <ul class="grupo-info-list">
+                        <li><i class="fa-solid fa-graduation-cap"></i> Mtra. Laura Gómez</li>
+                        <li><i class="fa-regular fa-clock"></i> Mar y Jue 14:00 – 16:00 hrs</li>
+                        <li><i class="fa-solid fa-city"></i> Edificio B • Aula 204</li>
+                    </ul>
+
+                    <div class="cupos-box">
+                        <div class="cupos-labels">
+                            <span>Capacidad: <strong>15 / 30 cupos</strong></span>
+                            <strong>15 libres</strong>
+                        </div>
+                        <div class="cupos-bar">
+                            <div class="cupos-fill" style="width: 50%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </details>
+    </div>
+
+    <!-- Barra flotante e inferíor -->
+    <div class="floating-action-bar-container">
+        <div class="confirm-bar">
+            <div class="confirm-header">
+                <span><i class="fa-solid fa-circle-dot"></i> <strong>3 Asignaturas</strong> • 24 Créditos</span>
+                <a href="#" class="link-horario">Ver Horario <i class="fa-regular fa-eye"></i></a>
+            </div>
+            <button class="btn-primary btn-confirm">
+                Confirmar Carga Académica <i class="fa-solid fa-arrow-right"></i>
+            </button>
+            <p class="confirm-note">Cumple con el mínimo (12 cr) y tope de 36 cr institucionales.</p>
+        </div>
+
+        <nav class="bottom-nav">
+            <div class="nav-item active">
+                <div class="nav-icon"><i class="fa-solid fa-house"></i></div>
+                <span>Inicio</span>
+            </div>
+            <div class="nav-item">
+                <div class="nav-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                <span>Inscripción</span>
+            </div>
+            <div class="nav-item">
+                <div class="nav-icon"><i class="fa-regular fa-calendar"></i></div>
+                <span>Horario</span>
+            </div>
+            <div class="nav-item">
+                <div class="nav-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                <span>Historial</span>
+            </div>
+        </nav>
+    </div>
+</main>
+</body>
+</html>
