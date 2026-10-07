@@ -1611,6 +1611,51 @@ input {
         width: fit-content;
     }
 
+
+    .slider-consola-escolar{
+        display: flex;
+        flex-direction: row;
+        overflow: hidden;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .tarjeta-slider{
+        height: 120px;
+        width: 200px;
+        background-color: white;
+        border-radius: 15px;
+        box-shadow: var(--shadow-sm);
+
+    }
+
+    .gestion-rapida-accesos{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .contenedor-accesos-directos{
+        margin-top: 10px;
+        display: grid;
+        width: 100%;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 14px;
+        row-gap: 14px;
+    }
+
+    .tarjeta-acceso-directo{
+        background-color: white;
+        height: 110px;
+        border-radius: 15px;
+        box-shadow: var(--shadow-sm);
+    }
+
+    .tarjeta-acceso-directo{
+        height: 40px;
+        width: 40px;
+        
+    }
+
     /* Fin panel administrador */
 
 }
