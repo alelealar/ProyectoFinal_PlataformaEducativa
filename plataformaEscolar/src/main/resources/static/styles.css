@@ -1313,6 +1313,77 @@ input {
         width: 100%;
     }
 
+    .tarjeta-materia{
+        width: 100%;
+        height: 150px;
+        background-color: #FFFFFF;
+        box-shadow: var(--shadow-sm);
+        border-radius: 20px;
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .titulo-materia{
+        display: flex;
+        flex-direction: column;
+        width: 68%;
+        padding-left: 20px;
+        margin-bottom: 5px;
+    }
+
+    .codigo-materia{
+        color: var(--color-secondary);
+        font-weight: bold;
+    }
+
+    .nombre-materia{
+        color: var(--text-primary);
+        font-weight: bold;
+        font-size: 17px;
+    }
+
+    .calificacion-materia{
+        width: 32%;
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+    }
+
+    .calificacion{
+        font-weight: bold;
+        margin-left: 10px;
+    }
+
+    .pill-acreditada{
+        background-color: #FFDEAA;
+        border-radius: 15px;
+        width: fit-content;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .top-tarjeta-materia{
+        display: flex;
+        flex-direction: row;
+    }
+
+    .bottom-tarjeta-materia{
+        background-color: beige;
+        border-radius: 15px;
+        height: 40px;
+        width: 80%;
+        display: flex;
+        justify-content: left;
+        align-items: center;
+    }
+
+    .nombre-maestro{
+        padding-left: 20px;
+    }
 }
 
 
