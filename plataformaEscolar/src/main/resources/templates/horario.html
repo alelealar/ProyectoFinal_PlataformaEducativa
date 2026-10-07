@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horario semanal</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Estilos del proyecto -->
+    <link rel="stylesheet" href="../static/styles.css">
+</head>
+<body>
+<div class="mobile-screen mobile-screen--fluid">
+    <div class="screen-content">
+        <header class="top-bar" th:replace="~{fragments/top-bar :: top-bar('Inicio')}">
+            <div class="brand">
+                <div class="brand-icon" aria-hidden="true"><i class="fa-solid fa-graduation-cap"></i></div>
+                <div class="brand-text">
+                    <h2>Portal Nexus</h2>
+                    <span>Inicio</span>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button type="button" class="icon-button" aria-label="Ajustes"><i class="fa-solid fa-gear"></i></button>
+                <button type="button" class="icon-button notification-icon" aria-label="Notificaciones nuevas"><i class="fa-regular fa-bell"></i><span class="notification-dot"></span></button>
+                <!-- en un futuro: th:src="@{/img/user.jpg}" -->
+                <div class="avatar"><img src="https://ui-avatars.com/api/?name=Valeria+Mendez&background=3182CE&color=fff" alt="Valeria Méndez"></div>
+            </div>
+        </header>
+
+        <main>
+            <header class="greeting-section">
+                <p class="eyebrow"><i class="fa-regular fa-calendar" aria-hidden="true"></i>Ciclo académico actual</p>
+                <h1 class="page-title">Mi Horario Semanal</h1>
+                <p class="user-id">Periodo 2026-1 • 4 asignaturas inscritas</p>
+            </header>
+
+            <div class="role-toggle" role="group" th:replace="~{fragments/segmented :: segmented('Tipo de vista','fa-regular fa-calendar','Vista Semanal (Horario)',true,'fa-solid fa-list','Lista de Materias','false')}" aria-label="Tipo de vista">
+                <button type="button" class="role-btn" aria-pressed="true"><i aria-hidden="true" class="fa-regular fa-calendar"></i><span>Vista Semanal (Horario)</span></button>
+                <button type="button" class="role-btn" aria-pressed="false"><i aria-hidden="true" class="fa-solid fa-list"></i><span>Lista de Materias</span></button>
+            </div>
+
+            <div class="split">
+                <div class="stack">
+                    <nav aria-label="Días de la semana">
+                        <ul class="week-strip">
+                            <li><button type="button" class="day day--has-events" aria-pressed="true"><span>Lun</span><span class="day__num">13</span><span class="day__dot"></span></button></li>
+                            <li><button type="button" class="day" aria-pressed="false"><span>Mar</span><span class="day__num">14</span><span class="day__dot"></span></button></li>
+                            <li><button type="button" class="day day--has-events" aria-pressed="false"><span>Mié</span><span class="day__num">15</span><span class="day__dot"></span></button></li>
+                            <li><button type="button" class="day day--has-events" aria-pressed="false"><span>Jue</span><span class="day__num">16</span><span class="day__dot"></span></button></li>
+                            <li><button type="button" class="day day--has-events" aria-pressed="false"><span>Vie</span><span class="day__num">17</span><span class="day__dot"></span></button></li>
+                        </ul>
+                    </nav>
+
+                    <section aria-labelledby="agenda-titulo">
+                        <h2 id="agenda-titulo" class="sr-only">Clases del lunes 13</h2>
+                        <ol class="timeline">
+                            <li th:replace="~{fragments/schedule-event :: schedule-event('event event--lab','08:00','10:00','NRC 5502 • TECLAB','fa-solid fa-layer-group')}" class="event event--lab">
+                                <p class="event__time"><time>08:00</time><time>10:00</time></p>
+                                <div class="event__body">
+                                    <span class="event__code">NRC 5502 • TECLAB</span>
+                                    <i aria-hidden="true" class="fa-solid fa-layer-group"></i>
+                                </div>
+                            </li>
+                            <li class="event event--free">
+                                <p class="event__time"><time>10:00</time><time>12:00</time></p>
+                                <div class="event__body">
+                                    <p class="event__kicker">Tiempo Libre • Tutorías Abiertas</p>
+                                    <p class="event__place"><i class="fa-solid fa-book-open" aria-hidden="true"></i>Cubículos de Estudio Biblioteca Norte <span class="chip chip--info">Disponible</span></p>
+                                </div>
+                            </li>
+                            <li th:replace="~{fragments/schedule-event :: schedule-event('event event--hybrid','12:00','14:00','NRC 4118 • HÍBRIDA','fa-solid fa-database')}" class="event event--hybrid">
+                                <p class="event__time"><time>12:00</time><time>14:00</time></p>
+                                <div class="event__body">
+                                    <span class="event__code">NRC 4118 • HÍBRIDA</span>
+                                    <i aria-hidden="true" class="fa-solid fa-database"></i>
+                                </div>
+                            </li>
+                            <li th:replace="~{fragments/schedule-event :: schedule-event('event event--onsite','14:00','16:00','NRC 3901 • PRESENCIAL','fa-solid fa-location-dot')}" class="event event--onsite">
+                                <p class="event__time"><time>14:00</time><time>16:00</time></p>
+                                <div class="event__body">
+                                    <span class="event__code">NRC 3901 • PRESENCIAL</span>
+                                    <i aria-hidden="true" class="fa-solid fa-location-dot"></i>
+                                </div>
+                            </li>
+                        </ol>
+                    </section>
+                </div>
+
+                <aside class="split__aside" aria-labelledby="detalle-titulo">
+                    <article class="card detail">
+                        <div class="detail__head">
+                            <div>
+                                <p class="eyebrow"><i class="fa-solid fa-circle" aria-hidden="true"></i>Detalles de la asignatura</p>
+                                <h2 id="detalle-titulo" class="detail__title">Arquitectura de Software (NRC 5502)</h2>
+                            </div>
+                            <span class="chip">Semestre 7</span>
+                        </div>
+
+                        <dl class="tile-list">
+                            <div class="tile" th:replace="~{fragments/info-tile :: info-tile('fa-regular fa-building','Ubicación','Campus • Edif. C -',null)}">
+                                <dt class="tile__label"><i aria-hidden="true" class="fa-regular fa-building"></i>Ubicación</dt>
+                                <dd class="tile__value">Campus • Edif. C -</dd>
+                            </div>
+                            <div class="tile" th:replace="~{fragments/info-tile :: info-tile('fa-regular fa-clock','Carga','8 SATCA • 64 horas',null)}">
+                                <dt class="tile__label"><i aria-hidden="true" class="fa-regular fa-clock"></i>Carga</dt>
+                                <dd class="tile__value">8 SATCA • 64 horas</dd>
+                            </div>
+                        </dl>
+
+                        <section class="teacher" aria-label="Docente titular">
+                            <span class="teacher__icon" aria-hidden="true"><i class="fa-solid fa-graduation-cap"></i></span>
+                            <div>
+                                <p class="teacher__label">Docente Titular</p>
+                                <h3 class="teacher__name">Dr. Alejandro Morales</h3>
+                                <a class="teacher__mail" href="mailto:alejandro.morales@nexus.edu">alejandro.morales@nexus.edu</a>
+                            </div>
+                        </section>
+
+                        <div class="btn-stack">
+                            <button type="button" class="btn-primary"><i class="fa-regular fa-calendar-check" aria-hidden="true"></i>Sincronizar con Google Calendar</button>
+                            <button type="button" class="btn-secondary"><i class="fa-solid fa-download" aria-hidden="true"></i>Descargar Comprobante PDF</button>
+                        </div>
+                    </article>
+                </aside>
+            </div>
+        </main>
+    </div>
+
+    <nav class="bottom-nav" aria-label="Navegación principal" th:replace="~{fragments/bottom-nav :: bottom-nav('horario')}">
+        <a class="nav-item" href="inicio.html">
+            <span class="nav-icon"><i class="fa-solid fa-house"></i></span><span>Inicio</span>
+        </a>
+        <a class="nav-item" href="#">
+            <span class="nav-icon"><i class="fa-solid fa-graduation-cap"></i></span><span>Inscripción</span>
+        </a>
+        <a class="nav-item is-active" href="horario.html" aria-current="page">
+            <span class="nav-icon"><i class="fa-regular fa-calendar"></i></span><span>Horario</span>
+        </a>
+        <a class="nav-item" href="historial.html">
+            <span class="nav-icon"><i class="fa-solid fa-clock-rotate-left"></i></span><span>Historial</span>
+        </a>
+    </nav>
+</div>
+</body>
+</html>
