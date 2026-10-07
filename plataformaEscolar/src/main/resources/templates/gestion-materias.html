@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Gestión de materias y cupos</title>
+
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    
+    <link rel="stylesheet" href="../static/styles.css">
+</head>
+
+<body>
+
+<main class="mobile-screen">
+
+    <div class="screen-content">
+
+        <!-- HEADER -->
+        <header class="top-bar">
+
+            <div class="brand">
+
+                <div class="return">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </div>
+
+                <div class="brand-text">
+                    <h2>Gestión de materias y cupos</h2>
+                    <span>Portal Nexus Administration</span>
+                </div>
+
+            </div>
+
+            <div class="header-actions">
+
+                <span class="admin-label">ADMIN</span>
+
+                <div class="header-admin-icon">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+
+                <div class="avatar admin-avatar">
+                    <i class="fa-regular fa-user"></i>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- RESUMEN DEL PERIODO -->
+        <section class="materias-resumen">
+
+            <div class="periodo-header">
+                <div>
+                    <span class="periodo-titulo">
+                        <i class="fa-solid fa-circle"></i>
+                        PERIODO ACADÉMICO 2026-1
+                    </span>
+                </div>
+
+                <span class="periodo-estado">
+                    Pregrado Regular
+                </span>
+            </div>
+
+
+            <div class="estadisticas-materias">
+
+                <div class="estadistica-materia">
+
+                    <div class="estadistica-titulo">
+                        <i class="fa-regular fa-bookmark"></i>
+                        <span>MATERIAS</span>
+                    </div>
+
+                    <div>
+                        <strong>14</strong>
+                        <span>ofertadas</span>
+                    </div>
+
+                </div>
+
+
+                <div class="estadistica-materia">
+
+                    <div class="estadistica-titulo">
+                        <i class="fa-solid fa-chart-pie"></i>
+                        <span>OCUPACIÓN</span>
+                    </div>
+
+                    <div>
+                        <strong>92%</strong>
+                        <span>promedio</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- BUSCADOR -->
+        <div class="buscador-materias">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+                    type="text"
+                    placeholder="Buscar por asignatura o NRC..."
+            >
+
+            <span class="shortcut">⌘K</span>
+
+        </div>
+
+
+        <!-- FILTROS -->
+        <div class="filtros-materias">
+
+            <button class="filtro-materia activo">
+                Todas
+                <span>14</span>
+            </button>
+
+            <button class="filtro-materia">
+                <i class="fa-solid fa-circle filtro-rojo"></i>
+                Cupo Lleno
+                <span>3</span>
+            </button>
+
+            <button class="filtro-materia">
+                <i class="fa-solid fa-circle filtro-amarillo"></i>
+                Disponibles
+                <span>11</span>
+            </button>
+
+        </div>
+
+
+        <!-- LISTA DE MATERIAS -->
+        <section class="lista-materias">
+
+
+            <!-- MATERIA 1 -->
+            <article class="materia-card">
+
+                <div class="materia-card-top">
+
+                    <div>
+
+                        <div class="materia-codigos">
+                            <span>ARQ-401</span>
+                            <span>NRC 5502</span>
+                        </div>
+
+                        <h3>Arquitectura de Software</h3>
+
+                        <p>
+                            <i class="fa-regular fa-user"></i>
+                            Dr. Alejandro Morales
+                        </p>
+
+                    </div>
+
+                    <span class="badge-cupo libre">
+                        <i class="fa-solid fa-circle"></i>
+                        2 Libres
+                    </span>
+
+                </div>
+
+
+                <div class="ocupacion-info">
+
+                    <div class="ocupacion-texto">
+                        <span>Ocupación de Aula</span>
+                        <strong>38 / 40 plazas (95%)</strong>
+                    </div>
+
+                    <div class="barra-cupo">
+                        <div class="barra-cupo-progreso" style="width:95%"></div>
+                    </div>
+
+                </div>
+
+
+                <div class="acciones-materia">
+
+                    <button>
+                        <i class="fa-solid fa-sliders"></i>
+                        Editar Cupos
+                    </button>
+
+                    <button>
+                        <i class="fa-solid fa-arrow-right-arrow-left"></i>
+                        Cambiar Docente
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- MATERIA 2 -->
+            <article class="materia-card materia-llena">
+
+                <div class="materia-card-top">
+
+                    <div>
+
+                        <div class="materia-codigos">
+                            <span>ART-502</span>
+                            <span>NRC 7716</span>
+                        </div>
+
+                        <h3>Calidad de software</h3>
+
+                        <p>
+                            <i class="fa-regular fa-user"></i>
+                            Dr. Andrés Villalobos
+                        </p>
+
+                    </div>
+
+                    <span class="badge-cupo lleno">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                        Sin Cupo
+                    </span>
+
+                </div>
+
+
+                <div class="ocupacion-info ocupacion-llena">
+
+                    <div class="ocupacion-texto">
+
+                        <span>Capacidad Máxima Excedida</span>
+
+                        <strong>40 / 40 plazas (100%)</strong>
+
+                    </div>
+
+                    <div class="barra-cupo">
+                        <div class="barra-cupo-progreso llena"
+                             style="width:100%"></div>
+                    </div>
+
+                </div>
+
+
+                <div class="acciones-materia">
+
+                    <button class="btn-ampliar">
+                        <i class="fa-solid fa-circle-plus"></i>
+                        Ampliar Cupos
+                    </button>
+
+                    <button>
+                        <i class="fa-solid fa-arrow-right-arrow-left"></i>
+                        Cambiar Docente
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- MATERIA 3 -->
+            <article class="materia-card">
+
+                <div class="materia-card-top">
+
+                    <div>
+
+                        <div class="materia-codigos">
+                            <span>RED-601</span>
+                            <span>NRC 8840</span>
+                        </div>
+
+                        <h3>Redes de Computadoras</h3>
+
+                        <p>
+                            <i class="fa-regular fa-user"></i>
+                            Ing. Carlos Ortiz
+                        </p>
+
+                    </div>
+
+                    <span class="badge-cupo disponible">
+                        <i class="fa-solid fa-wifi"></i>
+                        13 Libres
+                    </span>
+
+                </div>
+
+
+                <div class="ocupacion-info">
+
+                    <div class="ocupacion-texto">
+                        <span>Ocupación de Aula</span>
+                        <strong>22 / 35 plazas (63%)</strong>
+                    </div>
+
+                    <div class="barra-cupo">
+                        <div class="barra-cupo-progreso"
+                             style="width:63%"></div>
+                    </div>
+
+                </div>
+
+
+                <div class="acciones-materia">
+
+                    <button>
+                        <i class="fa-solid fa-sliders"></i>
+                        Editar Cupos
+                    </button>
+
+                    <button>
+                        <i class="fa-solid fa-arrow-right-arrow-left"></i>
+                        Cambiar Docente
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- MATERIA 4 -->
+            <article class="materia-card">
+
+                <div class="materia-card-top">
+
+                    <div>
+
+                        <div class="materia-codigos">
+                            <span>BDD-302</span>
+                            <span>NRC 9120</span>
+                        </div>
+
+                        <h3>Bases de Datos Avanzadas</h3>
+
+                        <p>
+                            <i class="fa-regular fa-user"></i>
+                            Mtra. Elena Rostova
+                        </p>
+
+                    </div>
+
+                    <span class="badge-cupo disponible">
+                        <i class="fa-solid fa-wifi"></i>
+                        15 Libres
+                    </span>
+
+                </div>
+
+
+                <div class="ocupacion-info">
+
+                    <div class="ocupacion-texto">
+                        <span>Ocupación de Aula</span>
+                        <strong>15 / 30 plazas (50%)</strong>
+                    </div>
+
+                    <div class="barra-cupo">
+                        <div class="barra-cupo-progreso"
+                             style="width:50%"></div>
+                    </div>
+
+                </div>
+
+
+                <div class="acciones-materia">
+
+                    <button>
+                        <i class="fa-solid fa-sliders"></i>
+                        Editar Cupos
+                    </button>
+
+                    <button>
+                        <i class="fa-solid fa-arrow-right-arrow-left"></i>
+                        Cambiar Docente
+                    </button>
+
+                </div>
+
+            </article>
+
+        </section>
+
+
+        <!-- BOTÓN CREAR MATERIA -->
+        <div class="crear-materia-container">
+
+            <button class="btn-crear-materia">
+
+                <i class="fa-solid fa-plus"></i>
+
+                Crear Nueva Materia
+
+            </button>
+
+        </div>
+
+    </div>
+
+</main>
+
+</body>
+</html>

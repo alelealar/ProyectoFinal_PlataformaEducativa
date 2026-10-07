@@ -1702,3 +1702,740 @@ input {
     }
 
 }
+/* GESTIÓN DE MATERIAS Y CUPOS*/
+
+.admin-label {
+    font-size: 8px;
+    font-weight: 800;
+    color: #35728f;
+}
+
+.header-admin-icon,
+.admin-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 9px;
+    background: #2f6f8f;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* RESUMEN*/
+
+.materias-resumen {
+    background: #f5f2eb;
+    border-radius: 14px;
+    padding: 14px;
+    margin-top: 14px;
+}
+
+.periodo-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 13px;
+}
+
+.periodo-titulo {
+    font-size: 9px;
+    font-weight: 700;
+    color: #557080;
+}
+
+.periodo-titulo i {
+    font-size: 6px;
+    color: #28789a;
+    margin-right: 3px;
+}
+
+.periodo-estado {
+    background: #ebe8e1;
+    padding: 4px 8px;
+    border-radius: 20px;
+    font-size: 7px;
+    color: #6d6a65;
+}
+
+
+/* ESTADÍSTICAS*/
+
+.estadisticas-materias {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.estadistica-materia {
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.estadistica-titulo {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    color: #667983;
+    margin-bottom: 3px;
+}
+
+.estadistica-titulo span {
+    font-size: 8px;
+    font-weight: 700;
+}
+
+.estadistica-materia strong {
+    font-size: 20px;
+    margin-right: 3px;
+}
+
+.estadistica-materia > div:last-child span {
+    font-size: 10px;
+    color: #555;
+}
+
+
+/* BUSCADOR*/
+
+.buscador-materias {
+    margin-top: 12px;
+    height: 38px;
+    background: white;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 12px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+}
+
+.buscador-materias i {
+    color: #8c9298;
+    font-size: 12px;
+}
+
+.buscador-materias input {
+    border: none;
+    outline: none;
+    flex: 1;
+    font-family: inherit;
+    font-size: 10px;
+}
+
+.shortcut {
+    background: #f4f2ed;
+    padding: 3px 6px;
+    border-radius: 5px;
+    font-size: 8px;
+    color: #666;
+}
+
+
+/* FILTROS*/
+
+.filtros-materias {
+    display: flex;
+    gap: 7px;
+    margin: 10px 0;
+}
+
+.filtro-materia {
+    border: none;
+    background: transparent;
+    border-radius: 15px;
+    padding: 6px 10px;
+    font-family: inherit;
+    font-size: 8px;
+    font-weight: 600;
+    color: #696969;
+}
+
+.filtro-materia.activo {
+    background: #287795;
+    color: white;
+}
+
+.filtro-materia span {
+    margin-left: 3px;
+}
+
+.filtro-materia i {
+    font-size: 5px;
+    margin-right: 3px;
+}
+
+.filtro-rojo {
+    color: #d96262;
+}
+
+.filtro-amarillo {
+    color: #e6b447;
+}
+
+
+/*LISTA DE MATERIAS*/
+
+.lista-materias {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.materia-card {
+    background: white;
+    border-radius: 13px;
+    padding: 13px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.materia-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.materia-codigos {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 5px;
+}
+
+.materia-codigos span {
+    font-size: 8px;
+    color: #778085;
+    font-weight: 600;
+}
+
+.materia-codigos span:first-child {
+    background: #eeeeea;
+    padding: 2px 5px;
+    border-radius: 4px;
+}
+
+.materia-card h3 {
+    font-size: 13px;
+    margin: 3px 0;
+    color: #282828;
+}
+
+.materia-card p {
+    font-size: 9px;
+    color: #808080;
+    margin: 4px 0;
+}
+
+
+/*BADGES*/
+
+.badge-cupo {
+    padding: 3px 7px;
+    border-radius: 10px;
+    font-size: 7px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.badge-cupo.libre {
+    background: #f5d888;
+    color: #7c641e;
+}
+
+.badge-cupo.lleno {
+    background: #ffe2e0;
+    color: #cf5550;
+}
+
+.badge-cupo.disponible {
+    background: #e5eafa;
+    color: #5e72a9;
+}
+
+.badge-cupo i {
+    font-size: 5px;
+}
+
+
+/* OCUPACIÓN */
+
+.ocupacion-info {
+    background: #f5f3ed;
+    border-radius: 8px;
+    padding: 8px 9px;
+    margin-top: 10px;
+}
+
+.ocupacion-texto {
+    display: flex;
+    justify-content: space-between;
+    font-size: 8px;
+    margin-bottom: 6px;
+}
+
+.ocupacion-texto span {
+    color: #6d7579;
+}
+
+.ocupacion-texto strong {
+    font-size: 8px;
+}
+
+.barra-cupo {
+    width: 100%;
+    height: 5px;
+    border-radius: 5px;
+    background: #e4e2dc;
+    overflow: hidden;
+}
+
+.barra-cupo-progreso {
+    height: 100%;
+    background: #d0a952;
+    border-radius: 5px;
+}
+
+.barra-cupo-progreso.llena {
+    background: #dc6863;
+}
+
+.ocupacion-llena {
+    background: #fff2ef;
+}
+
+.ocupacion-llena .ocupacion-texto span,
+.ocupacion-llena .ocupacion-texto strong {
+    color: #c95550;
+}
+
+
+/*BOTONES DE CADA MATERIA*/
+
+.acciones-materia {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 7px;
+    margin-top: 9px;
+}
+
+.acciones-materia button {
+    border: none;
+    border-radius: 7px;
+    padding: 7px 5px;
+    background: #f5f2eb;
+    color: #527183;
+    font-family: inherit;
+    font-size: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.acciones-materia button:hover {
+    background: #ebe8df;
+}
+
+.acciones-materia .btn-ampliar {
+    color: #c34f4c;
+    background: #fff0ee;
+}
+
+
+/* 
+   CREAR MATERIA
+ */
+
+.crear-materia-container {
+    margin-top: 20px;
+    padding-bottom: 10px;
+}
+
+.btn-crear-materia {
+    width: 100%;
+    background: #2d7292;
+    border: none;
+    border-radius: 9px;
+    color: white;
+    padding: 13px;
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-crear-materia i {
+    margin-right: 5px;
+}
+
+.btn-crear-materia:hover {
+    background: #256582;
+}
+
+/* CONTROL DE PERIODOS ESCOLARES */
+
+.admin-label {
+    font-size: 8px;
+    font-weight: 800;
+    color: #2f708d;
+}
+
+.header-admin-icon,
+.admin-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 9px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #2f6f8e;
+    color: white;
+}
+
+
+/* TARJETA DEL PERIODO ACTUAL */
+
+.periodo-card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 14px;
+    margin-top: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.periodo-card-superior {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.campus-periodo {
+    font-size: 8px;
+    color: #6f7480;
+}
+
+.campus-periodo i {
+    color: #6183b5;
+    font-size: 5px;
+}
+
+.estado-periodo {
+    font-size: 8px;
+    color: #687078;
+}
+
+.periodo-titulo-contenedor {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.periodo-titulo-contenedor h1 {
+    font-size: 22px;
+    line-height: 1.05;
+    margin: 0 0 5px 0;
+    color: #202020;
+}
+
+.periodo-titulo-contenedor p {
+    margin: 0;
+    color: #7c7c7c;
+    font-size: 9px;
+}
+
+.badge-ejecucion {
+    background: #e7f2f6;
+    color: #557987;
+    font-size: 8px;
+    font-weight: 600;
+    border-radius: 15px;
+    padding: 6px 9px;
+}
+
+.badge-ejecucion i {
+    font-size: 5px;
+    color: #6da4bd;
+}
+
+
+/* DATOS DEL PERIODO */
+
+.datos-periodo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 14px;
+}
+
+.dato-periodo {
+    background: #f7f4ed;
+    border-radius: 9px;
+    padding: 9px;
+    display: flex;
+    flex-direction: column;
+}
+
+.dato-periodo-titulo {
+    font-size: 7px;
+    color: #647a85;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.dato-periodo-titulo i {
+    color: #4f87a0;
+    margin-right: 3px;
+}
+
+.dato-periodo strong {
+    font-size: 11px;
+    color: #282828;
+}
+
+.dato-periodo small {
+    font-size: 7px;
+    color: #929292;
+    margin-top: 2px;
+}
+
+
+/* AVANCE DEL PERIODO */
+
+.avance-periodo {
+    margin-top: 13px;
+}
+
+.avance-periodo-texto {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    font-size: 7px;
+    color: #718087;
+}
+
+.barra-periodo {
+    width: 100%;
+    height: 4px;
+    border-radius: 10px;
+    background: #e8e8e4;
+    overflow: hidden;
+}
+
+.barra-periodo-progreso {
+    width: 33%;
+    height: 100%;
+    background: #5a91aa;
+    border-radius: 10px;
+}
+
+
+/* FASES DEL CICLO ACADEMICO */
+
+.fases-section {
+    margin-top: 18px;
+}
+
+.fases-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 9px;
+}
+
+.fases-header h2 {
+    margin: 0;
+    font-size: 14px;
+}
+
+.fases-header p {
+    margin: 2px 0 0;
+    font-size: 8px;
+    color: #8b8b8b;
+}
+
+.fases-header > i {
+    color: #628291;
+}
+
+
+/* TARJETAS DE FASES */
+
+.fase-card {
+    background: white;
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 9px;
+    box-shadow: 0 2px 7px rgba(0, 0, 0, 0.04);
+}
+
+.fase-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.fase-nombre {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.fase-nombre i {
+    color: #477b93;
+    font-size: 11px;
+}
+
+.fase-nombre h3 {
+    font-size: 11px;
+    margin: 0;
+    color: #333;
+}
+
+.fase-card > p {
+    font-size: 8px;
+    line-height: 1.5;
+    color: #7b7b7b;
+    margin: 6px 0 10px;
+}
+
+
+/* SWITCH DE LAS FASES */
+
+.switch-periodo {
+    width: 31px;
+    height: 18px;
+    border-radius: 20px;
+    background: #e2dfd7;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 2px 5px;
+    color: #999;
+    font-size: 7px;
+}
+
+.switch-periodo.activo {
+    background: #347f9e;
+    color: white;
+    justify-content: flex-end;
+}
+
+.fase-bloqueada {
+    width: 27px;
+    height: 27px;
+    border-radius: 50%;
+    background: #f1efe9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #aaa;
+    font-size: 9px;
+}
+
+
+/* INFORMACION INFERIOR DE CADA FASE */
+
+.fase-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 7px;
+    color: #787878;
+}
+
+.fase-estado {
+    border-radius: 10px;
+    padding: 3px 6px;
+}
+
+.fase-estado i {
+    font-size: 4px;
+}
+
+.fase-estado.activo {
+    color: #3c7d98;
+    background: #e9f3f6;
+}
+
+.fase-estado.inactivo {
+    background: #f0efeb;
+    color: #777;
+}
+
+.fase-estado.pendiente {
+    background: #fff6dc;
+    color: #9a7928;
+}
+
+
+/* HISTORIAL DE PERIODOS */
+
+.historial-periodos {
+    background: #ffffff;
+    border-radius: 12px;
+    margin-top: 13px;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 2px 7px rgba(0, 0, 0, .04);
+}
+
+.historial-periodos-icono {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    background: #efeee9;
+    color: #637c89;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.historial-periodos-info {
+    flex: 1;
+}
+
+.historial-periodos-info h3 {
+    margin: 0;
+    font-size: 10px;
+}
+
+.historial-periodos-info p {
+    margin: 2px 0 0;
+    font-size: 7px;
+    color: #848484;
+}
+
+.historial-periodos > i {
+    color: #69777e;
+    font-size: 9px;
+}
+
+
+/* BOTON MODIFICAR CALENDARIO */
+
+.modificar-calendario-container {
+    margin-top: 30px;
+    padding-bottom: 10px;
+}
+
+.btn-modificar-calendario {
+    width: 100%;
+    padding: 13px;
+    border: none;
+    border-radius: 8px;
+    background: #2f7391;
+    color: white;
+    font-family: inherit;
+    font-size: 10px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-modificar-calendario i {
+    margin-right: 5px;
+}
+
+.btn-modificar-calendario:hover {
+    background: #286680;
+}
