@@ -1384,6 +1384,27 @@ input {
     .nombre-maestro{
         padding-left: 20px;
     }
+
+    .contenedor-descargar-kardex{
+        width: 100%;
+        height: 45px;
+        margin-bottom: 40px;
+    }
+
+    .boton-kardex{
+        width: 100%;
+        height: 100%;
+        background-color: white;
+        border: none;
+        box-shadow: var(--shadow-sm);
+        border-radius: 15px;
+        font: var(--text-primary);
+        font-weight: bold;
+    }
+
+    .boton-kardex:active{
+        background-color: #E2DBD0;
+    }
 }
 
 
