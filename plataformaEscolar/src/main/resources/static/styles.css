@@ -64,6 +64,14 @@
     --radius-lg: 16px;
     --radius-xl: 24px;
     --radius-phone: 40px;
+    --event-lab-bg: #DCE9E6;
+    --event-lab-bar: #4F8F87;
+    --event-hybrid-bg: #E3E5F5;
+    --event-hybrid-bar: #5B64B3;
+    --event-onsite-bg: #FBE6C3;
+    --event-onsite-bar: #D98E1F;
+    --chip-neutral-bg: #E8E1CF;
+    --chip-neutral-text: #5A5547;
 }
 
 
@@ -1200,6 +1208,187 @@ input {
     color: var(--status-selected-text);
 }
 
+/* Horario semanal */
+
+.week-strip {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 4px;
+
+    padding: 6px;
+    list-style: none;
+
+    background-color: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+.day {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+
+    padding: 8px 0 6px;
+
+    border: 0;
+    border-radius: var(--radius-md);
+    background: transparent;
+    color: var(--text-muted);
+
+    font-size: 9px;
+    font-weight: 600;
+    text-transform: uppercase;
+
+    cursor: pointer;
+}
+
+.day__num {
+    color: var(--text-primary);
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.day__dot {
+    width: 4px;
+    height: 4px;
+
+    border-radius: 50%;
+    background-color: transparent;
+}
+
+.day--has-events .day__dot { background-color: var(--color-accent); }
+
+.day[aria-pressed="true"] {
+    background-color: var(--color-primary);
+    color: var(--text-on-primary);
+}
+
+.day[aria-pressed="true"] .day__num { color: var(--text-on-primary); }
+
+/* Timeline */
+.timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    list-style: none;
+}
+
+.event {
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr);
+    gap: 10px;
+}
+
+.event__time {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.event__time time:last-child {
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.event__body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+
+    min-height: 48px;
+    padding: 10px 12px;
+
+    background-color: var(--event-bg, var(--bg-tertiary));
+    border-left: 5px solid var(--event-bar, transparent);
+    border-radius: var(--radius-md);
+}
+
+.event--lab    { --event-bg: var(--event-lab-bg);    --event-bar: var(--event-lab-bar); }
+.event--hybrid { --event-bg: var(--event-hybrid-bg); --event-bar: var(--event-hybrid-bar); }
+.event--onsite { --event-bg: var(--event-onsite-bg); --event-bar: var(--event-onsite-bar); }
+
+.event__code {
+    padding: 3px 8px;
+
+    background-color: rgba(255, 255, 255, 0.55);
+    border-radius: 12px;
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.event__icon { color: var(--text-secondary); }
+
+.event--free .event__body {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+}
+
+.event__kicker { color: var(--text-secondary); font-size: 10px; }
+
+.event__place {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.event__place .chip { margin-left: auto; }
+
+/* Carta de detalle*/
+.card.detail { display: flex; flex-direction: column; gap: 12px; margin-bottom: 0; }
+
+.detail__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.detail__title { font-size: 16px; line-height: 1.25; }
+
+.teacher {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 10px 12px;
+
+    background-color: var(--bg-primary);
+    border-radius: var(--radius-md);
+}
+
+.teacher__icon {
+    width: 36px;
+    height: 36px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: var(--status-selected-bg);
+    color: var(--status-selected-text);
+
+    border-radius: 50%;
+}
+
+.teacher__label { color: var(--text-muted); font-size: 9px; }
+.teacher__name  { font-size: 14px; }
+.teacher__mail  { font-size: 11px; word-break: break-all; }
+
 
 /* Responsividad*/
 
@@ -1425,6 +1614,7 @@ input {
     /* Fin panel administrador */
 
 }
+
 
 
 @media (max-width: 360px) {
