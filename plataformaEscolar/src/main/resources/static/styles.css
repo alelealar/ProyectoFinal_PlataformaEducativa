@@ -1645,15 +1645,35 @@ input {
 
     .tarjeta-acceso-directo{
         background-color: white;
-        height: 110px;
+        height: 140px;
         border-radius: 15px;
         box-shadow: var(--shadow-sm);
     }
 
-    .tarjeta-acceso-directo{
+    .icono-acceso-directo{
         height: 40px;
         width: 40px;
-        
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 10px;
+        margin-top: 10px;
+        border-radius: 15px;
+    }
+
+    .morado-pastel-bg{
+        background-color: #D9E2FF;
+    }
+    .azul-pastel-bg{
+        background-color: #C8E6FF;
+    }
+
+    .naranja-pastel-bg{
+        background-color: #FFDEAA;
+    }
+
+    .rosa-pastel-bg{
+        background-color: #FFC5D3;
     }
 
     /* Fin panel administrador */
