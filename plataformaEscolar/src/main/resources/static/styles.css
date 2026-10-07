@@ -1645,14 +1645,15 @@ input {
 
     .tarjeta-acceso-directo{
         background-color: white;
-        height: 140px;
+        height: 180px;
         border-radius: 15px;
         box-shadow: var(--shadow-sm);
+        padding: 10px;
     }
 
     .icono-acceso-directo{
-        height: 40px;
-        width: 40px;
+        height: 50px;
+        width: 50px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -1674,6 +1675,10 @@ input {
 
     .rosa-pastel-bg{
         background-color: #FFC5D3;
+    }
+
+    .texto-acceso-directo{
+        font-size: 12px;
     }
 
     /* Fin panel administrador */
