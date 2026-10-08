@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajustes y configuración</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../static/styles.css">
+</head>
+<body>
+<main class="mobile-screen">
+    <header class="top-bar-V2">
+        <div class="brand">
+            <a href="inicio.html" class="btn-regresar">
+                <i class="fa-solid fa-arrow-left"></i>
+            </a>
+
+            <div class="brand-icon">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <div class="brand-text">
+                <span>Universidad Nexus</span>
+                <h2>Ajustes y Configuración</h2>
+            </div>
+        </div>
+
+        <div class="header-actions">
+            <div class="avatar">
+                <img src="https://ui-avatars.com/api/?name=Valeria+Mendez&background=3182CE&color=fff" alt="User">
+            </div>
+        </div>
+    </header>
+
+    <div class="screen-content">
+        <!-- Info. de usuario -->
+        <div id="user-info">
+            <div class="user-profile-avatar">
+                <img src="https://ui-avatars.com/api/?name=Valeria+Mendez&background=3182CE&color=fff" alt="User">
+            </div>
+            <div id="user-information-container">
+                <div id="user-name">
+                    <b>Valeria Méndez</b>
+                    <b class="user-badge">Cuenta verificada</b>
+                </div>
+                <span id="user-id">Matrícula 000002598</span><br>
+                <span id="user-degree-semester"><i class="fa-solid fa-graduation-cap"></i> Ing. de Software • Semestre 8</span>
+            </div>
+        </div>
+
+        <!-- Config. apariencia de pantalla -->
+        <section class="configurations appearance">
+            <header class="config-description">
+                <h3><i class="fa-solid fa-palette"></i> Apariencia</h3>
+                <span>INTERFAZ</span>
+            </header>
+            <div class="config-options">
+                <article>
+                    <i class="config-icons fa-solid fa-moon"></i>
+                    <div class="option-info">
+                        <h4>Modo Oscuro</h4>
+                        <p>Alternar entre tema visual claro institucional y modo nocturno de alto contraste</p>
+                    </div>
+                    <!-- Switch Modo Oscuro (Apagado / Sol) -->
+                    <label class="switch-toggle" for="dark-mode-toggle">
+                        <input type="checkbox" id="dark-mode-toggle">
+                        <span class="slider">
+                            <i class="fa-solid fa-sun icon-off"></i>
+                            <i class="fa-solid fa-moon icon-on"></i>
+                        </span>
+                    </label>
+                </article>
+
+                <article>
+                    <i class="config-icons fa-solid fa-text-height"></i>
+                    <div class="option-info">
+                        <h4>Escala Tipográfica</h4>
+                        <p>Ajuste de lectura para catálogo y actas</p>
+                    </div>
+                    <!-- Custom Select -->
+                    <div class="custom-select-wrapper">
+                        <select class="custom-select">
+                            <option value="100" selected>Estándar (100%)</option>
+                            <option value="75">75%</option>
+                            <option value="50">50%</option>
+                        </select>
+                        <i class="fa-solid fa-arrows-up-down select-arrow"></i>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Config. Notificaciones -->
+        <section class="configurations notifications">
+            <header class="config-description">
+                <h3><i class="fa-regular fa-bell"></i> Notificaciones</h3>
+                <span class="badge">2 ACTIVAS</span>
+            </header>
+
+            <div class="config-options">
+                <article>
+                    <i class="config-icons fa-solid fa-bell"></i>
+                    <div class="option-info">
+                        <h4>Avisos del Portal</h4>
+                        <p>Alertas de apertura de cupos, comunicados urgentes y circulares de facultad</p>
+                    </div>
+                    <!-- Switch Avisos (Encendido / Palomita) -->
+                    <label class="switch-toggle" for="portal-notif-toggle">
+                        <input type="checkbox" id="portal-notif-toggle" checked>
+                        <span class="slider">
+                            <i class="fa-solid fa-check icon-on"></i>
+                            <i class="fa-solid fa-xmark icon-off"></i>
+                        </span>
+                    </label>
+                </article>
+
+                <article>
+                    <i class="config-icons fa-solid fa-clock"></i>
+                    <div class="option-info">
+                        <h4>Recordatorios de Horario</h4>
+                        <p>Notificación 15 minutos antes del inicio de clases y exámenes parciales</p>
+                    </div>
+                    <!-- Switch Recordatorios (Encendido / Palomita) -->
+                    <label class="switch-toggle" for="schedule-notif-toggle">
+                        <input type="checkbox" id="schedule-notif-toggle" checked>
+                        <span class="slider">
+                            <i class="fa-solid fa-check icon-on"></i>
+                            <i class="fa-solid fa-xmark icon-off"></i>
+                        </span>
+                    </label>
+                </article>
+            </div>
+        </section>
+
+        <!-- Config. Cuenta -->
+        <section class="configurations account">
+            <header class="config-description">
+                <h3><i class="fa-solid fa-user-gear"></i> Cuenta</h3>
+                <span>SEGURIDAD Y RED</span>
+            </header>
+
+            <div class="config-options">
+                <article>
+                    <i class="config-icons fa-solid fa-lock"></i>
+                    <div class="option-info">
+                        <h4>Cambiar Contraseña</h4>
+                        <p>Última actualización hace 3 meses</p>
+                    </div>
+                    <a href="cambiar-contrasena.html" class="action-link">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </a>
+                </article>
+
+                <article>
+                    <i class="config-icons fa-solid fa-headset"></i>
+                    <div class="option-info">
+                        <h4>Soporte Técnico y Mesa de Ayuda</h4>
+                        <p>Ext. 4402 • DTI en línea</p>
+                    </div>
+                    <a href="tel:+526441103407" class="action-link" aria-label="Llamar a Soporte Técnico">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </a>
+                </article>
+            </div>
+        </section>
+
+        <button id="logout" type="button"><i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión</button>
+        <footer class="login-footer">
+            <p>
+                <i class="fa-solid fa-shield"></i>
+                SESION SSL ENCRIPTADA
+            </p>
+            <p>
+                Portal Nexus Móvil v3.4.1 • DTI Universidad Nexus
+            </p>
+        </footer>
+    </div>
+</main>
+<script src="../static/theme.js"></script>
+</body>
+</html>
