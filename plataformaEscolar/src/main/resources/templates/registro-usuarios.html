@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de usuarios</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../static/styles.css">
+</head>
+<body>
+<main class="mobile-screen">
+    <div class="screen-content">
+        <header class="top-bar">
+            <div class="brand">
+                <div class="return">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </div>
+                <div class="brand-text">
+                    <h2>Registro de usuarios</h2>
+                    <span>Portal Nexus Administration</span>
+                </div>
+            </div>
+            <div class="header-actions">
+                <span class="admin-label">ADMIN</span>
+                <div class="header-admin-icon">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <div class="avatar admin-avatar">
+                    <i class="fa-regular fa-user"></i>
+                </div>
+            </div>
+        </header>
+
+        <!-- RESUMEN / TARJETA SUPERIOR -->
+        <section class="info-card user-management-card">
+            <div class="info-icon logo-box-small">
+                <i class="fa-regular fa-id-card"></i>
+            </div>
+            <div class="info-card-content">
+                <span class="subtitle-small">PERÍODO ACADÉMICO 2026–1</span>
+                <h2>Gestión de Cuentas</h2>
+            </div>
+            <div class="cupos-summary">
+                <span class="cupos-title">Cupos Activos</span>
+                <strong>1,420 / 1,500</strong>
+            </div>
+        </section>
+
+        <!-- TOGGLE DE PESTAÑAS -->
+        <div class="role-toggle register-mode-toggle">
+            <button type="button" class="role-btn is-active" id="btn-manual">
+                <i class="fa-solid fa-user-plus"></i> Manual
+            </button>
+            <button type="button" class="role-btn" id="btn-csv">
+                <i class="fa-solid fa-file-csv"></i> Carga Masiva CSV
+            </button>
+        </div>
+
+        <!-- VISTA 1: FORMULARIO MANUAL (Visible por defecto) -->
+        <div id="vista-manual">
+            <!-- Formulario Principal -->
+            <section class="card form-card">
+                <!-- Nombre Completo -->
+                <div class="form-group">
+                    <div class="form-label-row">
+                        <label class="form-label">Nombre Completo</label>
+                        <span class="input-helper-label">Obligatorio</span>
+                    </div>
+                    <div class="input-wrapper">
+                        <i class="fa-regular fa-circle-user input-icon input-icon-left"></i>
+                        <input type="text" class="form-control" value="Sofía Mariana Ramírez Gómez" placeholder="Ingresa el nombre completo">
+                    </div>
+                </div>
+
+                <!-- Correo Institucional -->
+                <div class="form-group">
+                    <label class="form-label">Correo Institucional</label>
+                    <div class="input-group-domain">
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-at input-icon input-icon-left"></i>
+                            <input type="text" class="form-control" value="s.ramirez" placeholder="usuario">
+                        </div>
+                        <span class="domain-badge">@nexus.edu</span>
+                    </div>
+                    <span class="input-helper">Se enviará el enlace de activación temporal a este alias.</span>
+                </div>
+
+                <!-- Matrícula / ID -->
+                <div class="form-group">
+                    <div class="form-label-row">
+                        <label class="form-label">Matrícula / ID Institucional</label>
+                        <button type="button" class="btn-action-text"><i class="fa-solid fa-arrows-rotate"></i> Autogenerar</button>
+                    </div>
+                    <div class="input-wrapper has-right-badge">
+                        <i class="fa-solid fa-arrow-down-1-9 input-icon input-icon-left"></i>
+                        <input type="text" class="form-control" value="NX - 2026 - 9041">
+                        <span class="status-badge-valid">Válido</span>
+                    </div>
+                </div>
+
+                <!-- Rol en el Portal -->
+                <div class="form-group">
+                    <label class="form-label">Rol en el Portal</label>
+                    <div class="role-cards-grid">
+                        <label class="role-option-card">
+                            <input type="radio" name="portal_role" value="alumno" checked>
+                            <i class="fa-regular fa-circle-check"></i>
+                            <strong>Alumno</strong>
+                            <span>Pregrado</span>
+                        </label>
+
+                        <label class="role-option-card">
+                            <input type="radio" name="portal_role" value="docente">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                            <strong>Docente</strong>
+                            <span>Cátedra</span>
+                        </label>
+
+                        <label class="role-option-card">
+                            <input type="radio" name="portal_role" value="admin">
+                            <i class="fa-solid fa-shield-halved"></i>
+                            <strong>Admin</strong>
+                            <span>Control</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Facultad / Carrera -->
+                <div class="form-group">
+                    <label class="form-label">Facultad / Carrera</label>
+                    <div class="custom-select-wrapper full-width">
+                        <i class="fa-solid fa-building-columns select-icon-left"></i>
+                        <select class="custom-select full-width-select">
+                            <option value="ing_soft" selected>Ingeniería de Software</option>
+                            <option value="ing_ind">Ingeniería Industrial</option>
+                            <option value="lic_admin">Administración de Empresas</option>
+                        </select>
+                        <i class="fa-solid fa-chevron-up-down select-arrow"></i>
+                    </div>
+                </div>
+
+                <!-- Checklist de Verificación -->
+                <ul class="validation-checklist">
+                    <li>
+                        <i class="fa-regular fa-circle-check check-icon"></i>
+                        Sintaxis de correo institucional válida y sin duplicados
+                    </li>
+                    <li>
+                        <i class="fa-regular fa-circle-check check-icon"></i>
+                        Permisos estándar de alumno asignados (Campus Virtual + Biblioteca)
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-circle-info info-icon"></i>
+                        Se generará contraseña temporal enviada por email
+                    </li>
+                </ul>
+
+                <!-- Botón Submit -->
+                <button type="submit" class="btn-primary btn-submit-user">
+                    <i class="fa-solid fa-user-plus"></i> Dar de Alta Usuario
+                </button>
+            </section>
+
+            <!-- Vista Previa de Usuario Creado -->
+            <section class="card user-preview-card">
+                <div class="user-avatar-initials">SR</div>
+                <div class="user-preview-info">
+                    <div class="user-preview-header">
+                        <h3>Sofía M. Ramírez</h3>
+                        <span class="badge-new">Nuevo</span>
+                    </div>
+                    <p>s.ramirez@nexus.edu • Ing. de Software</p>
+                </div>
+                <div class="user-verified-badge">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+            </section>
+        </div>
+
+        <!-- VISTA 2: CARGA MASIVA CSV (Oculta por defecto) -->
+        <div id="vista-csv" class="is-hidden">
+            <section class="card form-card">
+                <div class="dropzone-csv" onclick="document.getElementById('input-file-csv').click()">
+                    <i class="fa-solid fa-cloud-arrow-up icon-csv"></i>
+                    <h3>Arrastra tu archivo CSV aquí</h3>
+                    <p>o haz clic para seleccionar tu archivo (.csv)</p>
+                    <input type="file" id="input-file-csv" accept=".csv" style="display: none;">
+                </div>
+
+                <div class="csv-template-info">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <span>Asegúrate de incluir las columnas: <strong>nombre_completo, correo_alias, matricula, rol, carrera</strong>.</span>
+                </div>
+
+                <button type="button" class="btn-submit-user" style="margin-top: 16px;">
+                    <i class="fa-solid fa-upload"></i> Procesar Carga Masiva
+                </button>
+            </section>
+        </div>
+    </div>
+</main>
+
+<script src="../static/theme.js"></script>
+</body>
+</html>

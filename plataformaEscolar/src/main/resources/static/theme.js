@@ -25,3 +25,30 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const btnManual = document.getElementById('btn-manual');
+    const btnCsv = document.getElementById('btn-csv');
+    const vistaManual = document.getElementById('vista-manual');
+    const vistaCsv = document.getElementById('vista-csv');
+
+    if (btnManual && btnCsv && vistaManual && vistaCsv) {
+        // Clic en pestaña "Manual"
+        btnManual.addEventListener('click', () => {
+            btnManual.classList.add('is-active');
+            btnCsv.classList.remove('is-active');
+
+            vistaManual.classList.remove('is-hidden');
+            vistaCsv.classList.add('is-hidden');
+        });
+
+        // Clic en pestaña "Carga Masiva CSV"
+        btnCsv.addEventListener('click', () => {
+            btnCsv.classList.add('is-active');
+            btnManual.classList.remove('is-active');
+
+            vistaCsv.classList.remove('is-hidden');
+            vistaManual.classList.add('is-hidden');
+        });
+    }
+});
