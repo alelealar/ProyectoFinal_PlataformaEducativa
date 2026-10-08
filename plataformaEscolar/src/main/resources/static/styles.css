@@ -1701,8 +1701,59 @@ input {
     .cupos-materia{
         background-color: white;
         width: 100%;
-        height: 140px;
+        height: 110px;
         border-radius: 15px;
+        box-shadow: var(--shadow-sm);
+        margin-top: 12px;
+    }
+
+    .titulo-cupos-materia{
+        padding-left: 20px;
+        padding-top: 10px;
+
+    }
+
+    .cupos-materia-nombre{
+        font-size: 12px;
+    }
+
+    .barra-progreso-cupos-materia{
+        width: 85%;
+        height: 10px;
+        background-color: darkred;
+        border-radius: 15px;
+        margin-left: 20px;
+        margin-top: 5px;
+    }
+
+    .footer-cupos-materia{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding-left: 20px;
+        padding-right: 20px;
+        font-size: 12px;
+        margin-top: 10px;
+    }
+
+    .contenedor-cupos-materia{
+        margin-bottom: 20px;
+    }
+
+    .nueva-materia-boton{
+        height: 60px;
+        width: 100%;
+        margin-bottom: 30px;
+        background-color: #535E7B;
+        border: none;
+        border-radius: 15px;
+        box-shadow: var(--shadow-sm);
+        color: var(--bg-primary);
+        font-size: 20px;
+    }
+
+    .nueva-materia-boton:active{
+        background-color: #1E293B;
         box-shadow: var(--shadow-sm);
     }
     /* Fin panel administrador */
