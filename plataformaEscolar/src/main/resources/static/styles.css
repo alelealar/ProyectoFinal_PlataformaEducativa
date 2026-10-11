@@ -2085,7 +2085,7 @@ details[open] .toggle-btn {
 .grupo-info-text h4 {
     margin: 0;
     font-size: 1.05rem;
-    color: #1a202c;
+    color: var(--text-primary);
     font-weight: 700;
 }
 
@@ -2206,7 +2206,7 @@ details[open] .toggle-btn {
 .btn-confirm {
     width: 100%;
     padding: 12px;
-    background-color: var(--color-dark);
+    background-color: var(--color-primary);
     color: var(--text-on-primary);
     border: none;
     border-radius: var(--radius-md);
@@ -3781,8 +3781,7 @@ details[open] .toggle-btn {
     }
 
     .mobile-only,
-    .bottom-nav,
-    .btn-regresar {
+    .bottom-nav{
         display: none !important;
     }
 
@@ -3834,29 +3833,20 @@ details[open] .toggle-btn {
         font-size: 18px;
         font-weight: 600;
         text-decoration: none;
-        position: relative;
-        padding: 4px 0;
-        transition: color 0.2s ease;
+        padding: 8px 16px;
+        border-radius: var(--radius-md);
+        transition: background-color 0.2s ease, color 0.2s ease;
     }
 
     .nav-item-link:hover {
         color: var(--text-primary);
+        background-color: var(--bg-tertiary);
     }
 
     .nav-item-link.active {
-        color: var(--text-primary);
+        color: var(--text-on-primary);
+        background-color: var(--color-primary);
         font-weight: 700;
-    }
-
-    .nav-item-link.active::after {
-        content: '';
-        position: absolute;
-        bottom: -2px;
-        left: 0;
-        right: 0;
-        height: 2px;
-        background-color: var(--color-secondary);
-        border-radius: 2px;
     }
 
     .header-actions {
@@ -4095,4 +4085,23 @@ details[open] .toggle-btn {
         color: var(--color-secondary);
         font-weight: 700;
     }
+
+    /*AJUSTES Y CONFIGURACION*/
+    .mobile-screen:has(.top-bar-V2) .screen-content {
+        max-width: 100%;
+        margin: 0 auto;
+        padding-left: 48px;
+        padding-right: 48px;
+    }
+    #user-information-container {
+        flex: 1;
+    }
+    .screen-ajustes {
+        padding-top: 32px;
+    }
+
+    #user-info {
+        margin-top: 24px;
+    }
+
 }
