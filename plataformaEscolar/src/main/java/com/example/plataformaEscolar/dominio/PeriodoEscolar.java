@@ -5,71 +5,134 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Representa un periodo escolar dentro de la plataforma.
- * Contiene las fechas del periodo, las fechas de inscripción
- * y los alumnos relacionados con él.
+ * Representa un periodo escolar lectivo dentro de la plataforma.
+ * Contiene las fechas del periodo, las ventanas de inscripción
+ * y las clases o grupos aperturados para dicho periodo.
  *
  * @author Equipo 2 - Amarillo
  */
 public class PeriodoEscolar {
 
     /**
-     * Fecha de inicio del periodo escolar.
+     * Identificador único del periodo escolar.
      */
-    private LocalDate fechaInicio;
+    private int id;
 
     /**
-     * Fecha de fin del periodo escolar.
-     */
-    private LocalDate fechaFin;
-
-    /**
-     * Fecha de inicio de las inscripciones.
-     */
-    private LocalDate fechaInicioInscripcion;
-
-    /**
-     * Fecha de fin de las inscripciones.
-     */
-    private LocalDate fechaFinInscripcion;
-
-    /**
-     * Nombre del periodo escolar.
+     * Nombre descriptivo del periodo escolar (ej. "Enero - Mayo 2026").
      */
     private String nombrePeriodo;
 
     /**
-     * Alumnos relacionados con el periodo escolar.
+     * Fecha de inicio del periodo lectivo.
      */
-    private List<Alumno> alumnos;
+    private LocalDate fechaInicio;
+
+    /**
+     * Fecha de fin del periodo lectivo.
+     */
+    private LocalDate fechaFin;
+
+    /**
+     * Fecha de inicio del proceso de inscripciones y carga académica.
+     */
+    private LocalDate fechaInicioInscripcion;
+
+    /**
+     * Fecha límite para el proceso de inscripciones.
+     */
+    private LocalDate fechaFinInscripcion;
+
+    /**
+     * Lista de clases o grupos ofertados durante este periodo escolar.
+     */
+    private List<Clase> clases;
 
     /**
      * Crea un periodo escolar vacío.
      */
     public PeriodoEscolar() {
-        this.alumnos = new ArrayList<>();
+        this.clases = new ArrayList<>();
     }
 
     /**
-     * Crea un periodo escolar con todos sus datos.
+     * Crea un periodo escolar con sus datos principales.
      *
-     * @param fechaInicio fecha de inicio del periodo
-     * @param fechaFin fecha de fin del periodo
-     * @param fechaInicioInscripcion fecha de inicio de las inscripciones
-     * @param fechaFinInscripcion fecha de fin de las inscripciones
+     * @param id identificador del periodo
      * @param nombrePeriodo nombre del periodo
-     * @param alumnos alumnos relacionados con el periodo
+     * @param fechaInicio fecha de inicio lectivo
+     * @param fechaFin fecha de fin lectivo
+     * @param fechaInicioInscripcion apertura de inscripciones
+     * @param fechaFinInscripcion cierre de inscripciones
      */
-    public PeriodoEscolar(LocalDate fechaInicio, LocalDate fechaFin,
-                          LocalDate fechaInicioInscripcion,
-                          LocalDate fechaFinInscripcion,
-                          String nombrePeriodo, List<Alumno> alumnos) {
+    public PeriodoEscolar(int id, String nombrePeriodo, LocalDate fechaInicio, LocalDate fechaFin,
+                          LocalDate fechaInicioInscripcion, LocalDate fechaFinInscripcion) {
+        this.id = id;
+        this.nombrePeriodo = nombrePeriodo;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.fechaInicioInscripcion = fechaInicioInscripcion;
         this.fechaFinInscripcion = fechaFinInscripcion;
+        this.clases = new ArrayList<>();
+    }
+
+    /**
+     * Crea un periodo escolar con todos sus datos completos, incluyendo su oferta de clases.
+     *
+     * @param id identificador del periodo
+     * @param nombrePeriodo nombre del periodo
+     * @param fechaInicio fecha de inicio lectivo
+     * @param fechaFin fecha de fin lectivo
+     * @param fechaInicioInscripcion apertura de inscripciones
+     * @param fechaFinInscripcion cierre de inscripciones
+     * @param clases lista de clases aperturadas
+     */
+    public PeriodoEscolar(int id, String nombrePeriodo, LocalDate fechaInicio, LocalDate fechaFin,
+                          LocalDate fechaInicioInscripcion, LocalDate fechaFinInscripcion,
+                          List<Clase> clases) {
+        this.id = id;
         this.nombrePeriodo = nombrePeriodo;
-        this.alumnos = alumnos;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.fechaInicioInscripcion = fechaInicioInscripcion;
+        this.fechaFinInscripcion = fechaFinInscripcion;
+        this.clases = (clases != null) ? clases : new ArrayList<>();
+    }
+
+    /**
+     * Regresa el identificador del periodo escolar.
+     *
+     * @return id del periodo
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * Cambia el identificador del periodo escolar.
+     *
+     * @param id nuevo id
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    /**
+     * Regresa el nombre del periodo.
+     *
+     * @return nombre del periodo
+     */
+    public String getNombrePeriodo() {
+        return nombrePeriodo;
+    }
+
+    /**
+     * Cambia el nombre del periodo.
+     *
+     * @param nombrePeriodo nuevo nombre del periodo
+     */
+    public void setNombrePeriodo(String nombrePeriodo) {
+        this.nombrePeriodo = nombrePeriodo;
     }
 
     /**
@@ -145,50 +208,33 @@ public class PeriodoEscolar {
     }
 
     /**
-     * Regresa el nombre del periodo.
+     * Regresa las clases ofertadas en este periodo escolar.
      *
-     * @return nombre del periodo
+     * @return lista de clases
      */
-    public String getNombrePeriodo() {
-        return nombrePeriodo;
+    public List<Clase> getClases() {
+        return clases;
     }
 
     /**
-     * Cambia el nombre del periodo.
+     * Cambia las clases ofertadas en este periodo escolar.
      *
-     * @param nombrePeriodo nuevo nombre del periodo
+     * @param clases nueva lista de clases
      */
-    public void setNombrePeriodo(String nombrePeriodo) {
-        this.nombrePeriodo = nombrePeriodo;
+    public void setClases(List<Clase> clases) {
+        this.clases = clases;
     }
 
     /**
-     * Regresa los alumnos del periodo.
-     *
-     * @return lista de alumnos
-     */
-    public List<Alumno> getAlumnos() {
-        return alumnos;
-    }
-
-    /**
-     * Cambia los alumnos del periodo.
-     *
-     * @param alumnos nueva lista de alumnos
-     */
-    public void setAlumnos(List<Alumno> alumnos) {
-        this.alumnos = alumnos;
-    }
-
-    /**
-     * Regresa la información del periodo escolar.
+     * Regresa la información del periodo escolar en formato texto.
      *
      * @return datos del periodo en texto
      */
     @Override
     public String toString() {
         return "PeriodoEscolar{" +
-                "nombrePeriodo='" + nombrePeriodo + '\'' +
+                "id=" + id +
+                ", nombrePeriodo='" + nombrePeriodo + '\'' +
                 ", fechaInicio=" + fechaInicio +
                 ", fechaFin=" + fechaFin +
                 ", fechaInicioInscripcion=" + fechaInicioInscripcion +

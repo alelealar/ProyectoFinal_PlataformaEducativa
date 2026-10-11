@@ -1,185 +1,68 @@
 package com.example.plataformaEscolar.dominio;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- * Representa a un maestro de la plataforma escolar.
- * Contiene su información personal, de contacto
- * y sus horarios.
+ * Representa a un docente de la plataforma escolar.
+ * Hereda de Usuario para compartir la información personal y de acceso,
+ * agregando los atributos específicos del ámbito laboral/académico.
  *
  * @author Equipo 2 - Amarillo
  */
-public class Maestro {
+public class Maestro extends Usuario {
 
     /**
-     * Nombre del maestro.
-     */
-    private String nombre;
-
-    /**
-     * Apellido paterno del maestro.
-     */
-    private String apellidoPaterno;
-
-    /**
-     * Apellido materno del maestro.
-     */
-    private String apellidoMaterno;
-
-    /**
-     * Correo personal del maestro.
-     */
-    private String correo;
-
-    /**
-     * Correo institucional del maestro.
-     */
-    private String correoInstitucional;
-
-    /**
-     * Matrícula del maestro.
+     * Número de empleado o matrícula única del maestro.
      */
     private String matricula;
 
     /**
-     * Contraseña del maestro.
+     * Correo institucional asignado al maestro.
      */
-    private String contrasena;
-
-    /**
-     * Horarios asignados al maestro.
-     */
-    private List<HorarioMaestro> horariosMaestro;
+    private String correoInstitucional;
 
     /**
      * Crea un maestro vacío.
      */
     public Maestro() {
-        this.horariosMaestro = new ArrayList<>();
+        super();
     }
 
     /**
-     * Crea un maestro con todos sus datos.
+     * Crea un maestro con sus atributos propios.
      *
+     * @param matricula número de empleado o matrícula
+     * @param correoInstitucional correo institucional del maestro
+     */
+    public Maestro(String matricula, String correoInstitucional) {
+        this.matricula = matricula;
+        this.correoInstitucional = correoInstitucional;
+    }
+
+    /**
+     * Crea un maestro con todos los datos personales e institucionales completos.
+     *
+     * @param id identificador único del usuario
      * @param nombre nombre del maestro
      * @param apellidoPaterno apellido paterno del maestro
      * @param apellidoMaterno apellido materno del maestro
      * @param correo correo personal del maestro
+     * @param telefono teléfono de contacto del maestro
+     * @param contraseña contraseña de acceso
+     * @param rol rol dentro del sistema
+     * @param matricula matrícula o número de empleado
      * @param correoInstitucional correo institucional del maestro
-     * @param matricula matrícula del maestro
-     * @param contrasena contraseña del maestro
-     * @param horariosMaestro horarios del maestro
      */
-    public Maestro(String nombre, String apellidoPaterno,
-                   String apellidoMaterno, String correo,
-                   String correoInstitucional, String matricula,
-                   String contrasena,
-                   List<HorarioMaestro> horariosMaestro) {
-        this.nombre = nombre;
-        this.apellidoPaterno = apellidoPaterno;
-        this.apellidoMaterno = apellidoMaterno;
-        this.correo = correo;
-        this.correoInstitucional = correoInstitucional;
+    public Maestro(Integer id, String nombre, String apellidoPaterno, String apellidoMaterno,
+                   String correo, String telefono, String contraseña, String rol,
+                   String matricula, String correoInstitucional) {
+        super(id, nombre, apellidoPaterno, apellidoMaterno, correo, telefono, contraseña, rol);
         this.matricula = matricula;
-        this.contrasena = contrasena;
-        this.horariosMaestro = horariosMaestro;
-    }
-
-    /**
-     * Regresa el nombre del maestro.
-     *
-     * @return nombre del maestro
-     */
-    public String getNombre() {
-        return nombre;
-    }
-
-    /**
-     * Cambia el nombre del maestro.
-     *
-     * @param nombre nuevo nombre del maestro
-     */
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    /**
-     * Regresa el apellido paterno.
-     *
-     * @return apellido paterno del maestro
-     */
-    public String getApellidoPaterno() {
-        return apellidoPaterno;
-    }
-
-    /**
-     * Cambia el apellido paterno.
-     *
-     * @param apellidoPaterno nuevo apellido paterno
-     */
-    public void setApellidoPaterno(String apellidoPaterno) {
-        this.apellidoPaterno = apellidoPaterno;
-    }
-
-    /**
-     * Regresa el apellido materno.
-     *
-     * @return apellido materno del maestro
-     */
-    public String getApellidoMaterno() {
-        return apellidoMaterno;
-    }
-
-    /**
-     * Cambia el apellido materno.
-     *
-     * @param apellidoMaterno nuevo apellido materno
-     */
-    public void setApellidoMaterno(String apellidoMaterno) {
-        this.apellidoMaterno = apellidoMaterno;
-    }
-
-    /**
-     * Regresa el correo personal.
-     *
-     * @return correo personal del maestro
-     */
-    public String getCorreo() {
-        return correo;
-    }
-
-    /**
-     * Cambia el correo personal.
-     *
-     * @param correo nuevo correo personal
-     */
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-
-    /**
-     * Regresa el correo institucional.
-     *
-     * @return correo institucional del maestro
-     */
-    public String getCorreoInstitucional() {
-        return correoInstitucional;
-    }
-
-    /**
-     * Cambia el correo institucional.
-     *
-     * @param correoInstitucional nuevo correo institucional
-     */
-    public void setCorreoInstitucional(String correoInstitucional) {
         this.correoInstitucional = correoInstitucional;
     }
 
     /**
      * Regresa la matrícula del maestro.
      *
-     * @return matrícula del maestro
+     * @return matrícula o número de empleado
      */
     public String getMatricula() {
         return matricula;
@@ -195,56 +78,38 @@ public class Maestro {
     }
 
     /**
-     * Regresa la contraseña.
+     * Regresa el correo institucional del maestro.
      *
-     * @return contraseña del maestro
+     * @return correo institucional
      */
-    public String getContrasena() {
-        return contrasena;
+    public String getCorreoInstitucional() {
+        return correoInstitucional;
     }
 
     /**
-     * Cambia la contraseña.
+     * Cambia el correo institucional del maestro.
      *
-     * @param contrasena nueva contraseña
+     * @param correoInstitucional nuevo correo institucional
      */
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
+    public void setCorreoInstitucional(String correoInstitucional) {
+        this.correoInstitucional = correoInstitucional;
     }
 
     /**
-     * Regresa los horarios del maestro.
+     * Regresa la información del maestro en formato texto.
      *
-     * @return lista de horarios
-     */
-    public List<HorarioMaestro> getHorariosMaestro() {
-        return horariosMaestro;
-    }
-
-    /**
-     * Cambia los horarios del maestro.
-     *
-     * @param horariosMaestro nueva lista de horarios
-     */
-    public void setHorariosMaestro(List<HorarioMaestro> horariosMaestro) {
-        this.horariosMaestro = horariosMaestro;
-    }
-
-    /**
-     * Regresa la información del maestro.
-     *
-     * @return datos del maestro en texto
+     * @return representación en cadena de los datos del maestro
      */
     @Override
     public String toString() {
         return "Maestro{" +
-                "nombre='" + nombre + '\'' +
-                ", apellidoPaterno='" + apellidoPaterno + '\'' +
-                ", apellidoMaterno='" + apellidoMaterno + '\'' +
-                ", correo='" + correo + '\'' +
+                "id=" + getId() +
+                ", nombre='" + getNombre() + '\'' +
+                ", apellidoPaterno='" + getApellidoPaterno() + '\'' +
+                ", apellidoMaterno='" + getApellidoMaterno() + '\'' +
+                ", correo='" + getCorreo() + '\'' +
                 ", correoInstitucional='" + correoInstitucional + '\'' +
                 ", matricula='" + matricula + '\'' +
-                ", contrasena='" + contrasena + '\'' +
                 '}';
     }
 }

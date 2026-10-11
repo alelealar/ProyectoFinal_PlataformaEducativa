@@ -4,13 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Representa una materia de la plataforma escolar.
- * Contiene su información básica y las clases
- * relacionadas con ella.
+ * Representa una asignatura dentro del catálogo académico de la universidad.
+ * Gestiona sus créditos, estado activo, grupos (clases) aperturados
+ * y su relación reflexiva de prerrequisito (seriación).
  *
  * @author Equipo 2 - Amarillo
  */
 public class Materia {
+
+    /**
+     * Identificador único de la materia.
+     */
+    private int id;
 
     /**
      * Nombre de la materia.
@@ -18,27 +23,32 @@ public class Materia {
     private String nombre;
 
     /**
-     * Clave de la materia.
+     * Clave oficial de la materia.
      */
     private String clave;
 
     /**
-     * Descripción de la materia.
+     * Descripción del contenido o propósito de la materia.
      */
     private String descripcion;
 
     /**
-     * Número de créditos de la materia.
+     * Número de créditos académicos que otorga la materia.
      */
     private int creditos;
 
     /**
-     * Indica si la materia está activa.
+     * Indica si la materia se encuentra disponible en el catálogo activo.
      */
     private boolean activa;
 
     /**
-     * Clases relacionadas con la materia.
+     * Materia previa obligatoria que el alumno debe haber aprobado para cursar esta asignación (relación reflexiva).
+     */
+    private Materia prerrequisito;
+
+    /**
+     * Clases o grupos aperturados para esta materia.
      */
     private List<Clase> clases;
 
@@ -52,13 +62,14 @@ public class Materia {
     /**
      * Crea una materia con sus datos principales.
      *
+     * @param id identificador de la materia
      * @param nombre nombre de la materia
-     * @param clave clave de la materia
-     * @param descripcion descripción de la materia
+     * @param clave clave oficial
+     * @param descripcion descripción del curso
      * @param creditos número de créditos
      */
-    public Materia(String nombre, String clave,
-                   String descripcion, int creditos) {
+    public Materia(int id, String nombre, String clave, String descripcion, int creditos) {
+        this.id = id;
         this.nombre = nombre;
         this.clave = clave;
         this.descripcion = descripcion;
@@ -68,24 +79,45 @@ public class Materia {
     }
 
     /**
-     * Crea una materia con todos sus datos.
+     * Crea una materia con todos sus datos completos, incluyendo su prerrequisito.
      *
+     * @param id identificador de la materia
      * @param nombre nombre de la materia
-     * @param clave clave de la materia
-     * @param descripcion descripción de la materia
+     * @param clave clave oficial
+     * @param descripcion descripción del curso
      * @param creditos número de créditos
-     * @param activa indica si la materia está activa
-     * @param clases clases relacionadas con la materia
+     * @param activa estado activo de la materia
+     * @param prerrequisito materia previa requerida (seriación)
+     * @param clases lista de clases asociadas
      */
-    public Materia(String nombre, String clave,
-                   String descripcion, int creditos,
-                   boolean activa, List<Clase> clases) {
+    public Materia(int id, String nombre, String clave, String descripcion, int creditos,
+                   boolean activa, Materia prerrequisito, List<Clase> clases) {
+        this.id = id;
         this.nombre = nombre;
         this.clave = clave;
         this.descripcion = descripcion;
         this.creditos = creditos;
         this.activa = activa;
+        this.prerrequisito = prerrequisito;
         this.clases = (clases != null) ? clases : new ArrayList<>();
+    }
+
+    /**
+     * Regresa el identificador de la materia.
+     *
+     * @return id de la materia
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * Cambia el identificador de la materia.
+     *
+     * @param id nuevo id
+     */
+    public void setId(int id) {
+        this.id = id;
     }
 
     /**
@@ -136,7 +168,7 @@ public class Materia {
     /**
      * Cambia la descripción de la materia.
      *
-     * @param descripcion nueva descripción de la materia
+     * @param descripcion nueva descripción
      */
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
@@ -172,14 +204,32 @@ public class Materia {
     /**
      * Cambia el estado de la materia.
      *
-     * @param activa nuevo estado de la materia
+     * @param activa nuevo estado
      */
     public void setActiva(boolean activa) {
         this.activa = activa;
     }
 
     /**
-     * Regresa las clases de la materia.
+     * Regresa la materia asignada como prerrequisito.
+     *
+     * @return materia prerrequisito
+     */
+    public Materia getPrerrequisito() {
+        return prerrequisito;
+    }
+
+    /**
+     * Cambia o asigna la materia prerrequisito.
+     *
+     * @param prerrequisito nueva materia prerrequisito
+     */
+    public void setPrerrequisito(Materia prerrequisito) {
+        this.prerrequisito = prerrequisito;
+    }
+
+    /**
+     * Regresa las clases o grupos de la materia.
      *
      * @return lista de clases
      */
@@ -188,7 +238,7 @@ public class Materia {
     }
 
     /**
-     * Cambia las clases de la materia.
+     * Cambia la lista de clases de la materia.
      *
      * @param clases nueva lista de clases
      */
@@ -197,18 +247,20 @@ public class Materia {
     }
 
     /**
-     * Regresa la información de la materia.
+     * Regresa la información de la materia en formato de texto.
      *
      * @return datos de la materia en texto
      */
     @Override
     public String toString() {
         return "Materia{" +
-                "nombre='" + nombre + '\'' +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
                 ", clave='" + clave + '\'' +
                 ", descripcion='" + descripcion + '\'' +
                 ", creditos=" + creditos +
                 ", activa=" + activa +
+                ", prerrequisito=" + (prerrequisito != null ? prerrequisito.getNombre() : "Ninguno") +
                 '}';
     }
 }

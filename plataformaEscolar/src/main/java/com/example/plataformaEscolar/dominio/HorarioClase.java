@@ -3,68 +3,85 @@ package com.example.plataformaEscolar.dominio;
 import java.time.LocalTime;
 
 /**
- * Representa el horario de una clase.
- * Guarda las horas, los días y la clase
- * correspondiente.
+ * Representa el bloque de horario y aula asignados a una clase en particular.
+ * Permite validar la concurrencia de horarios y evitar empalmes en la carga del alumno.
  *
  * @author Equipo 2 - Amarillo
  */
 public class HorarioClase {
 
     /**
-     * Hora de entrada de la clase.
+     * Identificador único del horario.
+     */
+    private int id;
+
+    /**
+     * Hora de inicio de la sesión.
      */
     private LocalTime horaEntrada;
 
     /**
-     * Hora de salida de la clase.
+     * Hora de finalización de la sesión.
      */
     private LocalTime horaSalida;
 
     /**
-     * Días en los que se imparte la clase.
+     * Días de la semana en los que se imparte la clase (ej. "Lunes, Miércoles").
      */
     private String dias;
 
     /**
-     * Clase a la que pertenece el horario.
+     * Aula o laboratorio asignado.
+     */
+    private String aula;
+
+    /**
+     * Clase a la que pertenece este horario.
      */
     private Clase clase;
 
     /**
-     * Crea un horario vacío.
+     * Crea un horario de clase vacío.
      */
     public HorarioClase() {
     }
 
     /**
-     * Crea un horario con sus datos.
+     * Crea un horario de clase con todos sus datos completos.
      *
-     * @param horaEntrada hora de entrada
-     * @param horaSalida hora de salida
-     * @param dias días de la clase
+     * @param id identificador del horario
+     * @param horaEntrada hora de inicio
+     * @param horaSalida hora de fin
+     * @param dias días en los que aplica
+     * @param aula aula asignada
+     * @param clase clase correspondiente
      */
-    public HorarioClase(LocalTime horaEntrada, LocalTime horaSalida,
-                        String dias) {
+    public HorarioClase(int id, LocalTime horaEntrada, LocalTime horaSalida,
+                        String dias, String aula, Clase clase) {
+        this.id = id;
         this.horaEntrada = horaEntrada;
         this.horaSalida = horaSalida;
         this.dias = dias;
+        this.aula = aula;
+        this.clase = clase;
     }
 
     /**
-     * Crea un horario con todos sus datos.
+     * Regresa el identificador del horario.
      *
-     * @param horaEntrada hora de entrada
-     * @param horaSalida hora de salida
-     * @param dias días de la clase
-     * @param clase clase correspondiente
+     * @return id del horario
      */
-    public HorarioClase(LocalTime horaEntrada, LocalTime horaSalida,
-                        String dias, Clase clase) {
-        this.horaEntrada = horaEntrada;
-        this.horaSalida = horaSalida;
-        this.dias = dias;
-        this.clase = clase;
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * Cambia el identificador del horario.
+     *
+     * @param id nuevo id
+     */
+    public void setId(int id) {
+        this.id = id;
     }
 
     /**
@@ -106,7 +123,7 @@ public class HorarioClase {
     /**
      * Regresa los días de la clase.
      *
-     * @return días de la clase
+     * @return días asignados
      */
     public String getDias() {
         return dias;
@@ -115,23 +132,41 @@ public class HorarioClase {
     /**
      * Cambia los días de la clase.
      *
-     * @param dias nuevos días de la clase
+     * @param dias nuevos días
      */
     public void setDias(String dias) {
         this.dias = dias;
     }
 
     /**
-     * Regresa la clase correspondiente.
+     * Regresa el aula asignada.
      *
-     * @return clase del horario
+     * @return aula de la clase
+     */
+    public String getAula() {
+        return aula;
+    }
+
+    /**
+     * Cambia el aula asignada.
+     *
+     * @param aula nueva aula
+     */
+    public void setAula(String aula) {
+        this.aula = aula;
+    }
+
+    /**
+     * Regresa la clase asociada.
+     *
+     * @return clase correspondiente
      */
     public Clase getClase() {
         return clase;
     }
 
     /**
-     * Cambia la clase correspondiente.
+     * Cambia la clase asociada.
      *
      * @param clase nueva clase
      */
@@ -140,17 +175,19 @@ public class HorarioClase {
     }
 
     /**
-     * Regresa la información del horario.
+     * Regresa la información del horario de clase en texto.
      *
      * @return datos del horario en texto
      */
     @Override
     public String toString() {
         return "HorarioClase{" +
-                "horaEntrada=" + horaEntrada +
+                "id=" + id +
+                ", horaEntrada=" + horaEntrada +
                 ", horaSalida=" + horaSalida +
                 ", dias='" + dias + '\'' +
-                ", clase=" + (clase != null ? clase.getNombre() : "N/A") +
+                ", aula='" + aula + '\'' +
+                ", clase=" + clase +
                 '}';
     }
 }

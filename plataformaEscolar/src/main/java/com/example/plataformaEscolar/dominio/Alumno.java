@@ -1,196 +1,83 @@
 package com.example.plataformaEscolar.dominio;
 
-import java.util.List;
-
 /**
- * Representa a un alumno de la plataforma escolar.
- * Guarda su información personal, escolar
- * y sus horarios.
+ * Representa a un alumno dentro de la plataforma escolar.
+ * Hereda la información personal y credenciales de acceso de Usuario.
  *
  * @author Equipo 2 - Amarillo
  */
-public class Alumno {
+public class Alumno extends Usuario {
 
     /**
-     * Nombre del alumno.
-     */
-    private String nombre;
-
-    /**
-     * Apellido paterno del alumno.
-     */
-    private String apellidoPaterno;
-
-    /**
-     * Apellido materno del alumno.
-     */
-    private String apellidoMaterno;
-
-    /**
-     * Correo personal del alumno.
-     */
-    private String correo;
-
-    /**
-     * Correo institucional del alumno.
-     */
-    private String correoInstitucional;
-
-    /**
-     * Matrícula del alumno.
+     * Matrícula única del alumno.
      */
     private String matricula;
 
     /**
-     * Contraseña del alumno.
+     * Correo institucional asignado al alumno.
      */
-    private String contrasenia;
+    private String correoInstitucional;
 
     /**
-     * Período escolar del alumno.
+     * Carrera universitaria a la que pertenece el alumno.
      */
-    private PeriodoEscolar periodoEscolar;
-
-    /**
-     * Horarios del alumno.
-     */
-    private List<HorarioAlumno> horarios;
+    private Carrera carrera;
 
     /**
      * Crea un alumno vacío.
      */
     public Alumno() {
+        super();
     }
 
     /**
-     * Crea un alumno con todos sus datos.
+     * Crea un alumno con sus atributos propios.
      *
+     * @param matricula matrícula única del alumno
+     * @param correoInstitucional correo institucional asignado
+     * @param carrera carrera a la que pertenece
+     */
+    public Alumno(String matricula, String correoInstitucional, Carrera carrera) {
+        this.matricula = matricula;
+        this.correoInstitucional = correoInstitucional;
+        this.carrera = carrera;
+    }
+
+    /**
+     * Crea un alumno con todos los datos personales e institucionales completos.
+     *
+     * @param id identificador único del usuario
      * @param nombre nombre del alumno
      * @param apellidoPaterno apellido paterno del alumno
      * @param apellidoMaterno apellido materno del alumno
      * @param correo correo personal del alumno
-     * @param correoInstitucional correo institucional del alumno
-     * @param matricula matrícula del alumno
-     * @param contrasenia contraseña del alumno
-     * @param periodoEscolar período escolar del alumno
-     * @param horarios horarios del alumno
+     * @param telefono teléfono de contacto
+     * @param contrasenia contraseña de acceso
+     * @param rol rol dentro del sistema
+     * @param matricula matrícula única del alumno
+     * @param correoInstitucional correo institucional asignado
+     * @param carrera carrera a la que pertenece
      */
-    public Alumno(String nombre, String apellidoPaterno, String apellidoMaterno,
-                  String correo, String correoInstitucional, String matricula,
-                  String contrasenia, PeriodoEscolar periodoEscolar,
-                  List<HorarioAlumno> horarios) {
-        this.nombre = nombre;
-        this.apellidoPaterno = apellidoPaterno;
-        this.apellidoMaterno = apellidoMaterno;
-        this.correo = correo;
-        this.correoInstitucional = correoInstitucional;
+    public Alumno(Integer id, String nombre, String apellidoPaterno, String apellidoMaterno,
+                  String correo, String telefono, String contrasenia, String rol,
+                  String matricula, String correoInstitucional, Carrera carrera) {
+        super(id, nombre, apellidoPaterno, apellidoMaterno, correo, telefono, contrasenia, rol);
         this.matricula = matricula;
-        this.contrasenia = contrasenia;
-        this.periodoEscolar = periodoEscolar;
-        this.horarios = horarios;
-    }
-
-    /**
-     * Regresa el nombre del alumno.
-     *
-     * @return nombre del alumno
-     */
-    public String getNombre() {
-        return nombre;
-    }
-
-    /**
-     * Cambia el nombre del alumno.
-     *
-     * @param nombre nuevo nombre del alumno
-     */
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    /**
-     * Regresa el apellido paterno.
-     *
-     * @return apellido paterno del alumno
-     */
-    public String getApellidoPaterno() {
-        return apellidoPaterno;
-    }
-
-    /**
-     * Cambia el apellido paterno.
-     *
-     * @param apellidoPaterno nuevo apellido paterno
-     */
-    public void setApellidoPaterno(String apellidoPaterno) {
-        this.apellidoPaterno = apellidoPaterno;
-    }
-
-    /**
-     * Regresa el apellido materno.
-     *
-     * @return apellido materno del alumno
-     */
-    public String getApellidoMaterno() {
-        return apellidoMaterno;
-    }
-
-    /**
-     * Cambia el apellido materno.
-     *
-     * @param apellidoMaterno nuevo apellido materno
-     */
-    public void setApellidoMaterno(String apellidoMaterno) {
-        this.apellidoMaterno = apellidoMaterno;
-    }
-
-    /**
-     * Regresa el correo personal.
-     *
-     * @return correo del alumno
-     */
-    public String getCorreo() {
-        return correo;
-    }
-
-    /**
-     * Cambia el correo personal.
-     *
-     * @param correo nuevo correo del alumno
-     */
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-
-    /**
-     * Regresa el correo institucional.
-     *
-     * @return correo institucional del alumno
-     */
-    public String getCorreoInstitucional() {
-        return correoInstitucional;
-    }
-
-    /**
-     * Cambia el correo institucional.
-     *
-     * @param correoInstitucional nuevo correo institucional
-     */
-    public void setCorreoInstitucional(String correoInstitucional) {
         this.correoInstitucional = correoInstitucional;
+        this.carrera = carrera;
     }
 
     /**
-     * Regresa la matrícula.
+     * Regresa la matrícula del alumno.
      *
-     * @return matrícula del alumno
+     * @return matrícula única
      */
     public String getMatricula() {
         return matricula;
     }
 
     /**
-     * Cambia la matrícula.
+     * Cambia la matrícula del alumno.
      *
      * @param matricula nueva matrícula
      */
@@ -199,76 +86,57 @@ public class Alumno {
     }
 
     /**
-     * Regresa la contraseña.
+     * Regresa el correo institucional del alumno.
      *
-     * @return contraseña del alumno
+     * @return correo institucional
      */
-    public String getContrasenia() {
-        return contrasenia;
+    public String getCorreoInstitucional() {
+        return correoInstitucional;
     }
 
     /**
-     * Cambia la contraseña.
+     * Cambia el correo institucional del alumno.
      *
-     * @param contrasenia nueva contraseña
+     * @param correoInstitucional nuevo correo institucional
      */
-    public void setContrasenia(String contrasenia) {
-        this.contrasenia = contrasenia;
+    public void setCorreoInstitucional(String correoInstitucional) {
+        this.correoInstitucional = correoInstitucional;
     }
 
     /**
-     * Regresa el período escolar.
+     * Regresa la carrera a la que pertenece el alumno.
      *
-     * @return período escolar del alumno
+     * @return carrera universitaria
      */
-    public PeriodoEscolar getPeriodoEscolar() {
-        return periodoEscolar;
+    public Carrera getCarrera() {
+        return carrera;
     }
 
     /**
-     * Cambia el período escolar.
+     * Cambia la carrera a la que pertenece el alumno.
      *
-     * @param periodoEscolar nuevo período escolar
+     * @param carrera nueva carrera
      */
-    public void setPeriodoEscolar(PeriodoEscolar periodoEscolar) {
-        this.periodoEscolar = periodoEscolar;
+    public void setCarrera(Carrera carrera) {
+        this.carrera = carrera;
     }
 
     /**
-     * Regresa los horarios del alumno.
+     * Regresa la información del alumno en formato texto.
      *
-     * @return lista de horarios
-     */
-    public List<HorarioAlumno> getHorarios() {
-        return horarios;
-    }
-
-    /**
-     * Cambia los horarios del alumno.
-     *
-     * @param horarios nueva lista de horarios
-     */
-    public void setHorarios(List<HorarioAlumno> horarios) {
-        this.horarios = horarios;
-    }
-
-    /**
-     * Regresa la información del alumno.
-     *
-     * @return datos del alumno en texto
+     * @return representación en cadena de los datos del alumno
      */
     @Override
     public String toString() {
         return "Alumno{" +
-                "nombre='" + nombre + '\'' +
-                ", apellidoPaterno='" + apellidoPaterno + '\'' +
-                ", apellidoMaterno='" + apellidoMaterno + '\'' +
-                ", correo='" + correo + '\'' +
-                ", correoInstitucional='" + correoInstitucional + '\'' +
+                "id=" + getId() +
+                ", nombre='" + getNombre() + '\'' +
+                ", apellidoPaterno='" + getApellidoPaterno() + '\'' +
+                ", apellidoMaterno='" + getApellidoMaterno() + '\'' +
+                ", correo='" + getCorreo() + '\'' +
                 ", matricula='" + matricula + '\'' +
-                ", contrasenia='" + contrasenia + '\'' +
-                ", periodoEscolar=" + periodoEscolar +
-                ", horarios=" + horarios +
+                ", correoInstitucional='" + correoInstitucional + '\'' +
+                ", carrera=" + (carrera != null ? carrera.getNombre() : "null") +
                 '}';
     }
 }
