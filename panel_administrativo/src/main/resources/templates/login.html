@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel administrativo | Iniciar sesión</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/styles/style.css}">
+</head>
+<body>
+<main class="mobile-screen">
+    <div class="screen-content login-page">
+        <header class="login-header">
+            <div class="logo-box" aria-hidden="true">
+                <i class="fa-solid fa-user-shield"></i>
+            </div>
+            <span class="subtitle-small">Servicios Escolares</span>
+            <h1>Panel administrativo</h1>
+            <p class="login-description">Acceso exclusivo para administradores</p>
+        </header>
+
+        <section class="card login-form-card">
+            <p th:if="${error}" th:text="${error}" style="color:#b42318;margin-bottom:1rem;"></p>
+            <form th:action="@{/login}" method="post">
+                <div class="form-group">
+                    <label class="form-label" for="email">Correo institucional</label>
+                    <div class="input-wrapper">
+                        <i class="fa-regular fa-envelope input-icon input-icon-left" aria-hidden="true"></i>
+                        <input type="email" id="email" name="email" class="form-control"
+                               placeholder="admin@nexus.edu" autocomplete="username" required
+                               th:value="${email}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="password">Contraseña</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-lock input-icon input-icon-left" aria-hidden="true"></i>
+                        <input type="password" id="password" name="password" class="form-control"
+                               placeholder="••••••••••••" autocomplete="current-password" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary">
+                    <span>Iniciar sesión</span>
+                    <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                </button>
+            </form>
+        </section>
+    </div>
+</main>
+</body>
+</html>
