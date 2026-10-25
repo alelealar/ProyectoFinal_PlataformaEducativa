@@ -1,4 +1,4 @@
-package com.example.plataformaEscolar.dominio;
+package com.example.plataformaEscolar.model;
 
 /**
  * Representa a un docente de la plataforma escolar.

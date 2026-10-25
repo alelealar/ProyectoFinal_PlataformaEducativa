@@ -1,4 +1,4 @@
-package com.example.plataformaEscolar.dominio;
+package com.example.plataformaEscolar.model;
 
 /**
  * Representa la entidad base de usuario dentro de la plataforma escolar.
