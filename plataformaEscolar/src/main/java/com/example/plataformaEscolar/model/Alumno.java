@@ -46,20 +46,20 @@ public class Alumno extends Usuario {
     /**
      * Crea un alumno con todos los datos personales e institucionales completos.
      *
-     * @param id identificador único del usuario
+     * @param id identificador único del usuario (Long)
      * @param nombre nombre del alumno
      * @param apellidoPaterno apellido paterno del alumno
      * @param apellidoMaterno apellido materno del alumno
      * @param correo correo personal del alumno
      * @param telefono teléfono de contacto
      * @param contrasenia contraseña de acceso
-     * @param rol rol dentro del sistema
+     * @param rol rol dentro del sistema (Enum Rol)
      * @param matricula matrícula única del alumno
      * @param correoInstitucional correo institucional asignado
      * @param carrera carrera a la que pertenece
      */
-    public Alumno(Integer id, String nombre, String apellidoPaterno, String apellidoMaterno,
-                  String correo, String telefono, String contrasenia, String rol,
+    public Alumno(Long id, String nombre, String apellidoPaterno, String apellidoMaterno,
+                  String correo, String telefono, String contrasenia, Rol rol,
                   String matricula, String correoInstitucional, Carrera carrera) {
         super(id, nombre, apellidoPaterno, apellidoMaterno, correo, telefono, contrasenia, rol);
         this.matricula = matricula;
@@ -67,65 +67,30 @@ public class Alumno extends Usuario {
         this.carrera = carrera;
     }
 
-    /**
-     * Regresa la matrícula del alumno.
-     *
-     * @return matrícula única
-     */
     public String getMatricula() {
         return matricula;
     }
 
-    /**
-     * Cambia la matrícula del alumno.
-     *
-     * @param matricula nueva matrícula
-     */
     public void setMatricula(String matricula) {
         this.matricula = matricula;
     }
 
-    /**
-     * Regresa el correo institucional del alumno.
-     *
-     * @return correo institucional
-     */
     public String getCorreoInstitucional() {
         return correoInstitucional;
     }
 
-    /**
-     * Cambia el correo institucional del alumno.
-     *
-     * @param correoInstitucional nuevo correo institucional
-     */
     public void setCorreoInstitucional(String correoInstitucional) {
         this.correoInstitucional = correoInstitucional;
     }
 
-    /**
-     * Regresa la carrera a la que pertenece el alumno.
-     *
-     * @return carrera universitaria
-     */
     public Carrera getCarrera() {
         return carrera;
     }
 
-    /**
-     * Cambia la carrera a la que pertenece el alumno.
-     *
-     * @param carrera nueva carrera
-     */
     public void setCarrera(Carrera carrera) {
         this.carrera = carrera;
     }
 
-    /**
-     * Regresa la información del alumno en formato texto.
-     *
-     * @return representación en cadena de los datos del alumno
-     */
     @Override
     public String toString() {
         return "Alumno{" +

@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Representa una asignatura dentro del catálogo académico de la universidad.
  * Gestiona sus créditos, estado activo, grupos (clases) aperturados
- * y su relación reflexiva de prerrequisito (seriación).
+ * y sus relaciones reflexivas de prerrequisitos (seriación múltiple).
  *
  * @author Equipo 2 - Amarillo
  */
@@ -15,7 +15,7 @@ public class Materia {
     /**
      * Identificador único de la materia.
      */
-    private int id;
+    private Long id; // Cambiado de int a Long
 
     /**
      * Nombre de la materia.
@@ -43,9 +43,10 @@ public class Materia {
     private boolean activa;
 
     /**
-     * Materia previa obligatoria que el alumno debe haber aprobado para cursar esta asignación (relación reflexiva).
+     * Lista de materias previas obligatorias que el alumno debe haber aprobado
+     * para cursar esta asignatura (relación reflexiva de 1 a muchos).
      */
-    private Materia prerrequisito;
+    private List<Materia> prerrequisitos;
 
     /**
      * Clases o grupos aperturados para esta materia.
@@ -53,206 +54,158 @@ public class Materia {
     private List<Clase> clases;
 
     /**
-     * Crea una materia vacía.
+     * Crea una materia vacía e inicializa las listas requeridas.
      */
     public Materia() {
+        this.prerrequisitos = new ArrayList<>();
         this.clases = new ArrayList<>();
     }
 
     /**
      * Crea una materia con sus datos principales.
      *
-     * @param id identificador de la materia
+     * @param id identificador de la materia (Long)
      * @param nombre nombre de la materia
      * @param clave clave oficial
      * @param descripcion descripción del curso
      * @param creditos número de créditos
      */
-    public Materia(int id, String nombre, String clave, String descripcion, int creditos) {
+    public Materia(Long id, String nombre, String clave, String descripcion, int creditos) {
         this.id = id;
         this.nombre = nombre;
         this.clave = clave;
         this.descripcion = descripcion;
         this.creditos = creditos;
         this.activa = true;
+        this.prerrequisitos = new ArrayList<>();
         this.clases = new ArrayList<>();
     }
 
     /**
-     * Crea una materia con todos sus datos completos, incluyendo su prerrequisito.
+     * Crea una materia con todos sus datos completos, incluyendo su lista de prerrequisitos.
      *
-     * @param id identificador de la materia
+     * @param id identificador de la materia (Long)
      * @param nombre nombre de la materia
      * @param clave clave oficial
      * @param descripcion descripción del curso
      * @param creditos número de créditos
      * @param activa estado activo de la materia
-     * @param prerrequisito materia previa requerida (seriación)
+     * @param prerrequisitos lista de materias previas requeridas (seriación)
      * @param clases lista de clases asociadas
      */
-    public Materia(int id, String nombre, String clave, String descripcion, int creditos,
-                   boolean activa, Materia prerrequisito, List<Clase> clases) {
+    public Materia(Long id, String nombre, String clave, String descripcion, int creditos,
+                   boolean activa, List<Materia> prerrequisitos, List<Clase> clases) {
         this.id = id;
         this.nombre = nombre;
         this.clave = clave;
         this.descripcion = descripcion;
         this.creditos = creditos;
         this.activa = activa;
-        this.prerrequisito = prerrequisito;
+        this.prerrequisitos = (prerrequisitos != null) ? prerrequisitos : new ArrayList<>();
         this.clases = (clases != null) ? clases : new ArrayList<>();
     }
 
-    /**
-     * Regresa el identificador de la materia.
-     *
-     * @return id de la materia
-     */
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    /**
-     * Cambia el identificador de la materia.
-     *
-     * @param id nuevo id
-     */
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    /**
-     * Regresa el nombre de la materia.
-     *
-     * @return nombre de la materia
-     */
     public String getNombre() {
         return nombre;
     }
 
-    /**
-     * Cambia el nombre de la materia.
-     *
-     * @param nombre nuevo nombre de la materia
-     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    /**
-     * Regresa la clave de la materia.
-     *
-     * @return clave de la materia
-     */
     public String getClave() {
         return clave;
     }
 
-    /**
-     * Cambia la clave de la materia.
-     *
-     * @param clave nueva clave de la materia
-     */
     public void setClave(String clave) {
         this.clave = clave;
     }
 
-    /**
-     * Regresa la descripción de la materia.
-     *
-     * @return descripción de la materia
-     */
     public String getDescripcion() {
         return descripcion;
     }
 
-    /**
-     * Cambia la descripción de la materia.
-     *
-     * @param descripcion nueva descripción
-     */
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
-    /**
-     * Regresa los créditos de la materia.
-     *
-     * @return número de créditos
-     */
     public int getCreditos() {
         return creditos;
     }
 
-    /**
-     * Cambia los créditos de la materia.
-     *
-     * @param creditos nuevo número de créditos
-     */
     public void setCreditos(int creditos) {
         this.creditos = creditos;
     }
 
-    /**
-     * Indica si la materia está activa.
-     *
-     * @return true si está activa
-     */
     public boolean isActiva() {
         return activa;
     }
 
-    /**
-     * Cambia el estado de la materia.
-     *
-     * @param activa nuevo estado
-     */
     public void setActiva(boolean activa) {
         this.activa = activa;
     }
 
     /**
-     * Regresa la materia asignada como prerrequisito.
+     * Regresa la lista de materias asignadas como prerrequisito.
      *
-     * @return materia prerrequisito
+     * @return lista de materias prerrequisito
      */
-    public Materia getPrerrequisito() {
-        return prerrequisito;
+    public List<Materia> getPrerrequisitos() {
+        return prerrequisitos;
     }
 
     /**
-     * Cambia o asigna la materia prerrequisito.
+     * Asigna una lista completa de materias prerrequisito.
      *
-     * @param prerrequisito nueva materia prerrequisito
+     * @param prerrequisitos nueva lista de prerrequisitos
      */
-    public void setPrerrequisito(Materia prerrequisito) {
-        this.prerrequisito = prerrequisito;
+    public void setPrerrequisitos(List<Materia> prerrequisitos) {
+        this.prerrequisitos = (prerrequisitos != null) ? prerrequisitos : new ArrayList<>();
     }
 
     /**
-     * Regresa las clases o grupos de la materia.
+     * Agrega un nuevo prerrequisito a la lista si no es nulo y no está ya presente.
      *
-     * @return lista de clases
+     * @param prerrequisito materia requerida a agregar
      */
+    public void agregarPrerrequisito(Materia prerrequisito) {
+        if (prerrequisito != null && !this.prerrequisitos.contains(prerrequisito)) {
+            this.prerrequisitos.add(prerrequisito);
+        }
+    }
+
+    /**
+     * Elimina un prerrequisito de la lista.
+     *
+     * @param prerrequisito materia requerida a remover
+     */
+    public void eliminarPrerrequisito(Materia prerrequisito) {
+        this.prerrequisitos.remove(prerrequisito);
+    }
+
     public List<Clase> getClases() {
         return clases;
     }
 
-    /**
-     * Cambia la lista de clases de la materia.
-     *
-     * @param clases nueva lista de clases
-     */
     public void setClases(List<Clase> clases) {
-        this.clases = clases;
+        this.clases = (clases != null) ? clases : new ArrayList<>();
     }
 
-    /**
-     * Regresa la información de la materia en formato de texto.
-     *
-     * @return datos de la materia en texto
-     */
     @Override
     public String toString() {
+        List<String> nombresPrerrequisitos = new ArrayList<>();
+        for (Materia p : prerrequisitos) {
+            nombresPrerrequisitos.add(p.getNombre());
+        }
+
         return "Materia{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
@@ -260,7 +213,7 @@ public class Materia {
                 ", descripcion='" + descripcion + '\'' +
                 ", creditos=" + creditos +
                 ", activa=" + activa +
-                ", prerrequisito=" + (prerrequisito != null ? prerrequisito.getNombre() : "Ninguno") +
+                ", prerrequisitos=" + (nombresPrerrequisitos.isEmpty() ? "Ninguno" : nombresPrerrequisitos) +
                 '}';
     }
 }

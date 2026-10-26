@@ -13,7 +13,7 @@ public class Inscripcion {
     /**
      * Identificador único de la inscripción.
      */
-    private int id;
+    private Long id; // Cambiado de int a Long
 
     /**
      * Fecha y hora exacta en la que se confirmó la inscripción.
@@ -21,9 +21,14 @@ public class Inscripcion {
     private LocalDateTime fechaInscripcion;
 
     /**
-     * Estatus actual de la inscripción (ej. "CONFIRMADA", "CANCELADA").
+     * Calificación final obtenida por el alumno en la materia inscrita.
      */
-    private String estatus;
+    private float calificacion;
+
+    /**
+     * Estado actual de la inscripción mediante enumeración.
+     */
+    private EstadoInscripcion estado;
 
     /**
      * Alumno que realiza la inscripción.
@@ -36,129 +41,104 @@ public class Inscripcion {
     private Clase clase;
 
     /**
-     * Crea una inscripción vacía.
+     * Crea una inscripción vacía con estado por defecto en INSCRITA.
      */
     public Inscripcion() {
+        this.estado = EstadoInscripcion.INSCRITA;
     }
 
     /**
-     * Crea una inscripción completa.
+     * Crea una inscripción con los datos básicos.
      *
-     * @param id identificador de la inscripción
+     * @param id identificador de la inscripción (Long)
      * @param fechaInscripcion fecha y hora de la transacción
-     * @param estatus estado de la inscripción
+     * @param estado estado de la inscripción
      * @param alumno alumno involucrado
      * @param clase clase seleccionada
      */
-    public Inscripcion(int id, LocalDateTime fechaInscripcion, String estatus, Alumno alumno, Clase clase) {
+    public Inscripcion(Long id, LocalDateTime fechaInscripcion, EstadoInscripcion estado, Alumno alumno, Clase clase) {
         this.id = id;
         this.fechaInscripcion = fechaInscripcion;
-        this.estatus = estatus;
+        this.calificacion = 0.0f;
+        this.estado = estado;
         this.alumno = alumno;
         this.clase = clase;
     }
 
     /**
-     * Regresa el identificador de la inscripción.
+     * Crea una inscripción completa incluyendo la calificación final.
      *
-     * @return id de la inscripción
+     * @param id identificador de la inscripción (Long)
+     * @param fechaInscripcion fecha y hora de la transacción
+     * @param calificacion calificación otorgada
+     * @param estado estado de la inscripción
+     * @param alumno alumno involucrado
+     * @param clase clase seleccionada
      */
-    public int getId() {
+    public Inscripcion(Long id, LocalDateTime fechaInscripcion, float calificacion, EstadoInscripcion estado, Alumno alumno, Clase clase) {
+        this.id = id;
+        this.fechaInscripcion = fechaInscripcion;
+        this.calificacion = calificacion;
+        this.estado = estado;
+        this.alumno = alumno;
+        this.clase = clase;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    /**
-     * Cambia el identificador de la inscripción.
-     *
-     * @param id nuevo id
-     */
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    /**
-     * Regresa la fecha y hora de la inscripción.
-     *
-     * @return fecha y hora
-     */
     public LocalDateTime getFechaInscripcion() {
         return fechaInscripcion;
     }
 
-    /**
-     * Cambia la fecha y hora de la inscripción.
-     *
-     * @param fechaInscripcion nueva fecha y hora
-     */
     public void setFechaInscripcion(LocalDateTime fechaInscripcion) {
         this.fechaInscripcion = fechaInscripcion;
     }
 
-    /**
-     * Regresa el estatus de la inscripción.
-     *
-     * @return estatus actual
-     */
-    public String getEstatus() {
-        return estatus;
+    public float getCalificacion() {
+        return calificacion;
     }
 
-    /**
-     * Cambia el estatus de la inscripción.
-     *
-     * @param estatus nuevo estatus
-     */
-    public void setEstatus(String estatus) {
-        this.estatus = estatus;
+    public void setCalificacion(float calificacion) {
+        this.calificacion = calificacion;
     }
 
-    /**
-     * Regresa el alumno asociado a la inscripción.
-     *
-     * @return alumno inscrito
-     */
+    public EstadoInscripcion getEstado() {
+        return estado;
+    }
+
+    public void setEstado(EstadoInscripcion estado) {
+        this.estado = estado;
+    }
+
     public Alumno getAlumno() {
         return alumno;
     }
 
-    /**
-     * Cambia el alumno asociado a la inscripción.
-     *
-     * @param alumno nuevo alumno
-     */
     public void setAlumno(Alumno alumno) {
         this.alumno = alumno;
     }
 
-    /**
-     * Regresa la clase asociada a la inscripción.
-     *
-     * @return clase inscrita
-     */
     public Clase getClase() {
         return clase;
     }
 
-    /**
-     * Cambia la clase asociada a la inscripción.
-     *
-     * @param clase nueva clase
-     */
     public void setClase(Clase clase) {
         this.clase = clase;
     }
 
-    /**
-     * Regresa la información de la inscripción en texto.
-     *
-     * @return representación en cadena de la inscripción
-     */
     @Override
     public String toString() {
         return "Inscripcion{" +
                 "id=" + id +
                 ", fechaInscripcion=" + fechaInscripcion +
-                ", estatus='" + estatus + '\'' +
+                ", calificacion=" + calificacion +
+                ", estado=" + estado +
                 ", alumno=" + (alumno != null ? alumno.getMatricula() : "null") +
                 ", clase=" + (clase != null ? clase.getClave() : "null") +
                 '}';

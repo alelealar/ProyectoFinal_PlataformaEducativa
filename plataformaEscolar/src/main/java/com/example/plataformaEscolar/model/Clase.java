@@ -1,10 +1,11 @@
 package com.example.plataformaEscolar.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Representa un grupo o sección aperturada de una materia en un periodo escolar determinado.
- * Gestiona la capacidad de alumnos, el maestro asignado, la materia y sus horarios.
+ * Gestiona la capacidad de alumnos, el maestro asignado, la materia, sus horarios y sus inscripciones.
  *
  * @author Equipo 2 - Amarillo
  */
@@ -13,7 +14,7 @@ public class Clase {
     /**
      * Identificador único de la clase.
      */
-    private int id;
+    private Long id; // Cambiado de int a Long
 
     /**
      * Nombre descriptivo de la clase o grupo.
@@ -29,11 +30,6 @@ public class Clase {
      * Cupo máximo permitido de alumnos en el grupo.
      */
     private int cupoMaximo;
-
-    /**
-     * Cantidad de lugares disponibles para inscripción.
-     */
-    private int cupoDisponible;
 
     /**
      * Maestro responsable de impartir la clase.
@@ -56,205 +52,162 @@ public class Clase {
     private List<HorarioClase> horarios;
 
     /**
-     * Crea una clase vacía.
+     * Lista de inscripciones activas vinculadas a esta clase.
+     */
+    private List<Inscripcion> inscripciones;
+
+    /**
+     * Crea una clase vacía e inicializa sus colecciones.
      */
     public Clase() {
+        this.horarios = new ArrayList<>();
+        this.inscripciones = new ArrayList<>();
     }
 
     /**
-     * Crea una clase con todos sus datos completos.
+     * Crea una clase con sus datos principales sin inscripciones previas.
      *
-     * @param id identificador de la clase
+     * @param id identificador de la clase (Long)
      * @param nombre nombre de la clase
      * @param clave clave del grupo
      * @param cupoMaximo capacidad máxima de alumnos
-     * @param cupoDisponible lugares disponibles
      * @param maestro maestro asignado
      * @param materia materia impartida
      * @param periodoEscolar período lectivo correspondiente
      * @param horarios bloques de horario de la clase
      */
-    public Clase(int id, String nombre, String clave, int cupoMaximo, int cupoDisponible,
+    public Clase(Long id, String nombre, String clave, int cupoMaximo,
                  Maestro maestro, Materia materia, PeriodoEscolar periodoEscolar,
                  List<HorarioClase> horarios) {
         this.id = id;
         this.nombre = nombre;
         this.clave = clave;
         this.cupoMaximo = cupoMaximo;
-        this.cupoDisponible = cupoDisponible;
         this.maestro = maestro;
         this.materia = materia;
         this.periodoEscolar = periodoEscolar;
-        this.horarios = horarios;
+        this.horarios = (horarios != null) ? horarios : new ArrayList<>();
+        this.inscripciones = new ArrayList<>();
     }
 
     /**
-     * Regresa el identificador de la clase.
+     * Crea una clase con todos sus datos completos, incluyendo inscripciones existentes.
      *
-     * @return id de la clase
+     * @param id identificador de la clase (Long)
+     * @param nombre nombre de la clase
+     * @param clave clave del grupo
+     * @param cupoMaximo capacidad máxima de alumnos
+     * @param maestro maestro asignado
+     * @param materia materia impartida
+     * @param periodoEscolar período lectivo correspondiente
+     * @param horarios bloques de horario de la clase
+     * @param inscripciones lista de inscripciones de la clase
      */
-    public int getId() {
+    public Clase(Long id, String nombre, String clave, int cupoMaximo,
+                 Maestro maestro, Materia materia, PeriodoEscolar periodoEscolar,
+                 List<HorarioClase> horarios, List<Inscripcion> inscripciones) {
+        this.id = id;
+        this.nombre = nombre;
+        this.clave = clave;
+        this.cupoMaximo = cupoMaximo;
+        this.maestro = maestro;
+        this.materia = materia;
+        this.periodoEscolar = periodoEscolar;
+        this.horarios = (horarios != null) ? horarios : new ArrayList<>();
+        this.inscripciones = (inscripciones != null) ? inscripciones : new ArrayList<>();
+    }
+
+    public Long getId() {
         return id;
     }
 
-    /**
-     * Cambia el identificador de la clase.
-     *
-     * @param id nuevo id
-     */
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    /**
-     * Regresa el nombre de la clase.
-     *
-     * @return nombre de la clase
-     */
     public String getNombre() {
         return nombre;
     }
 
-    /**
-     * Cambia el nombre de la clase.
-     *
-     * @param nombre nuevo nombre
-     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    /**
-     * Regresa la clave del grupo.
-     *
-     * @return clave de la clase
-     */
     public String getClave() {
         return clave;
     }
 
-    /**
-     * Cambia la clave del grupo.
-     *
-     * @param clave nueva clave
-     */
     public void setClave(String clave) {
         this.clave = clave;
     }
 
-    /**
-     * Regresa el cupo máximo.
-     *
-     * @return cupo máximo
-     */
     public int getCupoMaximo() {
         return cupoMaximo;
     }
 
-    /**
-     * Cambia el cupo máximo.
-     *
-     * @param cupoMaximo nuevo cupo máximo
-     */
     public void setCupoMaximo(int cupoMaximo) {
         this.cupoMaximo = cupoMaximo;
     }
 
     /**
-     * Regresa la cantidad de cupos disponibles.
+     * Regresa la cantidad de cupos disponibles calculada de forma dinámica.
+     * Cuenta únicamente las inscripciones activas (diferentes de BAJA).
      *
-     * @return cupo disponible
+     * @return lugares disponibles (cupoMáximo - inscripciones activas)
      */
     public int getCupoDisponible() {
-        return cupoDisponible;
+        int inscritosActivos = 0;
+        if (inscripciones != null) {
+            for (Inscripcion inscripcion : inscripciones) {
+                if (inscripcion.getEstado() != EstadoInscripcion.BAJA) {
+                    inscritosActivos++;
+                }
+            }
+        }
+        int disponibles = cupoMaximo - inscritosActivos;
+        return Math.max(disponibles, 0);
     }
 
-    /**
-     * Cambia la cantidad de cupos disponibles.
-     *
-     * @param cupoDisponible nuevo cupo disponible
-     */
-    public void setCupoDisponible(int cupoDisponible) {
-        this.cupoDisponible = cupoDisponible;
-    }
-
-    /**
-     * Regresa el maestro asignado.
-     *
-     * @return maestro de la clase
-     */
     public Maestro getMaestro() {
         return maestro;
     }
 
-    /**
-     * Cambia el maestro asignado.
-     *
-     * @param maestro nuevo maestro
-     */
     public void setMaestro(Maestro maestro) {
         this.maestro = maestro;
     }
 
-    /**
-     * Regresa la materia asociada.
-     *
-     * @return materia de la clase
-     */
     public Materia getMateria() {
         return materia;
     }
 
-    /**
-     * Cambia la materia asociada.
-     *
-     * @param materia nueva materia
-     */
     public void setMateria(Materia materia) {
         this.materia = materia;
     }
 
-    /**
-     * Regresa el período escolar.
-     *
-     * @return período escolar de la clase
-     */
     public PeriodoEscolar getPeriodoEscolar() {
         return periodoEscolar;
     }
 
-    /**
-     * Cambia el período escolar.
-     *
-     * @param periodoEscolar nuevo período escolar
-     */
     public void setPeriodoEscolar(PeriodoEscolar periodoEscolar) {
         this.periodoEscolar = periodoEscolar;
     }
 
-    /**
-     * Regresa la lista de horarios de la clase.
-     *
-     * @return lista de bloques de horario
-     */
     public List<HorarioClase> getHorarios() {
         return horarios;
     }
 
-    /**
-     * Cambia la lista de horarios de la clase.
-     *
-     * @param horarios nueva lista de horarios
-     */
     public void setHorarios(List<HorarioClase> horarios) {
-        this.horarios = horarios;
+        this.horarios = (horarios != null) ? horarios : new ArrayList<>();
     }
 
-    /**
-     * Regresa la información de la clase en formato de texto.
-     *
-     * @return datos de la clase en texto
-     */
+    public List<Inscripcion> getInscripciones() {
+        return inscripciones;
+    }
+
+    public void setInscripciones(List<Inscripcion> inscripciones) {
+        this.inscripciones = (inscripciones != null) ? inscripciones : new ArrayList<>();
+    }
+
     @Override
     public String toString() {
         return "Clase{" +
@@ -262,11 +215,10 @@ public class Clase {
                 ", nombre='" + nombre + '\'' +
                 ", clave='" + clave + '\'' +
                 ", cupoMaximo=" + cupoMaximo +
-                ", cupoDisponible=" + cupoDisponible +
-                ", maestro=" + maestro +
-                ", materia=" + materia +
-                ", periodoEscolar=" + periodoEscolar +
-                ", horarios=" + horarios +
+                ", cupoDisponible=" + getCupoDisponible() +
+                ", maestro=" + (maestro != null ? maestro.getCorreo() : "null") +
+                ", materia=" + (materia != null ? materia.getNombre() : "null") +
+                ", periodoEscolar=" + (periodoEscolar != null ? periodoEscolar.getNombrePeriodo() : "null") +
                 '}';
     }
 }

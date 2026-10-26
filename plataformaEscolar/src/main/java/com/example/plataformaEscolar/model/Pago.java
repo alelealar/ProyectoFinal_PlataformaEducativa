@@ -1,5 +1,6 @@
 package com.example.plataformaEscolar.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
@@ -12,7 +13,7 @@ public class Pago {
     /**
      * Identificador único de la transacción de pago.
      */
-    private int id;
+    private Long id; // Cambiado de int a Long
 
     /**
      * Folio o número de referencia bancaria/sistema.
@@ -22,7 +23,17 @@ public class Pago {
     /**
      * Monto total cubierto.
      */
-    private double monto;
+    private BigDecimal monto;
+
+    /**
+     * Método utilizado para realizar el pago mediante enumeración.
+     */
+    private MetodoPago metodoPago;
+
+    /**
+     * Concepto o motivo del pago (ej. "Inscripción", "Colegiatura").
+     */
+    private String concepto;
 
     /**
      * Fecha y hora en la que se registró el pago.
@@ -32,7 +43,7 @@ public class Pago {
     /**
      * Estado del pago (ej. "APROBADO", "PENDIENTE", "RECHAZADO").
      */
-    private String estado;
+    private EstadoPago estado;
 
     /**
      * Alumno que efectúa el pago.
@@ -40,151 +51,127 @@ public class Pago {
     private Alumno alumno;
 
     /**
-     * Crea un pago vacío.
+     * Período escolar correspondiente al pago.
+     */
+    private PeriodoEscolar periodoEscolar;
+
+    /**
+     * Crea un pago vacío con el monto inicializado en cero.
      */
     public Pago() {
+        this.monto = BigDecimal.ZERO;
     }
 
     /**
      * Crea un pago con todos sus datos completos.
      *
-     * @param id identificador del pago
+     * @param id identificador del pago (Long)
      * @param folio número de folio del recibo
      * @param monto cantidad pagada
+     * @param metodoPago método de pago utilizado (enum)
+     * @param concepto concepto del pago
      * @param fechaPago fecha y hora de la transacción
      * @param estado estado del pago
      * @param alumno alumno responsable
+     * @param periodoEscolar período escolar al que corresponde el pago
      */
-    public Pago(int id, String folio, double monto, LocalDateTime fechaPago, String estado, Alumno alumno) {
+    public Pago(Long id, String folio, BigDecimal monto, MetodoPago metodoPago, String concepto,
+                LocalDateTime fechaPago, EstadoPago estado, Alumno alumno, PeriodoEscolar periodoEscolar) {
         this.id = id;
         this.folio = folio;
-        this.monto = monto;
+        this.monto = (monto != null) ? monto : BigDecimal.ZERO;
+        this.metodoPago = metodoPago;
+        this.concepto = concepto;
         this.fechaPago = fechaPago;
         this.estado = estado;
         this.alumno = alumno;
+        this.periodoEscolar = periodoEscolar;
     }
 
-    /**
-     * Regresa el identificador del pago.
-     *
-     * @return id del pago
-     */
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    /**
-     * Cambia el identificador del pago.
-     *
-     * @param id nuevo id
-     */
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    /**
-     * Regresa el folio del pago.
-     *
-     * @return folio del recibo
-     */
     public String getFolio() {
         return folio;
     }
 
-    /**
-     * Cambia el folio del pago.
-     *
-     * @param folio nuevo folio
-     */
     public void setFolio(String folio) {
         this.folio = folio;
     }
 
-    /**
-     * Regresa el monto del pago.
-     *
-     * @return monto pagado
-     */
-    public double getMonto() {
+    public BigDecimal getMonto() {
         return monto;
     }
 
-    /**
-     * Cambia el monto del pago.
-     *
-     * @param monto nuevo monto
-     */
-    public void setMonto(double monto) {
-        this.monto = monto;
+    public void setMonto(BigDecimal monto) {
+        this.monto = (monto != null) ? monto : BigDecimal.ZERO;
     }
 
-    /**
-     * Regresa la fecha y hora del pago.
-     *
-     * @return fecha y hora
-     */
+    public MetodoPago getMetodoPago() {
+        return metodoPago;
+    }
+
+    public void setMetodoPago(MetodoPago metodoPago) {
+        this.metodoPago = metodoPago;
+    }
+
+    public String getConcepto() {
+        return concepto;
+    }
+
+    public void setConcepto(String concepto) {
+        this.concepto = concepto;
+    }
+
     public LocalDateTime getFechaPago() {
         return fechaPago;
     }
 
-    /**
-     * Cambia la fecha y hora del pago.
-     *
-     * @param fechaPago nueva fecha y hora
-     */
     public void setFechaPago(LocalDateTime fechaPago) {
         this.fechaPago = fechaPago;
     }
 
-    /**
-     * Regresa el estado del pago.
-     *
-     * @return estado del pago
-     */
-    public String getEstado() {
+    public EstadoPago getEstado() {
         return estado;
     }
 
-    /**
-     * Cambia el estado del pago.
-     *
-     * @param estado nuevo estado
-     */
-    public void setEstado(String estado) {
+    public void setEstado(EstadoPago estado) {
         this.estado = estado;
     }
 
-    /**
-     * Regresa el alumno que realizó el pago.
-     *
-     * @return alumno responsable
-     */
     public Alumno getAlumno() {
         return alumno;
     }
 
-    /**
-     * Cambia el alumno responsable del pago.
-     *
-     * @param alumno nuevo alumno
-     */
     public void setAlumno(Alumno alumno) {
         this.alumno = alumno;
     }
 
-    /**
-     * Regresa la información del pago en texto.
-     *
-     * @return representación en cadena del pago
-     */
+    public PeriodoEscolar getPeriodoEscolar() {
+        return periodoEscolar;
+    }
+
+    public void setPeriodoEscolar(PeriodoEscolar periodoEscolar) {
+        this.periodoEscolar = periodoEscolar;
+    }
+
     @Override
     public String toString() {
         return "Pago{" +
                 "id=" + id +
                 ", folio='" + folio + '\'' +
                 ", monto=" + monto +
+                ", metodoPago=" + metodoPago +
+                ", concepto='" + concepto + '\'' +
                 ", fechaPago=" + fechaPago +
                 ", estado='" + estado + '\'' +
+                ", alumno=" + (alumno != null ? alumno.getMatricula() : "null") +
+                ", periodoEscolar=" + (periodoEscolar != null ? periodoEscolar.getNombrePeriodo() : "null") +
                 '}';
     }
 }

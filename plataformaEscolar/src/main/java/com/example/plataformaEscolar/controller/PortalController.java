@@ -11,4 +11,19 @@ public class PortalController {
         return "inicio";
     }
 
+    @GetMapping("/carga-academica")
+    public String cargaAcademica(){
+        return "carga-academica";
+    }
+
+    @GetMapping("/ajustes")
+    public String ajustes(){
+        return "ajustes";
+    }
+
+    @GetMapping("/registro-usuarios")
+    public String registroUsuarios(){
+        return "registro-usuarios";
+    }
+
 }
