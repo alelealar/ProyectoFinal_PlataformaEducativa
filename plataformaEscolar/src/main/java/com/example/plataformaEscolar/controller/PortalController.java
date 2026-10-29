@@ -26,4 +26,9 @@ public class PortalController {
         return "registro-usuarios";
     }
 
+    @GetMapping("/horario")
+    public String horario(){
+        return "horario";
+    }
+
 }

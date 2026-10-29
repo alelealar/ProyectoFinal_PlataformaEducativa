@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alta de Materia | Portal Nexus Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/styles.css}">
+</head>
+<body>
+<main class="mobile-screen">
+    <div class="screen-content">
+        <!-- HEADER -->
+        <header class="top-bar">
+            <div class="brand">
+                <a href="gestion-materias.html" class="return" aria-label="Volver">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </a>
+                <div class="brand-text">
+                    <h2>Alta de Nueva Materia</h2>
+                    <span>Portal Nexus Administration</span>
+                </div>
+            </div>
+            <div class="header-actions">
+                <span class="admin-label">ADMIN</span>
+                <div class="header-admin-icon">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <div class="avatar admin-avatar">
+                    <i class="fa-regular fa-user"></i>
+                </div>
+            </div>
+        </header>
+
+        <form action="#" method="post" class="form-alta-materia">
+            <!-- SECCIÓN 1: DATOS GENERALES DE LA ASIGNATURA -->
+            <section class="card form-card">
+                <div class="card-header-title">
+                    <i class="fa-solid fa-book"></i>
+                    <h3>Información General</h3>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="nombre-materia">Nombre de la Asignatura</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-pen input-icon input-icon-left"></i>
+                        <input type="text" id="nombre-materia" name="nombre" class="form-control" placeholder="Ej. Sistemas Operativos" required>
+                    </div>
+                </div>
+
+                <div class="form-row-2col">
+                    <div class="form-group">
+                        <label class="form-label" for="clave-materia">Clave / Código</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-barcode input-icon input-icon-left"></i>
+                            <input type="text" id="clave-materia" name="clave" class="form-control" placeholder="Ej. SIS-301" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="creditos-materia">Créditos SATCA</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-award input-icon input-icon-left"></i>
+                            <input type="number" id="creditos-materia" name="creditos" class="form-control" placeholder="8" min="1" max="16" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row-2col">
+                    <div class="form-group">
+                        <label class="form-label" for="semestre-materia">Semestre Sugerido</label>
+                        <div class="custom-select-wrapper full-width">
+                            <select id="semestre-materia" name="semestre" class="custom-select full-width-select">
+                                <option value="1">1º Semestre</option>
+                                <option value="2">2º Semestre</option>
+                                <option value="3">3º Semestre</option>
+                                <option value="4">4º Semestre</option>
+                                <option value="5" selected>5º Semestre</option>
+                                <option value="6">6º Semestre</option>
+                                <option value="7">7º Semestre</option>
+                                <option value="8">8º Semestre</option>
+                            </select>
+                            <i class="fa-solid fa-chevron-down select-arrow"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="tipo-materia">Tipo de Asignatura</label>
+                        <div class="custom-select-wrapper full-width">
+                            <select id="tipo-materia" name="tipo" class="custom-select full-width-select">
+                                <option value="obligatoria" selected>Obligatoria</option>
+                                <option value="optativa">Optativa</option>
+                                <option value="taller">Taller / Laboratorio</option>
+                            </select>
+                            <i class="fa-solid fa-chevron-down select-arrow"></i>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 2: SERIACIÓN Y PRERREQUISITOS -->
+            <section class="card form-card">
+                <div class="card-header-title">
+                    <i class="fa-solid fa-link"></i>
+                    <h3>Seriación y Prerrequisitos</h3>
+                </div>
+                <p class="form-section-desc">Define si el alumno necesita haber acreditado alguna materia previa para inscribir esta asignatura.</p>
+
+                <div class="form-group">
+                    <label class="form-label" for="prerrequisito-select">Asignatura Prerrequisito</label>
+                    <div class="custom-select-wrapper full-width">
+                        <i class="fa-solid fa-layer-group select-icon-left"></i>
+                        <select id="prerrequisito-select" name="prerrequisito_id" class="custom-select full-width-select">
+                            <option value="none">Sin Prerrequisito (Materia Libre)</option>
+                            <option value="BDD-201">BDD-201 • Bases de Datos Relacionales</option>
+                            <option value="INF-102">INF-102 • Programación Orientada a Objetos</option>
+                            <option value="MAT-101">MAT-101 • Cálculo Diferencial e Integral</option>
+                            <option value="ARQ-301">ARQ-301 • Estructura de Computadoras</option>
+                        </select>
+                        <i class="fa-solid fa-chevron-down select-arrow"></i>
+                    </div>
+                </div>
+
+                <div class="prereq-badge-preview">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <span>Estatus de seriación: <strong>Regla Estricta</strong> (Bloquea inscripción si no está aprobada)</span>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 3: APERTURA DE GRUPOS Y HORARIOS -->
+            <section class="card form-card">
+                <div class="card-header-title-between">
+                    <div class="card-header-title">
+                        <i class="fa-solid fa-users-rectangle"></i>
+                        <h3>Apertura de Grupos</h3>
+                    </div>
+                    <button type="button" class="btn-secondary-sm"><i class="fa-solid fa-plus"></i> Agregar Grupo</button>
+                </div>
+
+                <!-- Tarjeta de Grupo 01 -->
+                <div class="grupo-config-card">
+                    <div class="grupo-config-header">
+                        <h4>Grupo 01 (NRC Autogenerado: 5510)</h4>
+                        <span class="pill-status-success">Activo</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Docente Asignado</label>
+                        <div class="custom-select-wrapper full-width">
+                            <select name="docente_g1" class="custom-select full-width-select">
+                                <option value="1">Dr. Alejandro Morales</option>
+                                <option value="2">Mtra. Laura Gómez</option>
+                                <option value="3">Ing. Carlos Ortiz</option>
+                            </select>
+                            <i class="fa-solid fa-chevron-down select-arrow"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-row-2col">
+                        <div class="form-group">
+                            <label class="form-label">Días</label>
+                            <input type="text" class="form-control" value="Lun y Mié" placeholder="ej. Lun y Mié">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Horario</label>
+                            <input type="text" class="form-control" value="08:00 - 10:00" placeholder="08:00 - 10:00">
+                        </div>
+                    </div>
+
+                    <div class="form-row-2col">
+                        <div class="form-group">
+                            <label class="form-label">Aula / Edificio</label>
+                            <input type="text" class="form-control" value="Edif. C • Lab TIC-3" placeholder="Aula">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Cupo Máximo</label>
+                            <input type="number" class="form-control" value="30" min="5" max="60">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ACCIONES DE GUARDADO -->
+            <div class="form-actions-sticky">
+                <button type="submit" class="btn-primary btn-submit-user">
+                    <i class="fa-solid fa-floppy-disk"></i> Guardar y Dar de Alta Asignatura
+                </button>
+            </div>
+        </form>
+    </div>
+</main>
+<script src="../static/theme.js"></script>
+</body>
+</html>
