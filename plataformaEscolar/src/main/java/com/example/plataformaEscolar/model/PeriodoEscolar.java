@@ -16,7 +16,7 @@ public class PeriodoEscolar {
     /**
      * Identificador único del periodo escolar.
      */
-    private int id;
+    private Long id; // Cambiado de int a Long
 
     /**
      * Nombre descriptivo del periodo escolar (ej. "Enero - Mayo 2026").
@@ -49,7 +49,7 @@ public class PeriodoEscolar {
     private List<Clase> clases;
 
     /**
-     * Crea un periodo escolar vacío.
+     * Crea un periodo escolar vacío e inicializa sus colecciones.
      */
     public PeriodoEscolar() {
         this.clases = new ArrayList<>();
@@ -58,14 +58,14 @@ public class PeriodoEscolar {
     /**
      * Crea un periodo escolar con sus datos principales.
      *
-     * @param id identificador del periodo
+     * @param id identificador del periodo (Long)
      * @param nombrePeriodo nombre del periodo
      * @param fechaInicio fecha de inicio lectivo
      * @param fechaFin fecha de fin lectivo
      * @param fechaInicioInscripcion apertura de inscripciones
      * @param fechaFinInscripcion cierre de inscripciones
      */
-    public PeriodoEscolar(int id, String nombrePeriodo, LocalDate fechaInicio, LocalDate fechaFin,
+    public PeriodoEscolar(Long id, String nombrePeriodo, LocalDate fechaInicio, LocalDate fechaFin,
                           LocalDate fechaInicioInscripcion, LocalDate fechaFinInscripcion) {
         this.id = id;
         this.nombrePeriodo = nombrePeriodo;
@@ -79,7 +79,7 @@ public class PeriodoEscolar {
     /**
      * Crea un periodo escolar con todos sus datos completos, incluyendo su oferta de clases.
      *
-     * @param id identificador del periodo
+     * @param id identificador del periodo (Long)
      * @param nombrePeriodo nombre del periodo
      * @param fechaInicio fecha de inicio lectivo
      * @param fechaFin fecha de fin lectivo
@@ -87,7 +87,7 @@ public class PeriodoEscolar {
      * @param fechaFinInscripcion cierre de inscripciones
      * @param clases lista de clases aperturadas
      */
-    public PeriodoEscolar(int id, String nombrePeriodo, LocalDate fechaInicio, LocalDate fechaFin,
+    public PeriodoEscolar(Long id, String nombrePeriodo, LocalDate fechaInicio, LocalDate fechaFin,
                           LocalDate fechaInicioInscripcion, LocalDate fechaFinInscripcion,
                           List<Clase> clases) {
         this.id = id;
@@ -99,137 +99,62 @@ public class PeriodoEscolar {
         this.clases = (clases != null) ? clases : new ArrayList<>();
     }
 
-    /**
-     * Regresa el identificador del periodo escolar.
-     *
-     * @return id del periodo
-     */
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    /**
-     * Cambia el identificador del periodo escolar.
-     *
-     * @param id nuevo id
-     */
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    /**
-     * Regresa el nombre del periodo.
-     *
-     * @return nombre del periodo
-     */
     public String getNombrePeriodo() {
         return nombrePeriodo;
     }
 
-    /**
-     * Cambia el nombre del periodo.
-     *
-     * @param nombrePeriodo nuevo nombre del periodo
-     */
     public void setNombrePeriodo(String nombrePeriodo) {
         this.nombrePeriodo = nombrePeriodo;
     }
 
-    /**
-     * Regresa la fecha de inicio del periodo.
-     *
-     * @return fecha de inicio
-     */
     public LocalDate getFechaInicio() {
         return fechaInicio;
     }
 
-    /**
-     * Cambia la fecha de inicio del periodo.
-     *
-     * @param fechaInicio nueva fecha de inicio
-     */
     public void setFechaInicio(LocalDate fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
-    /**
-     * Regresa la fecha de fin del periodo.
-     *
-     * @return fecha de fin
-     */
     public LocalDate getFechaFin() {
         return fechaFin;
     }
 
-    /**
-     * Cambia la fecha de fin del periodo.
-     *
-     * @param fechaFin nueva fecha de fin
-     */
     public void setFechaFin(LocalDate fechaFin) {
         this.fechaFin = fechaFin;
     }
 
-    /**
-     * Regresa la fecha de inicio de las inscripciones.
-     *
-     * @return fecha de inicio de inscripción
-     */
     public LocalDate getFechaInicioInscripcion() {
         return fechaInicioInscripcion;
     }
 
-    /**
-     * Cambia la fecha de inicio de las inscripciones.
-     *
-     * @param fechaInicioInscripcion nueva fecha de inicio de inscripción
-     */
     public void setFechaInicioInscripcion(LocalDate fechaInicioInscripcion) {
         this.fechaInicioInscripcion = fechaInicioInscripcion;
     }
 
-    /**
-     * Regresa la fecha de fin de las inscripciones.
-     *
-     * @return fecha de fin de inscripción
-     */
     public LocalDate getFechaFinInscripcion() {
         return fechaFinInscripcion;
     }
 
-    /**
-     * Cambia la fecha de fin de las inscripciones.
-     *
-     * @param fechaFinInscripcion nueva fecha de fin de inscripción
-     */
     public void setFechaFinInscripcion(LocalDate fechaFinInscripcion) {
         this.fechaFinInscripcion = fechaFinInscripcion;
     }
 
-    /**
-     * Regresa las clases ofertadas en este periodo escolar.
-     *
-     * @return lista de clases
-     */
     public List<Clase> getClases() {
         return clases;
     }
 
-    /**
-     * Cambia las clases ofertadas en este periodo escolar.
-     *
-     * @param clases nueva lista de clases
-     */
     public void setClases(List<Clase> clases) {
-        this.clases = clases;
+        this.clases = (clases != null) ? clases : new ArrayList<>();
     }
 
-    /**
-     * Regresa la información del periodo escolar en formato texto.
-     *
-     * @return datos del periodo en texto
-     */
     @Override
     public String toString() {
         return "PeriodoEscolar{" +

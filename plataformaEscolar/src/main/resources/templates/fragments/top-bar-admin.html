@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<header class="top-bar" th:fragment="adminHeader(titulo, subtitulo)">
+    <div class="brand">
+        <div class="return">
+            <i class="fa-solid fa-arrow-left"></i>
+        </div>
+        <div class="brand-text">
+            <h2 th:text="${titulo}">Título por defecto</h2>
+            <span th:text="${subtitulo ?: 'Portal Nexus Administration'}">Portal Nexus Administration</span>
+        </div>
+    </div>
+    <div class="header-actions">
+        <span class="admin-label">ADMIN</span>
+        <div class="header-admin-icon">
+            <i class="fa-solid fa-graduation-cap"></i>
+        </div>
+        <div class="avatar admin-avatar">
+            <i class="fa-regular fa-user"></i>
+        </div>
+    </div>
+</header>
+
+</body>
+</html>

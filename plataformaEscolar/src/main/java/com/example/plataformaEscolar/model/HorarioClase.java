@@ -13,7 +13,7 @@ public class HorarioClase {
     /**
      * Identificador único del horario.
      */
-    private int id;
+    private Long id; // Cambiado de int a Long
 
     /**
      * Hora de inicio de la sesión.
@@ -49,14 +49,14 @@ public class HorarioClase {
     /**
      * Crea un horario de clase con todos sus datos completos.
      *
-     * @param id identificador del horario
+     * @param id identificador del horario (Long)
      * @param horaEntrada hora de inicio
      * @param horaSalida hora de fin
      * @param dias días en los que aplica
      * @param aula aula asignada
      * @param clase clase correspondiente
      */
-    public HorarioClase(int id, LocalTime horaEntrada, LocalTime horaSalida,
+    public HorarioClase(Long id, LocalTime horaEntrada, LocalTime horaSalida,
                         String dias, String aula, Clase clase) {
         this.id = id;
         this.horaEntrada = horaEntrada;
@@ -66,119 +66,54 @@ public class HorarioClase {
         this.clase = clase;
     }
 
-    /**
-     * Regresa el identificador del horario.
-     *
-     * @return id del horario
-     */
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    /**
-     * Cambia el identificador del horario.
-     *
-     * @param id nuevo id
-     */
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    /**
-     * Regresa la hora de entrada.
-     *
-     * @return hora de entrada
-     */
     public LocalTime getHoraEntrada() {
         return horaEntrada;
     }
 
-    /**
-     * Cambia la hora de entrada.
-     *
-     * @param horaEntrada nueva hora de entrada
-     */
     public void setHoraEntrada(LocalTime horaEntrada) {
         this.horaEntrada = horaEntrada;
     }
 
-    /**
-     * Regresa la hora de salida.
-     *
-     * @return hora de salida
-     */
     public LocalTime getHoraSalida() {
         return horaSalida;
     }
 
-    /**
-     * Cambia la hora de salida.
-     *
-     * @param horaSalida nueva hora de salida
-     */
     public void setHoraSalida(LocalTime horaSalida) {
         this.horaSalida = horaSalida;
     }
 
-    /**
-     * Regresa los días de la clase.
-     *
-     * @return días asignados
-     */
     public String getDias() {
         return dias;
     }
 
-    /**
-     * Cambia los días de la clase.
-     *
-     * @param dias nuevos días
-     */
     public void setDias(String dias) {
         this.dias = dias;
     }
 
-    /**
-     * Regresa el aula asignada.
-     *
-     * @return aula de la clase
-     */
     public String getAula() {
         return aula;
     }
 
-    /**
-     * Cambia el aula asignada.
-     *
-     * @param aula nueva aula
-     */
     public void setAula(String aula) {
         this.aula = aula;
     }
 
-    /**
-     * Regresa la clase asociada.
-     *
-     * @return clase correspondiente
-     */
     public Clase getClase() {
         return clase;
     }
 
-    /**
-     * Cambia la clase asociada.
-     *
-     * @param clase nueva clase
-     */
     public void setClase(Clase clase) {
         this.clase = clase;
     }
 
-    /**
-     * Regresa la información del horario de clase en texto.
-     *
-     * @return datos del horario en texto
-     */
     @Override
     public String toString() {
         return "HorarioClase{" +
@@ -187,7 +122,7 @@ public class HorarioClase {
                 ", horaSalida=" + horaSalida +
                 ", dias='" + dias + '\'' +
                 ", aula='" + aula + '\'' +
-                ", clase=" + clase +
+                ", clase=" + (clase != null ? clase.getClave() : "null") +
                 '}';
     }
 }

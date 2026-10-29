@@ -1,226 +1,310 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Selección de Carga Académica</title>
+    <title>Selección de Carga Académica | Portal Nexus</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="../static/styles.css">
+    <link rel="stylesheet" th:href="@{/styles.css}">
 </head>
 <body>
-    <main class="mobile-screen">
-        <header class="top-bar">
-            <div class="brand">
-                <div class="brand-icon">
-                    <i class="fa-solid fa-graduation-cap"></i>
+<main class="mobile-screen">
+    <header class="top-bar">
+        <div class="brand">
+            <div class="brand-icon">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <div class="brand-text">
+                <h2>Portal Nexus</h2>
+                <span class="mobile-only">INICIO</span>
+            </div>
+        </div>
+
+        <nav class="nav-menu">
+            <a href="inicio.html" class="nav-item-link">Tablero</a>
+            <a href="carga-academica.html" class="nav-item-link active">Carga Académica</a>
+            <a href="horario.html" class="nav-item-link">Horarios</a>
+            <a href="historial.html" class="nav-item-link">Historial</a>
+        </nav>
+
+        <div class="header-actions">
+            <a href="ajustes.html" class="icon-button"><i class="fa-solid fa-gear action-icon"></i></a>
+            <div class="notification-icon">
+                <i class="fa-regular fa-bell"></i>
+                <div class="notification-dot"></div>
+            </div>
+            <div class="user-profile">
+                <div class="avatar">
+                    <img src="https://ui-avatars.com/api/?name=Valeria+Mendez&background=3182CE&color=fff" alt="User">
                 </div>
-                <div class="brand-text">
-                    <h2>Portal Nexus</h2>
-                    <span class="mobile-only">INICIO</span>
+                <div class="avatar-info">
+                    <span class="user-name">Valeria Méndez</span>
+                    <span class="user-id">ID: 24015879</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="screen-content screen-carga">
+        <div class="main-container">
+
+            <!-- ENCABEZADO Y ESTATUS DE PAGO DE COLEGIATURA -->
+            <section class="carga-header">
+                <div class="carga-badge-row">
+                    <span class="period-pill"><i class="fa-regular fa-calendar"></i> Periodo Académico 2026-1</span>
+                    <span class="payment-status-badge success">
+                            <i class="fa-solid fa-circle-check"></i> Pago Validado
+                        </span>
+                </div>
+                <h1>Carga Académica 2026–1</h1>
+                <p class="carga-subtitle">Selecciona el grupo ideal para cada una de tus asignaturas disponibles.</p>
+            </section>
+
+            <!-- BANNER DE ALERTA POR EMPALME DE HORARIOS -->
+            <div class="alert-empalme-banner">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <div>
+                    <strong>Conflicto de Horario Detectado:</strong>
+                    <p>El Grupo 02 de Redes choca con tu selección actual de Arquitectura de Software (Mar y Jue 14:00 - 16:00).</p>
                 </div>
             </div>
 
-            <nav class="nav-menu">
-                <a href="#" class="nav-item-link">Tablero</a>
-                <a href="#" class="nav-item-link active">Carga Académica</a>
-                <a href="#" class="nav-item-link">Horarios</a>
-                <a href="#" class="nav-item-link">Historial</a>
-            </nav>
-
-            <div class="header-actions">
-                <i class="fa-solid fa-gear action-icon"></i>
-                <div class="notification-icon">
-                    <i class="fa-regular fa-bell"></i>
-                    <div class="notification-dot"></div>
+            <!-- TARJETA DE CRÉDITOS -->
+            <section class="card creditos-card">
+                <div class="creditos-header">
+                    <div>
+                        <span class="creditos-label">CRÉDITOS ACUMULADOS</span>
+                        <div class="creditos-val"><strong>24</strong> <small>/ 36 cr máx</small></div>
+                    </div>
+                    <span class="pill-status-success"><i class="fa-solid fa-gauge"></i> 66% Carga Normal</span>
                 </div>
-                <div class="user-profile">
-                    <div class="avatar">
-                        <img src="https://ui-avatars.com/api/?name=Valeria+Mendez&background=3182CE&color=fff" alt="User">
+                <div class="progress-bar">
+                    <div class="progress-bar-fill" style="width: 66%;"></div>
+                </div>
+                <div class="creditos-scale">
+                    <span>Mínimo: 12 cr</span>
+                    <span class="scale-active"><i class="fa-regular fa-circle-check"></i> En rango permitido</span>
+                    <span>Máx: 36 cr</span>
+                </div>
+            </section>
+
+            <!-- BUSCADOR Y FILTROS -->
+            <section class="search-filter-section">
+                <div class="input-wrapper search-box">
+                    <i class="fa-solid fa-magnifying-glass input-icon input-icon-left"></i>
+                    <input type="text" class="form-control" placeholder="Buscar por materia, docente o NRC (ej. ARC)">
+                    <button class="filter-btn-icon" type="button"><i class="fa-solid fa-sliders"></i></button>
+                </div>
+                <div class="pills-scroll">
+                    <input type="radio" id="pill-todas" name="filtro-materia" checked>
+                    <label for="pill-todas" class="filter-pill">Todas (8)</label>
+
+                    <input type="radio" id="pill-semestre" name="filtro-materia">
+                    <label for="pill-semestre" class="filter-pill">Semestre (6)</label>
+
+                    <input type="radio" id="pill-optativas" name="filtro-materia">
+                    <label for="pill-optativas" class="filter-pill">Optativas (2)</label>
+
+                    <input type="radio" id="pill-cupo" name="filtro-materia">
+                    <label for="pill-cupo" class="filter-pill">Con cupo (6)</label>
+                </div>
+            </section>
+
+            <!-- MATERIA 1: DISPONIBLE Y SELECCIONADA -->
+            <details class="materia-item" open>
+                <summary class="materia-header">
+                    <div class="header-content">
+                        <div class="materia-tags">
+                            <span class="code-tag">ARQ-401</span>
+                            <span class="credits-tag">8 Créditos</span>
+                            <span class="badge-status-selected"><i class="fa-regular fa-circle-check"></i> 1 Seleccionado</span>
+                        </div>
+                        <h3>Arquitectura de Software</h3>
+                        <p class="materia-area">Tocar para ver horarios y disponibilidad</p>
                     </div>
-                    <div class="avatar-info">
-                        <span class="user-name">Valeria Mendez</span>
-                        <span class="user-id">ID: 24015879</span>
+                    <span class="toggle-btn">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </span>
+                </summary>
+
+                <div class="materia-details-body">
+                    <div class="materia-sub-header">
+                        <span>Secciones Disponibles (2)</span>
+                        <span class="req-link"><i class="fa-solid fa-check"></i> Prerrequisito Cumplido</span>
+                    </div>
+
+                    <div class="grupo-card grupo-selected">
+                        <div class="grupo-header">
+                            <label for="grupo-5502" class="grupo-title">
+                                <input type="radio" id="grupo-5502" name="materia_arq_401" value="5502" class="grupo-radio" checked>
+                                <span class="custom-radio"><i class="fa-solid fa-check"></i></span>
+                                <div class="grupo-info-text">
+                                    <h4>Grupo 01</h4>
+                                    <span class="nrc">NRC 5502</span>
+                                </div>
+                            </label>
+                            <span class="status-pill-blue">Inscrito</span>
+                        </div>
+
+                        <ul class="grupo-info-list">
+                            <li><i class="fa-solid fa-graduation-cap"></i> Dr. Alejandro Morales</li>
+                            <li><i class="fa-regular fa-clock"></i> Lun y Mié 08:00 – 10:00 hrs</li>
+                            <li><i class="fa-solid fa-city"></i> Edificio C • Lab TIC-3</li>
+                        </ul>
+
+                        <div class="cupos-box">
+                            <div class="cupos-labels">
+                                <span>Capacidad: <strong>28 / 30 cupos</strong></span>
+                                <strong>2 libres</strong>
+                            </div>
+                            <div class="cupos-bar">
+                                <div class="cupos-fill" style="width: 93%;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grupo-card">
+                        <div class="grupo-header">
+                            <label for="grupo-5503" class="grupo-title">
+                                <input type="radio" id="grupo-5503" name="materia_arq_401" value="5503" class="grupo-radio">
+                                <span class="custom-radio"><i class="fa-solid fa-check"></i></span>
+                                <div class="grupo-info-text">
+                                    <h4>Grupo 02</h4>
+                                    <span class="nrc">NRC 5503</span>
+                                </div>
+                            </label>
+                            <span class="status-pill-gray">Disponible</span>
+                        </div>
+
+                        <ul class="grupo-info-list">
+                            <li><i class="fa-solid fa-graduation-cap"></i> Mtra. Laura Gómez</li>
+                            <li><i class="fa-regular fa-clock"></i> Mar y Jue 14:00 – 16:00 hrs</li>
+                            <li><i class="fa-solid fa-city"></i> Edificio B • Aula 204</li>
+                        </ul>
+
+                        <div class="cupos-box">
+                            <div class="cupos-labels">
+                                <span>Capacidad: <strong>15 / 30 cupos</strong></span>
+                                <strong>15 libres</strong>
+                            </div>
+                            <div class="cupos-bar">
+                                <div class="cupos-fill" style="width: 50%;"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </header>
+            </details>
 
-        <div class="screen-content screen-carga">
-            <div class="main-container">
-
-                <section class="carga-header">
-                    <div class="carga-badge-row">
-                        <span class="period-pill"><i class="fa-regular fa-calendar"></i> Periodo Académico 2026-1</span>
+            <!-- MATERIA 2: GRUPO CON EMPALME -->
+            <details class="materia-item">
+                <summary class="materia-header">
+                    <div class="header-content">
+                        <div class="materia-tags">
+                            <span class="code-tag">RED-601</span>
+                            <span class="credits-tag">8 Créditos</span>
+                        </div>
+                        <h3>Redes de Computadoras</h3>
+                        <p class="materia-area">Tocar para ver horarios y disponibilidad</p>
                     </div>
-                    <h1>Carga Académica 2026–1</h1>
-                    <p class="carga-subtitle">Selecciona el grupo ideal para cada una de tus asignaturas disponibles.</p>
-                </section>
+                    <span class="toggle-btn">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </span>
+                </summary>
 
-                <section class="card creditos-card">
-                    <div class="creditos-header">
+                <div class="materia-details-body">
+                    <div class="grupo-card grupo-empalme">
+                        <div class="grupo-header">
+                            <label for="grupo-8841" class="grupo-title">
+                                <input type="radio" id="grupo-8841" name="materia_red_601" value="8841" class="grupo-radio" disabled>
+                                <span class="custom-radio"><i class="fa-solid fa-xmark"></i></span>
+                                <div class="grupo-info-text">
+                                    <h4>Grupo 02</h4>
+                                    <span class="nrc">NRC 8841</span>
+                                </div>
+                            </label>
+                            <span class="badge-empalme-warning"><i class="fa-solid fa-triangle-exclamation"></i> Empalme de horario</span>
+                        </div>
+
+                        <ul class="grupo-info-list">
+                            <li><i class="fa-solid fa-graduation-cap"></i> Ing. Carlos Ortiz</li>
+                            <li><i class="fa-regular fa-clock"></i> Mar y Jue 14:00 – 16:00 hrs</li>
+                        </ul>
+                        <p class="empalme-msg">Choca con: Arquitectura de Software (Grupo 02)</p>
+                    </div>
+                </div>
+            </details>
+
+            <!-- MATERIA 3: BLOQUEADA POR SERIACIÓN -->
+            <details class="materia-item materia-bloqueada">
+                <summary class="materia-header">
+                    <div class="header-content">
+                        <div class="materia-tags">
+                            <span class="code-tag">BDD-302</span>
+                            <span class="credits-tag">8 Créditos</span>
+                            <span class="badge-status-locked"><i class="fa-solid fa-lock"></i> Bloqueada por Seriación</span>
+                        </div>
+                        <h3>Bases de Datos Avanzadas</h3>
+                        <p class="prereq-missing-text"><i class="fa-solid fa-circle-xmark"></i> Prerrequisito pendiente: INF-102 Programación Orientada a Objetos</p>
+                    </div>
+                    <span class="toggle-btn">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </span>
+                </summary>
+
+                <div class="materia-details-body">
+                    <div class="prereq-lock-box">
+                        <i class="fa-solid fa-shield-halved lock-icon"></i>
                         <div>
-                            <span class="creditos-label">CRÉDITOS ACUMULADOS</span>
-                            <div class="creditos-val"><strong>24</strong> <small>/ 36 cr máx</small></div>
-                        </div>
-                        <span class="pill-status-success"><i class="fa-solid fa-gauge"></i> 66% Carga Normal</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-bar-fill" style="width: 66%;"></div>
-                    </div>
-                    <div class="creditos-scale">
-                        <span>Mínimo: 12 cr</span>
-                        <span class="scale-active"><i class="fa-regular fa-circle-check"></i> En rango permitido</span>
-                        <span>Máx: 36 cr •</span>
-                    </div>
-                </section>
-
-                <section class="search-filter-section">
-                    <div class="input-wrapper search-box">
-                        <i class="fa-solid fa-magnifying-glass input-icon input-icon-left"></i>
-                        <input type="text" class="form-control" placeholder="Buscar por materia, docente o NRC (ej. ARC)">
-                        <button class="filter-btn-icon"><i class="fa-solid fa-sliders"></i></button>
-                    </div>
-                    <div class="pills-scroll">
-                        <input type="radio" id="pill-todas" name="filtro-materia" checked>
-                        <label for="pill-todas" class="filter-pill">Todas (8)</label>
-
-                        <input type="radio" id="pill-semestre" name="filtro-materia">
-                        <label for="pill-semestre" class="filter-pill">Semestre (6)</label>
-
-                        <input type="radio" id="pill-optativas" name="filtro-materia">
-                        <label for="pill-optativas" class="filter-pill">Optativas (2)</label>
-
-                        <input type="radio" id="pill-cupo" name="filtro-materia">
-                        <label for="pill-cupo" class="filter-pill">Con cupo(6)</label>
-                    </div>
-                </section>
-
-                <details class="materia-item" open>
-                    <summary class="materia-header">
-                        <div class="header-content">
-                            <div class="materia-tags">
-                                <span class="code-tag">ARQ-401</span>
-                                <span class="credits-tag">8 Créditos</span>
-                                <span class="badge-status-selected"><i class="fa-regular fa-circle-check"></i> 1 Seleccionado</span>
-                            </div>
-                            <h3>Arquitectura de Software</h3>
-                            <p class="materia-area">Tocar para ver horarios y disponibilidad</p>
-                        </div>
-                        <span class="toggle-btn">
-                        <i class="fa-solid fa-chevron-down"></i>
-                    </span>
-                    </summary>
-
-                    <div class="materia-details-body">
-                        <div class="materia-sub-header">
-                            <span>Secciones Disponibles (2)</span>
-                            <span class="req-link">Requisito Obligatorio</span>
-                        </div>
-
-                        <div class="grupo-card grupo-selected">
-                            <div class="grupo-header">
-                                <label for="grupo-5502" class="grupo-title">
-                                    <input type="radio" id="grupo-5502" name="materia_arq_401" value="5502" class="grupo-radio" checked>
-                                    <span class="custom-radio"><i class="fa-solid fa-check"></i></span>
-                                    <div class="grupo-info-text">
-                                        <h4>Grupo 01</h4>
-                                        <span class="nrc">NRC 5502</span>
-                                    </div>
-                                </label>
-                                <span class="status-pill-blue">Inscrito</span>
-                            </div>
-
-                            <ul class="grupo-info-list">
-                                <li><i class="fa-solid fa-graduation-cap"></i> Dr. Alejandro Morales</li>
-                                <li><i class="fa-regular fa-clock"></i> Lun y Mié 08:00 – 10:00 hrs</li>
-                                <li><i class="fa-solid fa-city"></i> Edificio C • Lab TIC-3</li>
-                            </ul>
-
-                            <div class="cupos-box">
-                                <div class="cupos-labels">
-                                    <span>Capacidad: <strong>28 / 30 cupos</strong></span>
-                                    <strong>2 libres</strong>
-                                </div>
-                                <div class="cupos-bar">
-                                    <div class="cupos-fill" style="width: 93%;"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="grupo-card">
-                            <div class="grupo-header">
-                                <label for="grupo-5503" class="grupo-title">
-                                    <input type="radio" id="grupo-5503" name="materia_arq_401" value="5503" class="grupo-radio">
-                                    <span class="custom-radio"><i class="fa-solid fa-check"></i></span>
-                                    <div class="grupo-info-text">
-                                        <h4>Grupo 02</h4>
-                                        <span class="nrc">NRC 5503</span>
-                                    </div>
-                                </label>
-                                <span class="status-pill-gray">Disponible</span>
-                            </div>
-
-                            <ul class="grupo-info-list"> 0
-                                <li><i class="fa-solid fa-graduation-cap"></i> Mtra. Laura Gómez</li>
-                                <li><i class="fa-regular fa-clock"></i> Mar y Jue 14:00 – 16:00 hrs</li>
-                                <li><i class="fa-solid fa-city"></i> Edificio B • Aula 204</li>
-                            </ul>
-
-                            <div class="cupos-box">
-                                <div class="cupos-labels">
-                                    <span>Capacidad: <strong>15 / 30 cupos</strong></span>
-                                    <strong>15 libres</strong>
-                                </div>
-                                <div class="cupos-bar">
-                                    <div class="cupos-fill" style="width: 50%;"></div>
-                                </div>
-                            </div>
+                            <h4>Asignatura Bloqueada</h4>
+                            <p>No puedes inscribir esta materia hasta acreditar el curso previo obligatorio <strong>INF-102 (POO)</strong>.</p>
                         </div>
                     </div>
-                </details>
+                </div>
+            </details>
 
+        </div>
+    </div>
+
+    <div class="floating-action-bar-container">
+        <div class="confirm-bar">
+            <div class="confirm-header">
+                <span><i class="fa-solid fa-circle-dot"></i> <strong>3 Asignaturas</strong> 24 Créditos</span>
+                <a href="horario.html" class="link-horario">Ver previsualización</a>
             </div>
+            <button class="btn-primary btn-confirm" type="button">
+                Confirmar Carga Académica <i class="fa-solid fa-arrow-right"></i>
+            </button>
+            <p class="confirm-note">Cumple con el mínimo (12 cr) y tope de 36 cr institucionales.</p>
         </div>
 
-        <div class="floating-action-bar-container">
-            <div class="confirm-bar">
-                <div class="confirm-header">
-                    <span><i class="fa-solid fa-circle-dot"></i> <strong>3 Asignaturas</strong> 24 Créditos</span>
-                </div>
-                <button class="btn-primary btn-confirm">
-                    Confirmar Carga Académica <i class="fa-solid fa-arrow-right"></i>
-                </button>
-                <p class="confirm-note">Cumple con el mínimo (12 cr) y tope de 36 cr institucionales.</p>
-            </div>
+        <nav class="bottom-nav">
+            <a href="inicio.html" class="nav-item">
+                <div class="nav-icon"><i class="fa-solid fa-house"></i></div>
+                <span>Inicio</span>
+            </a>
+            <a href="carga-academica.html" class="nav-item active">
+                <div class="nav-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                <span>Inscripción</span>
+            </a>
+            <a href="horario.html" class="nav-item">
+                <div class="nav-icon"><i class="fa-regular fa-calendar"></i></div>
+                <span>Horario</span>
+            </a>
+            <a href="historial.html" class="nav-item">
+                <div class="nav-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                <span>Historial</span>
+            </a>
+        </nav>
+    </div>
 
-            <nav class="bottom-nav">
-                <div class="nav-item active">
-                    <div class="nav-icon"><i class="fa-solid fa-house"></i></div>
-                    <span>Inicio</span>
-                </div>
-                <div class="nav-item">
-                    <div class="nav-icon"><i class="fa-solid fa-graduation-cap"></i></div>
-                    <span>Inscripción</span>
-                </div>
-                <div class="nav-item">
-                    <div class="nav-icon"><i class="fa-regular fa-calendar"></i></div>
-                    <span>Horario</span>
-                </div>
-                <div class="nav-item">
-                    <div class="nav-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
-                    <span>Historial</span>
-                </div>
-            </nav>
-        </div>
-
-        <footer class="desktop-footer">
-            <p><strong>Portal Nexus</strong> — Sistema Institucional de Matrícula y Gestión Curricular</p>
-            <p>© 2026 Portal Nexus. Periodo Lectivo 2026-I.</p>
-        </footer>
-    </main>
-    <script src="../static/theme.js"></script>
+    <footer class="desktop-footer">
+        <p><strong>Portal Nexus</strong> — Sistema Institucional de Matrícula y Gestión Curricular</p>
+        <p>© 2026 Portal Nexus. Periodo Lectivo 2026-I.</p>
+    </footer>
+</main>
+<script src="/theme.js"></script>
 </body>
 </html>
