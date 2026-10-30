@@ -1,19 +1,40 @@
 package com.example.plataformaEscolar.model;
 
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+
 /**
  * Clase base para la gestión de usuarios del sistema.
  *
  * @author Equipo 2 - Amarillo
  */
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Usuario {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    private Long id; // Cambiado a Long para estandarizar
+    @NotBlank(message = "El nombre no puede estar vacio")
     private String nombre;
+
+    @NotBlank(message = "El apellido no puede estar vacio")
     private String apellidoPaterno;
+
     private String apellidoMaterno;
+
+    @Email(message = "El correo debe de tener un formato válido")
     private String correo;
+
+    @Pattern(regexp = "^\\\\d{10}$", message = "Formato de teléfono no válido")
     private String telefono;
+
     private String contraseña;
+
+    @Enumerated(EnumType.STRING)
     private Rol rol; // Implementación de EnumRol
 
     public Usuario() {
