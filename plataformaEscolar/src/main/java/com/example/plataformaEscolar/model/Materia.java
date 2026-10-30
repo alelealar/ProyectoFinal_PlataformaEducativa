@@ -1,5 +1,14 @@
 package com.example.plataformaEscolar.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,31 +19,39 @@ import java.util.List;
  *
  * @author Equipo 2 - Amarillo
  */
+@Entity
 public class Materia {
 
     /**
      * Identificador único de la materia.
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; // Cambiado de int a Long
 
     /**
      * Nombre de la materia.
      */
+    @NotBlank(message = "El nombre de la materia no puede estar en blanco")
     private String nombre;
 
     /**
      * Clave oficial de la materia.
      */
+    @NotBlank(message = "La clave de la materia no puede estar en blanco")
     private String clave;
 
     /**
      * Descripción del contenido o propósito de la materia.
      */
+    @Min(value = 1)
+    @Max(value = 400)
     private String descripcion;
 
     /**
      * Número de créditos académicos que otorga la materia.
      */
+    @NotBlank(message = "Los creditos no pueden estar vacios")
     private int creditos;
 
     /**

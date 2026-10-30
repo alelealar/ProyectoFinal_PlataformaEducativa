@@ -1,5 +1,9 @@
 package com.example.plataformaEscolar.model;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PastOrPresent;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -8,16 +12,20 @@ import java.time.LocalDateTime;
  *
  * @author Equipo 2 - Amarillo
  */
+@Entity
 public class Pago {
 
     /**
      * Identificador único de la transacción de pago.
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; // Cambiado de int a Long
 
     /**
      * Folio o número de referencia bancaria/sistema.
      */
+    @NotBlank(message = "el folio no puede estar vacio")
     private String folio;
 
     /**
@@ -28,21 +36,25 @@ public class Pago {
     /**
      * Método utilizado para realizar el pago mediante enumeración.
      */
+    @Enumerated(EnumType.STRING)
     private MetodoPago metodoPago;
 
     /**
      * Concepto o motivo del pago (ej. "Inscripción", "Colegiatura").
      */
+    @NotBlank(message = "El concepto no puede estar vacio")
     private String concepto;
 
     /**
      * Fecha y hora en la que se registró el pago.
      */
+    @PastOrPresent(message = "La fecha de pago no puede ser futura")
     private LocalDateTime fechaPago;
 
     /**
      * Estado del pago (ej. "APROBADO", "PENDIENTE", "RECHAZADO").
      */
+    @Enumerated(EnumType.STRING)
     private EstadoPago estado;
 
     /**
