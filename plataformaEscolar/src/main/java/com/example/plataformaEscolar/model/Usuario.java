@@ -27,11 +27,13 @@ public abstract class Usuario {
     private String apellidoMaterno;
 
     @Email(message = "El correo debe de tener un formato válido")
+    @NotBlank(message = "El correo no puede estar vacio")
     private String correo;
 
     @Pattern(regexp = "^\\\\d{10}$", message = "Formato de teléfono no válido")
     private String telefono;
 
+    @NotBlank(message = "La contraseña no puede estar vacia")
     private String contraseña;
 
     @Enumerated(EnumType.STRING)

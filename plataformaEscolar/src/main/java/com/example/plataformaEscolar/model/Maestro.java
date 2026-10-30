@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 
 /**
  * Representa a un docente de la plataforma escolar.
@@ -20,11 +21,13 @@ public class Maestro extends Usuario {
      */
     @Min(value = 1)
     @Max(value = 100)
+    @NotBlank(message = "El numero de empleado no puede estar vacío")
     private String numEmpleado;
 
     /**
      * Correo institucional asignado al maestro.
      */
+    @NotBlank(message = "El correo Institucional no puede estar vacio.")
     @Email(message = "El correo no tiene un formato válido")
     private String correoInstitucional;
 
