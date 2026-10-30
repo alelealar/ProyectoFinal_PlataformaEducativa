@@ -1,5 +1,6 @@
 package com.example.plataformaEscolar.model;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.Email;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Value;
  *
  * @author Equipo 2 - Amarillo
  */
+@Entity
 public class Alumno extends Usuario {
 
     /**

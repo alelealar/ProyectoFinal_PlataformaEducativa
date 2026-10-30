@@ -1,5 +1,10 @@
 package com.example.plataformaEscolar.model;
 
+import jakarta.persistence.Entity;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+
 /**
  * Representa a un docente de la plataforma escolar.
  * Hereda de Usuario para compartir la información personal y de acceso,
@@ -7,16 +12,20 @@ package com.example.plataformaEscolar.model;
  *
  * @author Equipo 2 - Amarillo
  */
+@Entity
 public class Maestro extends Usuario {
 
     /**
      * Número de empleado asignado al maestro.
      */
+    @Min(value = 1)
+    @Max(value = 100)
     private String numEmpleado;
 
     /**
      * Correo institucional asignado al maestro.
      */
+    @Email(message = "El correo no tiene un formato válido")
     private String correoInstitucional;
 
     /**
