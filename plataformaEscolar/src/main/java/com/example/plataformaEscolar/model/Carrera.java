@@ -1,9 +1,25 @@
 package com.example.plataformaEscolar.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+
+@Entity
 public class Carrera {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; // Cambiado de int a Long
+
+    @Min(value = 1)
+    @Max(value = 100)
     private String clave;
+
+    @NotBlank(message = "El nombre de la carrera no puede estar en blanco")
     private String nombre;
 
     public Carrera() {
