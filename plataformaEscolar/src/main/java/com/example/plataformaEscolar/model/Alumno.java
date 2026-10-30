@@ -1,5 +1,13 @@
 package com.example.plataformaEscolar.model;
 
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Size;
+import org.springframework.beans.factory.annotation.Value;
+
 /**
  * Representa a un alumno dentro de la plataforma escolar.
  * Hereda la información personal y credenciales de acceso de Usuario.
@@ -11,16 +19,20 @@ public class Alumno extends Usuario {
     /**
      * Matrícula única del alumno.
      */
+    @Min(value = 1)
+    @Max(value = 100)
     private String matricula;
 
     /**
      * Correo institucional asignado al alumno.
      */
+    @Email(message = "El correo debe de tener un formato válido")
     private String correoInstitucional;
 
     /**
      * Carrera universitaria a la que pertenece el alumno.
      */
+    @Enumerated(EnumType.STRING)
     private Carrera carrera;
 
     /**
