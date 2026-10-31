@@ -38,7 +38,7 @@ public class Alumno extends Usuario {
     @ManyToOne
     @JoinColumn(name = "carrera_id")
     private Carrera carrera;
-    
+
     @OneToMany(mappedBy = "alumno")
     private List<Pago> pagos;
 
