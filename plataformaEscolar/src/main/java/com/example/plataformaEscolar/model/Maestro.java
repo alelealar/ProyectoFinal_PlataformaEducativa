@@ -1,10 +1,14 @@
 package com.example.plataformaEscolar.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Representa a un docente de la plataforma escolar.
@@ -30,6 +34,9 @@ public class Maestro extends Usuario {
     @NotBlank(message = "El correo Institucional no puede estar vacio.")
     @Email(message = "El correo no tiene un formato válido")
     private String correoInstitucional;
+
+    @OneToMany(mappedBy = "maestro")
+    private List<Clase> clases;
 
     /**
      * Crea un maestro vacío.

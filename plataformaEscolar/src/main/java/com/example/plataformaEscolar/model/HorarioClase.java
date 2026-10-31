@@ -1,5 +1,7 @@
 package com.example.plataformaEscolar.model;
 
+import jakarta.persistence.*;
+
 import java.time.LocalTime;
 
 /**
@@ -8,11 +10,15 @@ import java.time.LocalTime;
  *
  * @author Equipo 2 - Amarillo
  */
+@Entity
+@Table(name = "horario_clases")
 public class HorarioClase {
 
     /**
      * Identificador único del horario.
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; // Cambiado de int a Long
 
     /**
@@ -28,7 +34,8 @@ public class HorarioClase {
     /**
      * Días de la semana en los que se imparte la clase (ej. "Lunes, Miércoles").
      */
-    private String dias;
+    @Enumerated(EnumType.STRING)
+    private Dia dias;
 
     /**
      * Aula o laboratorio asignado.
@@ -38,6 +45,8 @@ public class HorarioClase {
     /**
      * Clase a la que pertenece este horario.
      */
+    @ManyToOne
+    @JoinColumn(name = "clase_id")
     private Clase clase;
 
     /**
@@ -57,7 +66,7 @@ public class HorarioClase {
      * @param clase clase correspondiente
      */
     public HorarioClase(Long id, LocalTime horaEntrada, LocalTime horaSalida,
-                        String dias, String aula, Clase clase) {
+                        Dia dias, String aula, Clase clase) {
         this.id = id;
         this.horaEntrada = horaEntrada;
         this.horaSalida = horaSalida;
@@ -90,11 +99,11 @@ public class HorarioClase {
         this.horaSalida = horaSalida;
     }
 
-    public String getDias() {
+    public Dia getDias() {
         return dias;
     }
 
-    public void setDias(String dias) {
+    public void setDias(Dia dias) {
         this.dias = dias;
     }
 

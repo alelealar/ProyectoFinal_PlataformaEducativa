@@ -1,6 +1,10 @@
 package com.example.plataformaEscolar.model;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.PastOrPresent;
+
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * Representa el registro de alta de una clase para un alumno en un periodo determinado.
@@ -8,16 +12,21 @@ import java.time.LocalDateTime;
  *
  * @author Equipo 2 - Amarillo
  */
+@Entity
+@Table(name = "inscripciones")
 public class Inscripcion {
 
     /**
      * Identificador único de la inscripción.
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; // Cambiado de int a Long
 
     /**
      * Fecha y hora exacta en la que se confirmó la inscripción.
      */
+    @PastOrPresent(message = "La fecha no puede ser futura")
     private LocalDateTime fechaInscripcion;
 
     /**
@@ -28,17 +37,21 @@ public class Inscripcion {
     /**
      * Estado actual de la inscripción mediante enumeración.
      */
+    @Enumerated(EnumType.STRING)
     private EstadoInscripcion estado;
 
     /**
      * Alumno que realiza la inscripción.
      */
+
+    @ManyToOne
+    @JoinColumn(name = "alumno_id")
     private Alumno alumno;
 
-    /**
-     * Clase o grupo al cual se inscribe el alumno.
-     */
+    @ManyToOne
+    @JoinColumn(name = "clase_id")
     private Clase clase;
+
 
     /**
      * Crea una inscripción vacía con estado por defecto en INSCRITA.
@@ -53,15 +66,13 @@ public class Inscripcion {
      * @param id identificador de la inscripción (Long)
      * @param fechaInscripcion fecha y hora de la transacción
      * @param estado estado de la inscripción
-     * @param alumno alumno involucrado
      * @param clase clase seleccionada
      */
-    public Inscripcion(Long id, LocalDateTime fechaInscripcion, EstadoInscripcion estado, Alumno alumno, Clase clase) {
+    public Inscripcion(Long id, LocalDateTime fechaInscripcion, EstadoInscripcion estado, Clase clase) {
         this.id = id;
         this.fechaInscripcion = fechaInscripcion;
         this.calificacion = 0.0f;
         this.estado = estado;
-        this.alumno = alumno;
         this.clase = clase;
     }
 
@@ -72,15 +83,13 @@ public class Inscripcion {
      * @param fechaInscripcion fecha y hora de la transacción
      * @param calificacion calificación otorgada
      * @param estado estado de la inscripción
-     * @param alumno alumno involucrado
      * @param clase clase seleccionada
      */
-    public Inscripcion(Long id, LocalDateTime fechaInscripcion, float calificacion, EstadoInscripcion estado, Alumno alumno, Clase clase) {
+    public Inscripcion(Long id, LocalDateTime fechaInscripcion, float calificacion, EstadoInscripcion estado, Clase clase) {
         this.id = id;
         this.fechaInscripcion = fechaInscripcion;
         this.calificacion = calificacion;
         this.estado = estado;
-        this.alumno = alumno;
         this.clase = clase;
     }
 
@@ -116,13 +125,7 @@ public class Inscripcion {
         this.estado = estado;
     }
 
-    public Alumno getAlumno() {
-        return alumno;
-    }
 
-    public void setAlumno(Alumno alumno) {
-        this.alumno = alumno;
-    }
 
     public Clase getClase() {
         return clase;
@@ -139,7 +142,6 @@ public class Inscripcion {
                 ", fechaInscripcion=" + fechaInscripcion +
                 ", calificacion=" + calificacion +
                 ", estado=" + estado +
-                ", alumno=" + (alumno != null ? alumno.getMatricula() : "null") +
                 ", clase=" + (clase != null ? clase.getClave() : "null") +
                 '}';
     }

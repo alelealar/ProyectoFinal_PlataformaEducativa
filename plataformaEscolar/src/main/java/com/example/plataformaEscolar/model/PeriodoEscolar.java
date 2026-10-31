@@ -1,5 +1,7 @@
 package com.example.plataformaEscolar.model;
 
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,11 +13,15 @@ import java.util.List;
  *
  * @author Equipo 2 - Amarillo
  */
+@Entity
+@Table(name = "periodos_escolares")
 public class PeriodoEscolar {
 
     /**
      * Identificador único del periodo escolar.
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; // Cambiado de int a Long
 
     /**
@@ -46,6 +52,7 @@ public class PeriodoEscolar {
     /**
      * Lista de clases o grupos ofertados durante este periodo escolar.
      */
+    @OneToMany(mappedBy = "periodo_escolar")
     private List<Clase> clases;
 
     /**

@@ -1,9 +1,6 @@
 package com.example.plataformaEscolar.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -20,6 +17,7 @@ import java.util.List;
  * @author Equipo 2 - Amarillo
  */
 @Entity
+@Table(name = "materias")
 public class Materia {
 
     /**
@@ -63,12 +61,22 @@ public class Materia {
      * Lista de materias previas obligatorias que el alumno debe haber aprobado
      * para cursar esta asignatura (relación reflexiva de 1 a muchos).
      */
+    @ManyToMany
+    @JoinTable(
+            name = "materia_prerrequisitos",
+            joinColumns = @JoinColumn(name = "materia_id"),
+            inverseJoinColumns = @JoinColumn(name = "prerrequisito_id")
+    )
     private List<Materia> prerrequisitos;
 
     /**
      * Clases o grupos aperturados para esta materia.
      */
+    @OneToMany(mappedBy = "materia")
     private List<Clase> clases;
+
+    @OneToMany(mappedBy = "materia")
+    private List<PlanMateria> planMaterias;
 
     /**
      * Crea una materia vacía e inicializa las listas requeridas.

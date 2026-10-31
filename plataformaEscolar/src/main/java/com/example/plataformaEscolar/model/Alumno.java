@@ -1,13 +1,14 @@
 package com.example.plataformaEscolar.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Size;
 import org.springframework.beans.factory.annotation.Value;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Representa a un alumno dentro de la plataforma escolar.
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Value;
  * @author Equipo 2 - Amarillo
  */
 @Entity
+@Table(name = "alumnos")
 public class Alumno extends Usuario {
 
     /**
@@ -34,8 +36,17 @@ public class Alumno extends Usuario {
     /**
      * Carrera universitaria a la que pertenece el alumno.
      */
-    @Enumerated(EnumType.STRING)
+    @ManyToOne
+    @JoinColumn(name = "carrera_id")
     private Carrera carrera;
+
+
+    @OneToMany(mappedBy = "alumno")
+    private List<Pago> pagos;
+
+    @OneToMany(mappedBy = "alumno")
+    private List<Inscripcion> inscripciones;
+
 
     /**
      * Crea un alumno vacío.

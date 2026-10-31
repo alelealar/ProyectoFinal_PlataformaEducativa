@@ -3,6 +3,8 @@ package com.example.plataformaEscolar.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PastOrPresent;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -60,6 +62,8 @@ public class Pago {
     /**
      * Alumno que efectúa el pago.
      */
+    @ManyToOne
+    @JoinColumn(name = "alumno_id")
     private Alumno alumno;
 
     /**

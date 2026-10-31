@@ -1,5 +1,8 @@
 package com.example.plataformaEscolar.model;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,21 +12,27 @@ import java.util.List;
  *
  * @author Equipo 2 - Amarillo
  */
+@Entity
+@Table(name = "clases")
 public class Clase {
 
     /**
      * Identificador único de la clase.
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; // Cambiado de int a Long
 
     /**
      * Nombre descriptivo de la clase o grupo.
      */
+    @NotBlank(message = "El nombre no puede estar en blanco")
     private String nombre;
 
     /**
      * Clave única que identifica al grupo.
      */
+    @NotBlank(message = "La clave no puede estar en blanco")
     private String clave;
 
     /**
@@ -34,26 +43,34 @@ public class Clase {
     /**
      * Maestro responsable de impartir la clase.
      */
+    @ManyToOne
+    @JoinColumn(name = "maestro_id")
     private Maestro maestro;
 
     /**
      * Materia asociada a la clase.
      */
+    @ManyToOne
+    @JoinColumn(name = "materia_id")
     private Materia materia;
 
     /**
      * Período escolar en el que se imparte la clase.
      */
+    @ManyToOne
+    @JoinColumn(name = "periodo_escolar_id")
     private PeriodoEscolar periodoEscolar;
 
     /**
      * Lista de horarios en los que se imparte la clase.
      */
+    @OneToMany(mappedBy = "clase")
     private List<HorarioClase> horarios;
 
     /**
      * Lista de inscripciones activas vinculadas a esta clase.
      */
+    @OneToMany(mappedBy = "clase")
     private List<Inscripcion> inscripciones;
 
     /**

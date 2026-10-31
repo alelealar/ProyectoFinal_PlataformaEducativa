@@ -6,6 +6,9 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Clase base para la gestión de usuarios del sistema.
  *
@@ -38,6 +41,7 @@ public abstract class Usuario {
 
     @Enumerated(EnumType.STRING)
     private Rol rol; // Implementación de EnumRol
+
 
     public Usuario() {
     }

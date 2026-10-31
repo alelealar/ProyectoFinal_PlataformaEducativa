@@ -1,5 +1,9 @@
 package com.example.plataformaEscolar.model;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PastOrPresent;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,21 +14,27 @@ import java.util.List;
  *
  * @author Equipo 2 - Amarillo
  */
+@Entity
+@Table(name = "plan_estudios")
 public class PlanEstudio {
 
     /**
      * Identificador único del plan de estudios.
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     /**
      * Clave oficial del plan de estudios (ej. "ISW-2020").
      */
+    @NotBlank(message = "La clave no puede estar vacia")
     private String clave;
 
     /**
      * Fecha oficial en la que fue aprobado el plan de estudios.
      */
+    @PastOrPresent(message = "La fecha no puede ser futura")
     private LocalDate fechaAprobacion;
 
     /**
@@ -35,11 +45,15 @@ public class PlanEstudio {
     /**
      * Carrera universitaria a la que pertenece este plan de estudios.
      */
+    @ManyToOne
+    @JoinColumn(name = "carrera_id")
     private Carrera carrera;
+
 
     /**
      * Lista de materias asignadas a este plan a través de la relación intermedia PlanMateria.
      */
+    @OneToMany(mappedBy = "plan_estudio")
     private List<PlanMateria> planMaterias;
 
     /**

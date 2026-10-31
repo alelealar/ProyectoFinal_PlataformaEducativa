@@ -1,11 +1,24 @@
 package com.example.plataformaEscolar.model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "plan_materias")
 public class PlanMateria {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; // Cambiado de int a Long
+
     private int semestreSugerido;
     private boolean esOptativa;
+
+    @ManyToOne
+    @JoinColumn(name = "plan_estudio_id")
     private PlanEstudio planEstudio;
+
+    @ManyToOne
+    @JoinColumn(name = "materia_id")
     private Materia materia;
 
     public PlanMateria() {
