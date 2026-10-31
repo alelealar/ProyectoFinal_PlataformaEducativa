@@ -5,6 +5,10 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +18,10 @@ import java.util.List;
  *
  * @author Equipo 2 - Amarillo
  */
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Usuario {
@@ -33,92 +41,16 @@ public abstract class Usuario {
     @NotBlank(message = "El correo no puede estar vacio")
     private String correo;
 
-    @Pattern(regexp = "^\\\\d{10}$", message = "Formato de teléfono no válido")
-    private String telefono;
+    @Email(message = "El correo debe de tener un formato válido")
+    private String correoInstitucional;
 
     @NotBlank(message = "La contraseña no puede estar vacia")
     private String contraseña;
 
+    @Pattern(regexp = "^\\\\d{10}$", message = "Formato de teléfono no válido")
+    private String telefono;
+
     @Enumerated(EnumType.STRING)
     private Rol rol; // Implementación de EnumRol
 
-
-    public Usuario() {
-    }
-
-    public Usuario(Long id, String nombre, String apellidoPaterno, String apellidoMaterno,
-                   String correo, String telefono, String contraseña, Rol rol) {
-        this.id = id;
-        this.nombre = nombre;
-        this.apellidoPaterno = apellidoPaterno;
-        this.apellidoMaterno = apellidoMaterno;
-        this.correo = correo;
-        this.telefono = telefono;
-        this.contraseña = contraseña;
-        this.rol = rol;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getApellidoPaterno() {
-        return apellidoPaterno;
-    }
-
-    public void setApellidoPaterno(String apellidoPaterno) {
-        this.apellidoPaterno = apellidoPaterno;
-    }
-
-    public String getApellidoMaterno() {
-        return apellidoMaterno;
-    }
-
-    public void setApellidoMaterno(String apellidoMaterno) {
-        this.apellidoMaterno = apellidoMaterno;
-    }
-
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
-    public String getContraseña() {
-        return contraseña;
-    }
-
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
-    }
-
-    public Rol getRol() {
-        return rol;
-    }
-
-    public void setRol(Rol rol) {
-        this.rol = rol;
-    }
 }
