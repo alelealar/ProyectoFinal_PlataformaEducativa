@@ -2,6 +2,7 @@ package com.example.plataformaEscolar.service;
 
 import com.example.plataformaEscolar.exception.BusinessRuleException;
 import com.example.plataformaEscolar.exception.ResourceNotFoundException;
+import com.example.plataformaEscolar.exception.WrongPasswordException;
 import com.example.plataformaEscolar.model.Alumno;
 import com.example.plataformaEscolar.repository.AlumnoRepository;
 import com.example.plataformaEscolar.util.BCryptUtils;
@@ -106,6 +107,22 @@ public class AlumnoService {
         throw new ResourceNotFoundException("No se ha encontrado al alumno con id: " + id);
 
     }
+
+    public void cambiarContraseña(Long id, String antiguaContraseña, String nuevaContraseña){
+        Alumno alumno = alumnoRepository.findById(id).orElse(null);
+        if (alumno != null){
+            if (BCryptUtils.verificarContraseña(antiguaContraseña, alumno.getContraseña()) ){
+                alumno.setContraseña(BCryptUtils.hashContraseña(nuevaContraseña));
+            }
+            else{
+                throw new WrongPasswordException("La contraseña introducida no es correcta.");
+            }
+
+        }
+
+        throw new ResourceNotFoundException("No se ha encontrado al alumno con id: " + id);
+    }
+
 
 
 }
