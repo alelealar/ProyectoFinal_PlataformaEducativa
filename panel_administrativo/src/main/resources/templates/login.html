@@ -3,51 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel administrativo | Iniciar sesión</title>
+    <meta name="description" content="Portal de acceso de la Universidad Nexus">
+    <title>Iniciar Sesión - Portal Nexus</title>
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" th:href="@{/styles/style.css}">
+
+    <!-- Estilos del proyecto -->
+    <link rel="stylesheet" th:href="@{/styles/style.css}" href="../static/styles/style.css">
 </head>
 <body>
-<main class="mobile-screen">
-    <div class="screen-content login-page">
+<main class="mobile-screen login-page">
+    <div class="screen-content">
+        <!-- Header del Login -->
         <header class="login-header">
-            <div class="logo-box" aria-hidden="true">
-                <i class="fa-solid fa-user-shield"></i>
+            <div class="logo-box">
+                <i class="fa-solid fa-graduation-cap"></i>
             </div>
-            <span class="subtitle-small">Servicios Escolares</span>
-            <h1>Panel administrativo</h1>
-            <p class="login-description">Acceso exclusivo para administradores</p>
+            <span class="subtitle-small">UNIVERSIDAD NEXUS</span>
+            <h1>Portal de Acceso Unificado</h1>
+            <p class="login-description">Ingresa tus credenciales institucionales para acceder a tu plataforma</p>
         </header>
 
-        <section class="card login-form-card">
-            <p th:if="${error}" th:text="${error}" style="color:#b42318;margin-bottom:1rem;"></p>
+        <!-- Tarjeta del Formulario -->
+        <div class="card login-form-card">
+
+            <!-- ALERTA DE ERROR CONDICIONAL (Thymeleaf) -->
+            <div th:if="${error}" class="alert-error-login" style="background-color: var(--status-danger-bg); color: var(--status-danger-text); padding: 10px 14px; border-radius: 8px; font-size: 12px; font-weight: 700; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <span th:text="${error}"></span>
+            </div>
+
             <form th:action="@{/login}" method="post">
+                <!-- Campo Identificador / Correo -->
                 <div class="form-group">
-                    <label class="form-label" for="email">Correo institucional</label>
+                    <label for="username" class="form-label">Correo Institucional</label>
                     <div class="input-wrapper">
-                        <i class="fa-regular fa-envelope input-icon input-icon-left" aria-hidden="true"></i>
-                        <input type="email" id="email" name="email" class="form-control"
-                               placeholder="admin@nexus.edu" autocomplete="username" required
-                               th:value="${email}">
+                        <i class="fa-regular fa-envelope input-icon input-icon-left"></i>
+                        <!-- Se mantiene th:value para conservar el texto en caso de error -->
+                        <input type="text" id="username" name="correo" th:value="${email}" class="form-control" placeholder="ejemplo@nexus.edu.mx" required autocomplete="username">
                     </div>
                 </div>
+
+                <!-- Campo Contraseña -->
                 <div class="form-group">
-                    <label class="form-label" for="password">Contraseña</label>
+                    <label for="password" class="form-label">Contraseña</label>
                     <div class="input-wrapper">
-                        <i class="fa-solid fa-lock input-icon input-icon-left" aria-hidden="true"></i>
-                        <input type="password" id="password" name="password" class="form-control"
-                               placeholder="••••••••••••" autocomplete="current-password" required>
+                        <i class="fa-solid fa-lock input-icon input-icon-left"></i>
+                        <input type="password" id="password" name="password" class="form-control has-right-icon" placeholder="••••••••" required autocomplete="current-password">
+                        <button type="button" class="input-action" aria-label="Mostrar contraseña">
+                            <i class="fa-regular fa-eye"></i>
+                        </button>
                     </div>
                 </div>
+
+                <!-- Opciones (Recordarme / Olvidé contraseña) -->
+                <div class="form-options">
+                    <a href="#">¿Olvidaste tu contraseña?</a>
+                </div>
+
+                <!-- Botón Iniciar Sesión -->
                 <button type="submit" class="btn-primary">
-                    <span>Iniciar sesión</span>
-                    <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                    Iniciar Sesión <i class="fa-solid fa-arrow-right"></i>
                 </button>
             </form>
-        </section>
+        </div>
+
+        <!-- Tarjeta Informativa / Ayuda -->
+        <div class="info-card">
+            <i class="fa-solid fa-circle-info info-icon"></i>
+            <div class="info-card-content">
+                <h2>¿Necesitas ayuda para ingresar?</h2>
+                <p>Si olvidaste tu NIP o tu cuenta está bloqueada, acude a Servicios Escolares o contacta a soporte técnico.</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="login-footer">
+            <p><i class="fa-solid fa-shield-halved"></i> Conexión segura Cifrado SSL 256-bit</p>
+            <p>© 2026 Universidad Nexus • Todos los derechos reservados</p>
+        </footer>
     </div>
 </main>
 </body>

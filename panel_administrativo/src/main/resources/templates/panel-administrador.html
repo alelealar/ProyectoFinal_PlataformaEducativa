@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portal de administración de la Universidad Nexus">
+    <title>Panel administrador - Universidad Nexus</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Estilos del proyecto -->
+    <link rel="stylesheet" th:href="@{/styles/style.css}" href="../static/styles/style.css">
+</head>
+<body>
+<main class="mobile-screen">
+    <div class="screen-content">
+        <!-- Header -->
+        <header class="top-bar">
+            <div class="brand">
+                <button type="button" class="icon-button btn-regresar">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </button>
+                <div class="brand-icon">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <div class="brand-text">
+                    <h2>Detalle Asignatura</h2>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button type="button" class="icon-button">
+                    <i class="fa-solid fa-gear"></i>
+                </button>
+                <button type="button" class="icon-button notification-icon">
+                    <i class="fa-regular fa-bell"></i>
+                    <div class="notification-dot"></div>
+                </button>
+                <div class="avatar">
+                    <img src="https://ui-avatars.com/api/?name=Valeria+Mendez&background=3182CE&color=fff" alt="Usuario">
+                </div>
+            </div>
+        </header>
+
+        <!-- Badge Administrador -->
+        <div class="administrador-pill">
+            <i class="fa-solid fa-user-shield"></i> ADMINISTRADOR • SERVICIOS ESCOLARES
+        </div>
+
+        <!-- Encabezado de Título -->
+        <section class="greeting-section admin-title-row">
+            <h1>Consola Escolar 2026–1</h1>
+            <span class="badge-live"><i class="fa-solid fa-circle"></i> En Vivo</span>
+        </section>
+
+        <section class="slider-consola-escolar">
+            <div class="tarjeta-slider">
+                <div class="tarjeta-slider-header">
+                    <span>INSCRITOS</span>
+                    <i class="fa-regular fa-user"></i>
+                </div>
+                <div class="tarjeta-slider-val" th:text="${stats.totalInscritos}">4,820</div>
+                <div class="slider-progress-bar">
+                    <div class="slider-progress-fill" th:style="'width: ' + ${stats.porcentajeInscritos} + '%;'"></div>
+                </div>
+                <div class="metric-footer-info">
+                    <span th:text="${stats.porcentajeInscritos} + '% del padrón total'">91.4% del padrón total</span>
+                    <strong th:text="'Meta: ' + ${stats.metaInscritos}">Meta: 5,270</strong>
+                </div>
+            </div>
+
+            <div class="tarjeta-slider">
+                <div class="tarjeta-slider-header">
+                    <span>PERÍODOS</span>
+                    <i class="fa-regular fa-calendar-check"></i>
+                </div>
+                <div class="tarjeta-slider-val" th:text="${stats.periodosActivos}">3</div>
+                <span class="badge-mini-active">Activos hoy</span>
+                <div class="tarjeta-slider-footer">Pregrado, Posgrado, Online</div>
+            </div>
+
+            <div class="tarjeta-slider">
+                <div class="tarjeta-slider-header">
+                    <span>MATERIAS ACTIVAS</span>
+                    <i class="fa-solid fa-book"></i>
+                </div>
+                <div class="tarjeta-slider-val" th:text="${stats.materiasActivas}">142</div>
+                <div class="slider-progress-bar">
+                    <div class="slider-progress-fill success" th:style="'width: ' + ${stats.ocupacionGlobal} + '%;'"></div>
+                </div>
+                <div class="metric-footer-info">
+                    <span th:text="${stats.ocupacionGlobal} + '% ocupación global'">88% ocupación global</span>
+                    <strong class="text-success-highlight" th:text="${stats.gruposLlenos} + ' grupos llenos'">18 grupos llenos</strong>
+                </div>
+            </div>
+        </section>
+
+        <section class="gestion-rapida-accesos">
+            <div class="section-header">
+                <h2>Gestión Rápida</h2>
+                <span class="accesos-count">4 accesos directos</span>
+            </div>
+            <div class="contenedor-accesos-directos">
+                <div class="tarjeta-acceso-directo">
+                    <div class="icono-acceso-directo azul-pastel-bg"><i class="fa-solid fa-box-archive"></i></div>
+                    <h3>Gestión de Materias</h3>
+                    <p class="texto-acceso-directo">Crear y editar cursos, cupos, profesores y horarios académicos.</p>
+                    <a href="#" class="card-bottom-link">Configurar catálogo <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+
+                <div class="tarjeta-acceso-directo">
+                    <div class="icono-acceso-directo morado-pastel-bg"><i class="fa-regular fa-calendar"></i></div>
+                    <h3>Períodos Escolares</h3>
+                    <p class="texto-acceso-directo">Ventanas de inscripción y fechas de altas/bajas para alumnos.</p>
+                    <a href="#" class="card-bottom-link">Apertura de ciclos <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+
+                <div class="tarjeta-acceso-directo">
+                    <div class="icono-acceso-directo neutral-pastel-bg"><i class="fa-solid fa-user-plus"></i></div>
+                    <h3>Registro Usuarios</h3>
+                    <p class="texto-acceso-directo">Alta masiva con correo @nexus.edu e importación CSV.</p>
+                    <a href="#" class="card-bottom-link">Carga de alumnos <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+
+                <div class="tarjeta-acceso-directo">
+                    <div class="icono-acceso-directo naranja-pastel-bg"><i class="fa-solid fa-bullhorn"></i></div>
+                    <h3>Publicar Avisos</h3>
+                    <p class="texto-acceso-directo">Comunicados push prioritarios al portal de alumnos y docentes.</p>
+                    <a href="#" class="card-bottom-link">Redactar aviso <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <section class="monitor-de-cupos">
+            <div class="monitor-header-responsive">
+                <div class="monitor-title-wrapper">
+                    <h2>Monitor de Cupos en Vivo</h2>
+                    <p class="monitor-subtitle">Visualización de aforos y demanda en tiempo real para asignación de aulas</p>
+                </div>
+
+                <div class="monitor-controls-group">
+                    <div class="custom-select-wrapper">
+                        <select name="selector-carrera" id="selector-carrera" class="select-carrera-admin">
+                            <option>Todas las facultades</option>
+                            <option>Ing. en Software</option>
+                            <option>Ciencias Computacionales</option>
+                            <option>Inteligencia Artificial</option>
+                        </select>
+                        <i class="fa-solid fa-chevron-down select-arrow"></i>
+                    </div>
+
+                    <div class="filter-pills-group">
+                        <button type="button" class="pill-filter active">Todos (142)</button>
+                        <button type="button" class="pill-filter">Críticos (18)</button>
+                        <button type="button" class="pill-filter">Disponibles (124)</button>
+                    </div>
+
+                    <button type="button" class="icon-refresh-btn"><i class="fa-solid fa-rotate"></i></button>
+                </div>
+            </div>
+
+            <div class="contenedor-cupos-materia">
+                <div class="cupos-materia" th:each="materia : ${monitorCupos}">
+                    <div class="materia-info-col">
+                        <div class="cupos-materia-header">
+                            <span class="cupos-materia-nombre" th:text="${materia.nrc} + ' • ' + ${materia.carrera}">NRC 3310 • ING. EN SOFTWARE</span>
+                            <!-- Badge de estado dinámico -->
+                            <span class="badge-status-cupo"
+                                  th:classappend="${materia.estado == 'SATURADA' ? 'danger' : (materia.estado == 'CASI_LLENA' ? 'warning' : 'info')}"
+                                  th:text="${materia.textoEstado}">¡Saturada!</span>
+                        </div>
+                        <h3 th:text="${materia.nombreMateria}">Ciberseguridad</h3>
+                        <div class="materia-meta-details-mobile">
+                            <span><i class="fa-regular fa-user"></i> <span th:text="${materia.profesor}">Prof. Carlos Estrada</span></span>
+                            <span><i class="fa-regular fa-building"></i> <span th:text="${materia.aula}">Lab. Central L-302</span></span>
+                            <span><i class="fa-regular fa-clock"></i> <span th:text="${materia.horario}">Lun - Mié - Vie 08:00</span></span>
+                        </div>
+                    </div>
+
+                    <div class="materia-stats-col">
+                        <div class="cupos-materia-info">
+                            <span>Cupos ocupados</span>
+                            <strong th:class="${materia.claseTextoColor}"
+                                    th:text="${materia.ocupados} + ' / ' + ${materia.totalCupos} + ' (' + ${materia.porcentajeOcupacion} + '%)'">30 / 30 (100%)</strong>
+                        </div>
+
+                        <!-- Barra de progreso dinámica -->
+                        <div class="barra-progreso-cupos-materia"
+                             th:classappend="${materia.claseBarraColor}"
+                             th:style="'--progreso: ' + ${materia.porcentajeOcupacion} + '%;'"></div>
+
+                        <div class="materia-actions-row-mobile">
+                            <button type="button" class="btn-action-primary" th:if="${materia.permiteAbrirGrupo}">
+                                <i class="fa-solid fa-plus"></i> Abrir Grupo B
+                            </button>
+                            <button type="button" class="btn-action-secondary" th:text="${materia.textoAccionSecundaria}">Lista de Espera (7)</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <p class="count-register-mobile">Mostrando asignaturas activas registradas en el sistema</p>
+
+        <button type="button" class="nueva-materia-boton">
+            <i class="fa-solid fa-plus"></i> Nueva Materia o Grupo
+        </button>
+    </div>
+</main>
+</body>
+</html>
