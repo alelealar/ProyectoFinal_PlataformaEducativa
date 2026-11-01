@@ -69,6 +69,8 @@ public class Pago {
     /**
      * Período escolar correspondiente al pago.
      */
+    @ManyToOne
+    @JoinColumn(name = "periodo_escolar_id")
     private PeriodoEscolar periodoEscolar;
 
     /**

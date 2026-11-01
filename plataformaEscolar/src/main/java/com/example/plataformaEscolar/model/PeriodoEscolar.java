@@ -55,6 +55,9 @@ public class PeriodoEscolar {
     @OneToMany(mappedBy = "periodo_escolar")
     private List<Clase> clases;
 
+    @OneToMany(mappedBy = "periodo_escolar")
+    private List<Pago> pagos;
+
     /**
      * Crea un periodo escolar vacío e inicializa sus colecciones.
      */
