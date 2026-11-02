@@ -29,4 +29,8 @@ public class MateriaCupoDTO {
     // Botones dinámicos opcionales
     private boolean permiteAbrirGrupo;
     private String textoAccionSecundaria;
+
+    public String getCarrera() {
+        return carrera;
+    }
 }

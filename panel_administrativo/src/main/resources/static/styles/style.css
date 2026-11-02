@@ -4513,3 +4513,804 @@ details[open] .toggle-btn {
     .registration-submit-row .workspace-primary-button { width: 100%; }
     .workspace-card-heading h2 { font-size: 14px; }
 }
+
+
+.gestion-page,
+.admin-workspace-page,
+.periodos-page {
+    background: #fbf8ef;
+    color: #202b42;
+    font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.gestion-page .top-bar-desktop,
+.admin-workspace-page .workspace-header {
+    min-height: 72px;
+    padding-right: max(28px, calc((100% - 1440px) / 2));
+    padding-left: max(28px, calc((100% - 1440px) / 2));
+    border-color: #e9e3d5;
+    background: #fff;
+}
+
+.gestion-page .brand-icon-desktop,
+.admin-workspace-page .workspace-brand-icon {
+    background: #1f2a44;
+    color: #fff;
+}
+
+.gestion-page .brand-text-desktop > strong,
+.admin-workspace-page .workspace-brand strong {
+    color: #202b42;
+    font-size: 14px;
+}
+
+.gestion-page .brand-text-desktop > span,
+.admin-workspace-page .workspace-brand small {
+    font-size: 10px;
+}
+
+.gestion-page .breadcrumbs,
+.admin-workspace-page .workspace-nav a,
+.admin-workspace-page .workspace-user {
+    font-size: 13px;
+}
+
+.gestion-page .btn-regresar-consola,
+.admin-workspace-page .workspace-secondary-button {
+    border-color: #e9e3d5;
+    border-radius: 11px;
+    background: #f7f3e8;
+    color: #34445e;
+    font-size: 13px;
+}
+
+.gestion-page .avatar-circle,
+.admin-workspace-page .workspace-avatar {
+    background: #245674;
+    color: #fff;
+}
+
+.gestion-content,
+.workspace-main {
+    max-width: 1440px;
+    padding: 32px 32px 52px;
+}
+
+.gestion-page .admin-title-row h1,
+.workspace-heading h1 {
+    color: #202b42;
+    font-size: clamp(26px, 2.4vw, 36px);
+    letter-spacing: -.045em;
+}
+
+.gestion-page .subtitle,
+.workspace-heading > div > p:last-child {
+    color: #65728a;
+    font-size: 14px;
+}
+
+.gestion-page .btn-primary,
+.gestion-page .btn-filter,
+.admin-workspace-page .workspace-primary-button {
+    min-height: 44px;
+    padding: 11px 18px;
+    border-radius: 11px;
+    background: #245674;
+    font-size: 14px;
+}
+
+.gestion-page .btn-primary:hover,
+.gestion-page .btn-filter:hover,
+.admin-workspace-page .workspace-primary-button:hover {
+    background: #19445e;
+}
+
+.gestion-page .stat-card,
+.gestion-page .materia-card-desktop,
+.gestion-page .create-materia-panel,
+.gestion-page .bottom-banner-action,
+.admin-workspace-page .workspace-card,
+.admin-workspace-page .dashboard-stat-card,
+.admin-workspace-page .dashboard-shortcut,
+.admin-workspace-page .user-count-grid article {
+    border-color: #e8e1d3;
+    border-radius: 17px;
+    box-shadow: 0 2px 4px rgb(52 43 23 / 3%);
+}
+
+.gestion-page .stat-card {
+    min-height: 132px;
+    padding: 20px;
+}
+
+.gestion-page .stat-header,
+.gestion-page .ocupacion-labels,
+.gestion-page .stat-footer {
+    font-size: 12px;
+}
+
+.gestion-page .stat-value strong {
+    color: #202b42;
+    font-size: 32px;
+}
+
+.gestion-page .stat-header i,
+.gestion-page .banner-content > i {
+    color: #245674;
+}
+
+.gestion-page .filters-row {
+    gap: 14px;
+    margin-bottom: 24px;
+    padding: 12px 14px;
+    border: 1px solid #e8e1d3;
+    border-radius: 16px;
+    background: #fff;
+}
+
+.gestion-page .pill {
+    padding: 9px 15px;
+    border: 1px solid #e8e1d3;
+    border-radius: 99px;
+    background: #f7f3e8;
+    color: #34445e;
+    font-size: 13px;
+}
+
+.gestion-page .pill.active {
+    border-color: #245674;
+    background: #245674;
+    color: #fff;
+}
+
+.gestion-page .custom-select-desktop,
+.gestion-page .filter-actions select,
+.gestion-page .search-input-wrapper,
+.gestion-page .create-materia-form input,
+.gestion-page .create-materia-form select,
+.gestion-page .create-materia-form textarea,
+.gestion-page .inline-action-form input,
+.gestion-page .inline-action-form select {
+    border-color: #e8e1d3;
+    border-radius: 10px;
+    background: #f7f3e8;
+    font-size: 13px;
+}
+
+.gestion-page .materia-card-desktop {
+    padding: 21px;
+}
+
+.gestion-page .materia-card-desktop h3 {
+    margin-top: 13px;
+    font-size: 19px;
+}
+
+.gestion-page .docente,
+.gestion-page .career-label {
+    font-size: 13px;
+}
+
+.gestion-page .ocupacion-box {
+    padding: 14px;
+    border: 1px solid #eee8db;
+    border-radius: 13px;
+    background: #f7f3e8;
+}
+
+.gestion-page .progress-bg {
+    height: 9px;
+    background: #e5dfd1;
+}
+
+.gestion-page .progress-fill.info {
+    background: #65a3d1;
+}
+
+.gestion-page .progress-fill.warning {
+    background: #e99a00;
+}
+
+.gestion-page .progress-fill.danger {
+    background: #e91e4f;
+}
+
+.gestion-page .badge-status {
+    padding: 6px 10px;
+    border: 1px solid currentColor;
+    border-radius: 99px;
+    background: #fff;
+}
+
+.gestion-page .btn-action {
+    min-height: 41px;
+    border-color: #e8e1d3;
+    border-radius: 10px;
+    background: #f7f3e8;
+    font-size: 12px;
+}
+
+.gestion-page .full-capacity {
+    border-color: #f2c9cf;
+}
+
+.gestion-page .full-capacity .ocupacion-box {
+    border-color: #f4c8ce;
+    background: #fff7f7;
+}
+
+.gestion-page .desktop-footer-main {
+    border-top: 1px solid #e8e1d3;
+    background: #fff;
+    font-size: 12px;
+}
+
+.admin-workspace-page .workspace-nav a {
+    color: #45536b;
+}
+
+.admin-workspace-page .workspace-nav a:hover,
+.admin-workspace-page .workspace-nav a.active {
+    background: #f7f3e8;
+    color: #245674;
+}
+
+.admin-workspace-page .workspace-main {
+    min-height: calc(100vh - 72px);
+}
+
+.admin-workspace-page .workspace-eyebrow {
+    color: #6b7890;
+    font-size: 11px;
+}
+
+.admin-workspace-page .workspace-card,
+.admin-workspace-page .dashboard-stat-card,
+.admin-workspace-page .dashboard-shortcut,
+.admin-workspace-page .user-count-grid article {
+    background: #fff;
+}
+
+.admin-workspace-page .dashboard-shortcuts {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.admin-workspace-page .dashboard-stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.admin-workspace-page .dashboard-stat-card {
+    min-height: 158px;
+    padding: 21px;
+}
+
+.admin-workspace-page .dashboard-stat-label,
+.admin-workspace-page .dashboard-stat-card > small {
+    font-size: 11px;
+}
+
+.admin-workspace-page .dashboard-stat-card > strong {
+    font-size: 30px;
+}
+
+.admin-workspace-page .dashboard-section-heading h2 {
+    font-size: 20px;
+}
+
+.admin-workspace-page .dashboard-shortcut {
+    min-height: 170px;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+.admin-workspace-page .dashboard-shortcut > span:nth-child(2) {
+    gap: 8px;
+}
+
+.admin-workspace-page .dashboard-shortcut strong {
+    color: #202b42;
+    font-size: 15px;
+}
+
+.admin-workspace-page .dashboard-shortcut small,
+.admin-workspace-page .monitor-course-meta {
+    font-size: 12px;
+}
+
+.admin-workspace-page .shortcut-icon,
+.admin-workspace-page .dashboard-stat-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+}
+
+.admin-workspace-page .dashboard-monitor {
+    padding: 22px;
+    border: 1px solid #e8e1d3;
+    border-radius: 17px;
+}
+
+.admin-workspace-page .monitor-filters label,
+.admin-workspace-page .monitor-course-capacity > div:first-child {
+    font-size: 12px;
+}
+
+.admin-workspace-page .monitor-course {
+    padding: 20px 4px;
+}
+
+.admin-workspace-page .monitor-course h3 {
+    font-size: 17px;
+}
+
+.admin-workspace-page .monitor-state-pill,
+.admin-workspace-page .monitor-course-code {
+    font-size: 11px;
+}
+
+.admin-workspace-page .monitor-course-capacity strong {
+    color: #202b42;
+}
+
+.admin-workspace-page .capacity-track {
+    height: 9px;
+    background: #eee8db;
+}
+
+.admin-workspace-page .capacity-track span {
+    background: #65a3d1;
+}
+
+.admin-workspace-page .capacity-track span.warning {
+    background: #e99a00;
+}
+
+.admin-workspace-page .capacity-track span.danger {
+    background: #e91e4f;
+}
+
+.admin-workspace-page .notice-layout {
+    grid-template-columns: minmax(0, 1.15fr) minmax(350px, .85fr);
+    gap: 24px;
+}
+
+.admin-workspace-page .notice-compose-card,
+.admin-workspace-page .notice-history-card {
+    padding: 24px;
+}
+
+.admin-workspace-page .workspace-card-heading h2 {
+    font-size: 19px;
+}
+
+.admin-workspace-page .workspace-card-heading p,
+.admin-workspace-page .workspace-form legend,
+.admin-workspace-page .workspace-field {
+    font-size: 13px;
+}
+
+.notices-page .workspace-form > fieldset { order: 2; }
+.notices-page .workspace-form > label[for="aviso-titulo"] { order: 3; }
+.notices-page .workspace-form > label[for="aviso-contenido"] { order: 4; }
+.notices-page .workspace-form > label[for="aviso-destinatarios"] { order: 1; }
+.notices-page .workspace-form > .notice-configuration-note { order: 5; }
+.notices-page .workspace-form > .workspace-primary-button { order: 6; }
+
+.admin-workspace-page .workspace-field input,
+.admin-workspace-page .workspace-field textarea,
+.admin-workspace-page .workspace-field select,
+.admin-workspace-page .monitor-filters input,
+.admin-workspace-page .monitor-filters select {
+    min-height: 48px;
+    border-color: #e8e1d3;
+    border-radius: 11px;
+    background: #f7f3e8;
+    font-size: 14px;
+}
+
+.admin-workspace-page .workspace-field textarea {
+    min-height: 140px;
+}
+
+.admin-workspace-page .priority-choice {
+    min-height: 62px;
+    border-color: #e8e1d3;
+    border-radius: 12px;
+    background: #fff;
+}
+
+.admin-workspace-page .notice-configuration-note,
+.admin-workspace-page .registration-security-note {
+    background: #f7f3e8;
+    font-size: 12px;
+}
+
+.admin-workspace-page .history-message,
+.admin-workspace-page .history-audience,
+.admin-workspace-page .history-item-top time {
+    font-size: 12px;
+}
+
+.admin-workspace-page .notice-history-item h3 {
+    font-size: 15px;
+}
+
+.notice-preview {
+    margin-bottom: 25px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid #eee8db;
+}
+
+.notice-preview-heading,
+.notice-preview-topline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.notice-preview-heading {
+    margin-bottom: 15px;
+    color: #27364f;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.notice-preview-heading span:first-child i {
+    margin-right: 7px;
+    color: #245674;
+}
+
+.notice-preview-heading span:last-child,
+.notice-preview-disclaimer {
+    color: #78859a;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.notice-preview-device {
+    padding: 18px;
+    border: 1px solid #e8e1d3;
+    border-radius: 15px;
+    background: #f7f3e8;
+    box-shadow: 0 5px 14px rgb(52 43 23 / 5%);
+}
+
+.notice-preview-topline {
+    justify-content: flex-start;
+    margin-bottom: 15px;
+    color: #65728a;
+    font-size: 11px;
+}
+
+.notice-preview-topline i {
+    color: #245674;
+}
+
+.notice-preview-topline time {
+    margin-left: auto;
+}
+
+.notice-preview-device > strong {
+    display: block;
+    color: #202b42;
+    font-size: 15px;
+}
+
+.notice-preview-device > p {
+    margin: 8px 0 14px;
+    color: #45536b;
+    font-size: 13px;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+.notice-preview-disclaimer {
+    margin: 11px 0 0;
+}
+
+.registration-page .workspace-heading {
+    margin-bottom: 20px;
+}
+
+.registration-page .user-count-pill {
+    border-color: #e8e1d3;
+    background: #f7f3e8;
+    color: #245674;
+    font-size: 13px;
+}
+
+.registration-page .user-count-grid article {
+    min-height: 84px;
+    padding: 17px 19px;
+}
+
+.registration-page .user-count-grid small {
+    font-size: 10px;
+}
+
+.registration-page .user-count-grid strong {
+    font-size: 24px;
+}
+
+.registration-page .registration-card {
+    border-radius: 18px;
+}
+
+.registration-page .registration-tabs {
+    justify-content: center;
+    width: fit-content;
+    margin: 18px auto 0;
+    padding: 6px;
+    border: 1px solid #e8e1d3;
+    border-radius: 15px;
+    background: #f7f3e8;
+}
+
+.registration-page .registration-tab {
+    min-width: 190px;
+    border: 0;
+    border-radius: 11px;
+    font-size: 13px;
+}
+
+.registration-page .registration-tab.active {
+    background: #fff;
+    color: #245674;
+    box-shadow: 0 2px 7px rgb(52 43 23 / 8%);
+}
+
+.registration-page .registration-view {
+    padding: 30px;
+}
+
+.registration-page .form-section-title {
+    margin-bottom: 24px;
+}
+
+.registration-page .registration-fields-grid {
+    grid-template-columns: 1fr;
+    gap: 19px;
+}
+
+.registration-page .workspace-field {
+    gap: 9px;
+}
+
+.registration-page .workspace-field input,
+.registration-page .workspace-field select {
+    min-height: 51px;
+    padding: 13px 15px;
+    border-color: transparent;
+    border-radius: 12px;
+    background: #f7f3e8;
+    font-size: 14px;
+}
+
+.registration-page .email-domain-field span {
+    min-height: 51px;
+    border-color: transparent;
+    border-radius: 0 12px 12px 0;
+    background: #eee8db;
+    font-size: 13px;
+}
+
+.registration-page .email-domain-field input {
+    border-radius: 12px 0 0 12px;
+}
+
+.registration-page .role-selection-field legend,
+.registration-page .workspace-field > label {
+    color: #263650;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.registration-page .role-selection-options {
+    gap: 10px;
+}
+
+.registration-page .role-selection-options label span {
+    min-height: 68px;
+    justify-content: center;
+    border-color: #e8e1d3;
+    border-radius: 13px;
+    background: #f7f3e8;
+    font-size: 13px;
+}
+
+.registration-page .role-selection-options input:checked + span {
+    border-color: #245674;
+    background: #245674;
+    color: #fff;
+}
+
+.registration-page .role-selection-options strong {
+    font-size: 13px;
+}
+
+.registration-page .workspace-field > small,
+.registration-page .registration-submit-row > span {
+    font-size: 12px;
+}
+
+.registration-page .registration-security-note {
+    margin-top: 22px;
+    padding: 16px;
+    border: 1px solid #eee8db;
+    border-radius: 13px;
+    font-size: 13px;
+}
+
+.registration-page .registration-submit-row {
+    margin-top: 22px;
+}
+
+.registration-page .registration-submit-row .workspace-primary-button {
+    min-height: 52px;
+    font-size: 15px;
+}
+
+.periodos-page {
+    min-height: 100vh;
+    margin: 0;
+}
+
+.periodos-page .mobile-screen {
+    width: 100%;
+    min-height: 100vh;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    background: #fbf8ef;
+}
+
+.periodos-page .screen-content {
+    width: min(100% - 48px, 1440px);
+    max-width: none;
+    margin: 0 auto;
+    padding: 24px 0 42px;
+}
+
+.periodos-page .top-bar {
+    min-height: 66px;
+    margin: 0 calc((min(100vw - 48px, 1440px) - 100vw) / 2) 28px;
+    padding: 10px max(24px, calc((100% - 1440px) / 2));
+    border-bottom: 1px solid #e8e1d3;
+    background: #fff;
+}
+
+.periodos-page .brand-text h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.periodos-page .brand-text span {
+    color: #65728a;
+    font-size: 12px;
+}
+
+.periodos-page .periodo-card,
+.periodos-page .fase-card,
+.periodos-page .historial-periodos {
+    border: 1px solid #e8e1d3;
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 3px 8px rgb(52 43 23 / 5%);
+}
+
+.periodos-page .periodo-card {
+    max-width: 880px;
+    margin: 0 auto 28px;
+    padding: 24px;
+}
+
+.periodos-page .periodo-titulo-contenedor h1 {
+    color: #202b42;
+    font-size: 30px;
+}
+
+.periodos-page .datos-periodo {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.periodos-page .dato-periodo {
+    padding: 17px;
+    border-radius: 13px;
+    background: #f7f3e8;
+}
+
+.periodos-page .fase-card {
+    min-width: 0;
+    padding: 18px;
+}
+
+.periodos-page .fases-section {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.periodos-page .fases-header {
+    grid-column: 1 / -1;
+}
+
+.periodos-page .historial-periodos {
+    margin-top: 22px;
+    padding: 17px 20px;
+}
+
+.periodos-page .modificar-calendario-container {
+    margin-top: 24px;
+    text-align: right;
+}
+
+.periodos-page .btn-modificar-calendario {
+    min-height: 44px;
+    padding: 11px 18px;
+    border: 0;
+    border-radius: 11px;
+    background: #245674;
+    color: #fff;
+    font: inherit;
+    font-weight: 700;
+}
+
+@media (max-width: 1000px) {
+    .admin-workspace-page .dashboard-shortcuts {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .admin-workspace-page .notice-layout {
+        grid-template-columns: minmax(0, 1fr) minmax(280px, .85fr);
+    }
+}
+
+@media (max-width: 700px) {
+    .gestion-content,
+    .workspace-main {
+        padding: 24px 16px 38px;
+    }
+
+    .gestion-page .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .admin-workspace-page .dashboard-shortcuts,
+    .admin-workspace-page .dashboard-stats,
+    .admin-workspace-page .notice-layout,
+    .registration-page .registration-fields-grid,
+    .periodos-page .datos-periodo,
+    .periodos-page .fases-section {
+        grid-template-columns: 1fr;
+    }
+
+    .registration-page .registration-tabs {
+        width: auto;
+        margin-right: 14px;
+        margin-left: 14px;
+    }
+
+    .registration-page .registration-tab {
+        min-width: 0;
+        flex: 1;
+    }
+
+    .registration-page .registration-view {
+        padding: 20px 16px;
+    }
+
+    .periodos-page .screen-content {
+        width: calc(100% - 28px);
+    }
+
+    .periodos-page .top-bar {
+        margin-right: -14px;
+        margin-left: -14px;
+        padding-right: 14px;
+        padding-left: 14px;
+    }
+}

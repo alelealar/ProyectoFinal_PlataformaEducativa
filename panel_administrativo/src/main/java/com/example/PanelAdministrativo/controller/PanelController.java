@@ -56,4 +56,12 @@ public class PanelController {
                 .orElse("Sin periodo activo"));
         return "panel-administrador";
     }
+
+    @GetMapping("/periodos")
+    public String mostrarPeriodos(HttpServletRequest request) {
+        if (!AuthInterceptor.tieneSesionAdministrador(request.getSession(false))) {
+            return "redirect:/login";
+        }
+        return "periodos";
+    }
 }

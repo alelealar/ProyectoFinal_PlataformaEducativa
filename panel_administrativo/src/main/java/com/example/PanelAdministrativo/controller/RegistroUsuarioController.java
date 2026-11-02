@@ -52,12 +52,12 @@ public class RegistroUsuarioController {
     }
 
     @PostMapping("/admin/usuarios")
-    public String registrarUsuario(@RequestParam String nombreCompleto,
-                                   @RequestParam String aliasCorreo,
-                                   @RequestParam(required = false) String identificador,
-                                   @RequestParam String rol,
-                                   @RequestParam(required = false) Long carreraId,
-                                   @RequestParam(required = false) String numEmpleado,
+    public String registrarUsuario(@RequestParam("nombreCompleto") String nombreCompleto,
+                                   @RequestParam("aliasCorreo") String aliasCorreo,
+                                   @RequestParam(value = "identificador", required = false) String identificador,
+                                   @RequestParam("rol") String rol,
+                                   @RequestParam(value = "carreraId", required = false) Long carreraId,
+                                   @RequestParam(value = "numEmpleado", required = false) String numEmpleado,
                                    RedirectAttributes redirectAttributes) {
         try {
             UsuarioRegistroResultadoDTO resultado = registroUsuarioService.registrar(

@@ -53,13 +53,8 @@
             <span class="dashboard-stat-icon purple"><i class="fa-solid fa-book-open"></i></span>
             <div class="dashboard-stat-label">MATERIAS OFERTADAS</div>
             <strong th:text="${stats.materiasActivas}">0</strong>
+            <small th:text="|${stats.ocupacionGlobal}% de ocupación • ${stats.gruposLlenos} grupos llenos|">Ocupación y grupos llenos</small>
             <small th:text="|${stats.periodosActivos} periodo(s) activo(s)|">Periodo activo</small>
-        </article>
-        <article class="dashboard-stat-card alert">
-            <span class="dashboard-stat-icon red"><i class="fa-solid fa-triangle-exclamation"></i></span>
-            <div class="dashboard-stat-label">GRUPOS SIN CUPO</div>
-            <strong th:text="${stats.gruposLlenos}">0</strong>
-            <small>En el periodo activo</small>
         </article>
     </section>
 
@@ -76,6 +71,11 @@
             <a class="dashboard-shortcut" th:href="@{/registro-usuarios}">
                 <span class="shortcut-icon purple"><i class="fa-solid fa-user-plus"></i></span>
                 <span><strong>Registro de usuarios</strong><small>Alta individual o importación CSV</small></span>
+                <i class="fa-solid fa-arrow-right shortcut-arrow"></i>
+            </a>
+            <a class="dashboard-shortcut" th:href="@{/periodos}">
+                <span class="shortcut-icon green"><i class="fa-solid fa-calendar-days"></i></span>
+                <span><strong>Períodos escolares</strong><small>Consulta el calendario académico</small></span>
                 <i class="fa-solid fa-arrow-right shortcut-arrow"></i>
             </a>
             <a class="dashboard-shortcut" th:href="@{/avisos}">

@@ -188,7 +188,7 @@ public class Pago {
                 ", concepto='" + concepto + '\'' +
                 ", fechaPago=" + fechaPago +
                 ", estado='" + estado + '\'' +
-                ", alumno=" + (alumno != null ? alumno.getMatricula() : "null") +
+                ", alumno=" + (alumno != null ? "asignado" : "null") +
                 ", periodoEscolar=" + (periodoEscolar != null ? periodoEscolar.getNombrePeriodo() : "null") +
                 '}';
     }

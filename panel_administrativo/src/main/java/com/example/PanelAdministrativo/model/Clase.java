@@ -236,7 +236,7 @@ public class Clase {
                 ", clave='" + clave + '\'' +
                 ", cupoMaximo=" + cupoMaximo +
                 ", cupoDisponible=" + getCupoDisponible() +
-                ", maestro=" + (maestro != null ? maestro.getCorreo() : "null") +
+                ", maestro=" + (maestro != null ? "asignado" : "null") +
                 ", materia=" + (materia != null ? materia.getNombre() : "null") +
                 ", periodoEscolar=" + (periodoEscolar != null ? periodoEscolar.getNombrePeriodo() : "null") +
                 '}';

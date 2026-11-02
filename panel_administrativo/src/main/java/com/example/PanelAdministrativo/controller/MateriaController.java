@@ -33,9 +33,9 @@ public class MateriaController {
     }
 
     @GetMapping({"/gestion-materias", "/admin/materias"})
-    public String mostrarGestionMaterias(@RequestParam(defaultValue = "TODAS") String estado,
-                                         @RequestParam(required = false) String carrera,
-                                         @RequestParam(defaultValue = "") String busqueda,
+    public String mostrarGestionMaterias(@RequestParam(value = "estado", defaultValue = "TODAS") String estado,
+                                         @RequestParam(value = "carrera", required = false) String carrera,
+                                         @RequestParam(value = "busqueda", defaultValue = "") String busqueda,
                                          HttpServletRequest request,
                                          Model model) {
         List<ClaseGestionDTO> todasLasClases = materiaService.obtenerClasesParaGestion();
@@ -94,13 +94,13 @@ public class MateriaController {
     }
 
     @PostMapping("/admin/materias")
-    public String crearMateria(@RequestParam String nombre,
-                               @RequestParam String clave,
-                               @RequestParam(required = false) String descripcion,
-                               @RequestParam int creditos,
-                               @RequestParam String nrc,
-                               @RequestParam int cupoMaximo,
-                               @RequestParam(required = false) Long docenteId,
+    public String crearMateria(@RequestParam("nombre") String nombre,
+                               @RequestParam("clave") String clave,
+                               @RequestParam(value = "descripcion", required = false) String descripcion,
+                               @RequestParam("creditos") int creditos,
+                               @RequestParam("nrc") String nrc,
+                               @RequestParam("cupoMaximo") int cupoMaximo,
+                               @RequestParam(value = "docenteId", required = false) Long docenteId,
                                RedirectAttributes redirectAttributes) {
         try {
             materiaService.crearMateriaYGrupo(nombre, clave, descripcion, creditos,
@@ -113,8 +113,8 @@ public class MateriaController {
     }
 
     @PostMapping("/admin/materias/clases/{claseId}/cupo")
-    public String actualizarCupo(@PathVariable Long claseId,
-                                 @RequestParam int cupoMaximo,
+    public String actualizarCupo(@PathVariable("claseId") Long claseId,
+                                 @RequestParam("cupoMaximo") int cupoMaximo,
                                  RedirectAttributes redirectAttributes) {
         try {
             materiaService.actualizarCupo(claseId, cupoMaximo);
@@ -126,8 +126,8 @@ public class MateriaController {
     }
 
     @PostMapping("/admin/materias/clases/{claseId}/docente")
-    public String actualizarDocente(@PathVariable Long claseId,
-                                    @RequestParam(required = false) Long docenteId,
+    public String actualizarDocente(@PathVariable("claseId") Long claseId,
+                                    @RequestParam(value = "docenteId", required = false) Long docenteId,
                                     RedirectAttributes redirectAttributes) {
         try {
             materiaService.actualizarDocente(claseId, docenteId);

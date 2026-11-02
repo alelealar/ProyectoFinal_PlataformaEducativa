@@ -1,10 +1,8 @@
 package com.example.PanelAdministrativo.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 public class EstadisticasAdminDTO {
     private int totalInscritos;
@@ -19,6 +17,9 @@ public class EstadisticasAdminDTO {
     private long totalUsuarios;
     private long totalAlumnos;
     private long totalDocentes;
+
+    public EstadisticasAdminDTO() {
+    }
 
     public EstadisticasAdminDTO(int totalInscritos, int metaInscritos, double porcentajeInscritos,
                                 int periodosActivos, int materiasActivas, double ocupacionGlobal,

@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" th:href="@{/styles/style.css}">
 </head>
-<body class="admin-workspace-page">
+<body class="admin-workspace-page notices-page">
 <header class="workspace-header">
     <a class="workspace-brand" th:href="@{/panel-administrador}">
         <span class="workspace-brand-icon"><i class="fa-solid fa-graduation-cap"></i></span>
@@ -86,6 +86,23 @@
         </section>
 
         <aside class="workspace-card notice-history-card">
+            <section class="notice-preview" aria-live="polite" aria-label="Vista previa del aviso">
+                <div class="notice-preview-heading">
+                    <span><i class="fa-regular fa-eye"></i> VISTA PREVIA DEL ESTUDIANTE</span>
+                    <span id="notice-preview-audience">Toda la comunidad</span>
+                </div>
+                <div class="notice-preview-device">
+                    <div class="notice-preview-topline">
+                        <i class="fa-solid fa-bell"></i>
+                        <span>Portal Nexus • Institucional</span>
+                        <time>Ahora</time>
+                    </div>
+                    <strong id="notice-preview-title">Título del comunicado</strong>
+                    <p id="notice-preview-content">El contenido del aviso aparecerá aquí mientras lo redactas.</p>
+                    <span id="notice-preview-priority" class="notice-priority-pill">Informativo</span>
+                </div>
+                <p class="notice-preview-disclaimer">Vista previa únicamente; guardar no envía notificaciones externas.</p>
+            </section>
             <div class="workspace-card-heading">
                 <div><span class="heading-icon purple"><i class="fa-solid fa-clock-rotate-left"></i></span>
                     <div><h2>Historial reciente</h2><p>Últimos 10 avisos registrados</p></div></div>
@@ -115,7 +132,23 @@
 <script>
     const bodyField = document.querySelector('#aviso-contenido');
     const bodyCount = document.querySelector('#notice-count');
-    bodyField.addEventListener('input', () => { bodyCount.textContent = bodyField.value.length; });
+    const titleField = document.querySelector('#aviso-titulo');
+    const previewTitle = document.querySelector('#notice-preview-title');
+    const previewContent = document.querySelector('#notice-preview-content');
+    const previewPriority = document.querySelector('#notice-preview-priority');
+    const previewAudience = document.querySelector('#aviso-destinatarios');
+    const previewAudienceLabel = document.querySelector('#notice-preview-audience');
+    const updateNoticePreview = () => {
+        bodyCount.textContent = bodyField.value.length;
+        previewTitle.textContent = titleField.value || 'Título del comunicado';
+        previewContent.textContent = bodyField.value || 'El contenido del aviso aparecerá aquí mientras lo redactas.';
+        previewAudienceLabel.textContent = previewAudience.options[previewAudience.selectedIndex].text;
+        const urgent = document.querySelector('input[name="prioridad"]:checked').value === 'URGENTE';
+        previewPriority.textContent = urgent ? 'Urgente' : 'Informativo';
+        previewPriority.classList.toggle('urgent', urgent);
+    };
+    document.querySelector('#notice-form').addEventListener('input', updateNoticePreview);
+    document.querySelector('#notice-form').addEventListener('change', updateNoticePreview);
 </script>
 </body>
 </html>

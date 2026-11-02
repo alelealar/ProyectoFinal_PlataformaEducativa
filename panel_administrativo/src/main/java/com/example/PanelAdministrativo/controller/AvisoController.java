@@ -33,10 +33,10 @@ public class AvisoController {
     }
 
     @PostMapping("/admin/avisos")
-    public String publicarAviso(@RequestParam String titulo,
-                                @RequestParam String contenido,
-                                @RequestParam String prioridad,
-                                @RequestParam String destinatarios,
+    public String publicarAviso(@RequestParam("titulo") String titulo,
+                                @RequestParam("contenido") String contenido,
+                                @RequestParam("prioridad") String prioridad,
+                                @RequestParam("destinatarios") String destinatarios,
                                 RedirectAttributes redirectAttributes) {
         try {
             var aviso = avisoService.publicar(titulo, contenido, prioridad, destinatarios);
