@@ -2788,18 +2788,16 @@ details[open] .toggle-btn {
     margin: 2px 0 8px 0;
 }
 
-.barra-progreso-cupos-materia::after {
-    content: "";
-    position: absolute;
-    top: 0; left: 0;
+.barra-relleno {
     height: 100%;
-    width: var(--progreso, 0%);
     border-radius: 10px;
+    transition: width 0.3s ease;
 }
 
-.barra-progreso-cupos-materia.danger::after  { background-color: var(--status-danger-text); }
-.barra-progreso-cupos-materia.warning::after { background-color: var(--status-warning-border); }
-.barra-progreso-cupos-materia.info::after    { background-color: var(--border-focus); }
+.barra-progreso-cupos-materia.barra-roja .barra-relleno    { background-color: var(--status-danger-text); }
+.barra-progreso-cupos-materia.barra-naranja .barra-relleno { background-color: var(--status-warning-border); }
+.barra-progreso-cupos-materia.barra-azul .barra-relleno    { background-color: var(--border-focus); }
+
 
 .materia-actions-row-mobile {
     display: flex;
@@ -3011,9 +3009,246 @@ details[open] .toggle-btn {
     cursor: pointer;
 }
 
+/* ==========================================================================
+   12. PANTALLA: Avisos (avisos.html)
+   ========================================================================== */
+.badge-admin-pill {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 700;
+    margin-left: 4px;
+    vertical-align: middle;
+}
+
+.brand-subtitle {
+    font-size: 11px;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.broadcast-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.broadcast-label {
+    color: var(--status-success-text);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.broadcast-label i {
+    font-size: 8px;
+}
+
+.broadcast-badge {
+    background-color: var(--bg-secondary);
+    padding: 4px 8px;
+    border-radius: 6px;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+}
+
+.form-comunicado-container {
+    background-color: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    padding: 16px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 20px;
+}
+
+.form-group-block {
+    margin-bottom: 16px;
+}
+
+.form-group-block:last-child {
+    margin-bottom: 0;
+}
+
+.form-label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.form-label-title {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+
+.badge-devices,
+.label-obligatorio {
+    font-size: 11px;
+    color: var(--text-secondary);
+    background-color: var(--bg-tertiary);
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.counter-text {
+    font-size: 11px;
+    color: var(--text-secondary);
+}
+
+.prioridad-options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.prioridad-card {
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 12px;
+    display: flex;
+    gap: 10px;
+    cursor: pointer;
+    align-items: flex-start;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.prioridad-card input[type="radio"] {
+    margin-top: 2px;
+}
+
+.prioridad-card:has(input[type="radio"]:checked) {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-focus);
+}
+
+.prioridad-card.active {
+    border-color: var(--border-focus);
+    background-color: var(--bg-secondary);
+}
+
+.prioridad-card input {
+    margin-top: 2px;
+}
+
+.prioridad-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.prioridad-content strong {
+    font-size: 13px;
+    color: var(--text-primary);
+}
+
+.prioridad-content span {
+    font-size: 11px;
+    color: var(--text-secondary);
+}
+
+.input-comunicado-text {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 13px;
+    color: var(--text-primary);
+}
+
+.textarea-comunicado {
+    width: 100%;
+    height: 100px;
+    padding: 12px;
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 13px;
+    color: var(--text-primary);
+    resize: none;
+}
+
+.btn-emitir-push {
+    width: 100%;
+    padding: 14px;
+    background-color: var(--color-secondary);
+    color: var(--text-on-primary);
+    border: none;
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: var(--shadow-sm);
+}
+
+.avisos-sidebar-column {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.sidebar-card-info {
+    background-color: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    padding: 16px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+}
+
+.sidebar-card-header {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.historial-item-mini {
+    padding: 10px 0;
+}
+
+.historial-item-mini:not(:last-child) {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.historial-item-mini strong {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-primary);
+    display: block;
+    margin-bottom: 2px;
+}
+
+.historial-item-mini p {
+    font-size: 11px;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
 
 /* ==========================================================================
-   12. REGLAS DE ACCESIBILIDAD, CONTRASTE Y FUENTES MÍNIMAS (>= 12px)
+   13. REGLAS DE ACCESIBILIDAD, CONTRASTE Y FUENTES MÍNIMAS (>= 12px)
    ========================================================================== */
 
 .mobile-only,
@@ -3605,5 +3840,40 @@ details[open] .toggle-btn {
         width: auto;
         padding: 0 24px;
         margin-left: auto;
+    }
+
+    /* ==========================================================================
+   12. PANTALLA: Avisos (avisos.html) desktop
+   ========================================================================== */
+
+    screen-avisos-desktop {
+        max-width: 1200px !important;
+        margin: 0 auto !important;
+        padding: 32px 24px 80px !important;
+    }
+
+    .avisos-main-layout {
+        display: grid !important;
+        grid-template-columns: 1fr 380px !important;
+        gap: 32px !important;
+        align-items: start !important;
+    }
+
+    .avisos-form-column {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .avisos-sidebar-column {
+        margin-top: 0 !important;
+        gap: 20px !important;
+    }
+
+    .sidebar-card-info {
+        padding: 20px !important;
+    }
+
+    .sidebar-card-header {
+        margin-bottom: 16px !important;
     }
 }
