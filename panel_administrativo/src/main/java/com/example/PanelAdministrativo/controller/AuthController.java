@@ -2,6 +2,7 @@ package com.example.PanelAdministrativo.controller;
 
 import com.example.PanelAdministrativo.config.AuthInterceptor;
 import com.example.PanelAdministrativo.model.Usuario;
+import com.example.PanelAdministrativo.service.ClaseService;
 import com.example.PanelAdministrativo.service.UsuarioService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -20,16 +21,21 @@ public class AuthController {
         this.usuarioService = usuarioService;
     }
 
+    @GetMapping("/")
+    public String inicio() {
+        return "redirect:/login";
+    }
+
     @GetMapping("/login")
     public String mostrarLogin(HttpServletRequest request) {
         if (AuthInterceptor.tieneSesionAdministrador(request.getSession(false))) {
-            return "redirect:/panel";
+            return "redirect:/panel-administrador";
         }
         return "login";
     }
 
     @PostMapping("/login")
-    public String procesarLogin(@RequestParam("email") String email,
+    public String procesarLogin(@RequestParam("correo") String email,
                                 @RequestParam("password") String password,
                                 HttpServletRequest request,
                                 Model model) {
@@ -52,8 +58,9 @@ public class AuthController {
         session.setAttribute(AuthInterceptor.SESSION_USUARIO_ROL, UsuarioService.ROL_ADMIN);
         session.setAttribute(AuthInterceptor.SESSION_USUARIO_NOMBRE, administrador.getNombre());
 
-        return "redirect:/panel";
+        return "redirect:/panel-administrador";
     }
+
 
     @GetMapping("/logout")
     public String logout(HttpServletRequest request) {

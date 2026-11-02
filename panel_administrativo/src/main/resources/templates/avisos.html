@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publicar Comunicado Escolar - Portal Nexus</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/styles/style.css}" href="../static/styles/style.css">
+</head>
+<body>
+<main class="mobile-screen">
+    <div class="screen-content screen-avisos-desktop">
+        <header class="top-bar">
+            <div class="brand">
+                <a th:href="@{/panel-administrador}" class="icon-button btn-regresar">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </a>
+                <div class="brand-text">
+                    <h2>Avisos <span class="badge-admin-pill">ADMIN</span></h2>
+                    <p class="brand-subtitle">Portal Nexus Administration</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <div class="avatar">
+                    <img src="https://ui-avatars.com/api/?name=Valeria+Mendez&background=3182CE&color=fff" alt="Usuario">
+                </div>
+            </div>
+        </header>
+
+        <div class="avisos-main-layout">
+            <div class="avisos-form-column">
+                <div class="broadcast-header-row">
+                    <span class="broadcast-label"><i class="fa-solid fa-circle"></i> CANAL OFICIAL BROADCAST</span>
+                    <span class="broadcast-badge"><i class="fa-solid fa-tower-broadcast"></i> Pasarela Push Activa</span>
+                </div>
+
+                <section class="form-comunicado-container">
+                    <div class="form-group-block">
+                        <label class="form-label-title"><i class="fa-solid fa-flag"></i> Prioridad del Mensaje</label>
+                        <div class="prioridad-options-grid">
+                            <label class="prioridad-card">
+                                <input type="radio" name="prioridad" value="informativo" checked>
+                                <div class="prioridad-content">
+                                    <strong>Informativo</strong>
+                                    <span>Azul regular</span>
+                                </div>
+                            </label>
+                            <label class="prioridad-card">
+                                <input type="radio" name="prioridad" value="urgente">
+                                <div class="prioridad-content">
+                                    <strong>Urgente</strong>
+                                    <span>Alerta push roja</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group-block">
+                        <div class="form-label-row">
+                            <label><i class="fa-solid fa-t"></i> Título del Comunicado</label>
+                            <span class="label-obligatorio">Obligatorio</span>
+                        </div>
+                        <input type="text" class="input-comunicado-text" value="Ampliación de plazo: Selección de asignaturas Ci">
+                    </div>
+
+                    <div class="form-group-block">
+                        <div class="form-label-row">
+                            <label><i class="fa-solid fa-bars-staggered"></i> Cuerpo del Comunicado</label>
+                            <span class="counter-text">168 / 500</span>
+                        </div>
+                        <textarea class="textarea-comunicado">Se extiende la ventana oficial de matrícula extraordinaria hasta el viernes a las 23:59 hrs. Por favor revisen sus cupos validados en el módulo de Portal Nexus.</textarea>
+                    </div>
+                </section>
+
+                <button type="button" class="btn-emitir-push">
+                    <i class="fa-solid fa-bullhorn"></i> Emitir Notificación Push (842 alumnos)
+                </button>
+            </div>
+
+            <div class="avisos-sidebar-column">
+                <div class="sidebar-card-info">
+                    <div class="sidebar-card-header">
+                        <span><i class="fa-solid fa-clock-rotate-left"></i> Historial Reciente</span>
+                    </div>
+                    <div class="historial-item-mini">
+                        <strong>Apertura Turno 01 Matrícula</strong>
+                        <p>Emitido hace 2 días • 1,200 alumnos</p>
+                    </div>
+                    <div class="historial-item-mini">
+                        <strong>Mantenimiento de Servidores TI</strong>
+                        <p>Emitido hace 1 semana • Informativo</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

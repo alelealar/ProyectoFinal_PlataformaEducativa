@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<header class="top-bar" th:fragment="top-bar(activeTab)">
+    <div class="brand">
+        <div class="return btn-regresar">
+            <i class="fa-solid fa-arrow-left"></i>
+        </div>
+        <div class="brand-icon">
+            <i class="fa-solid fa-graduation-cap"></i>
+        </div>
+        <div class="brand-text">
+            <h2>Portal Nexus</h2>
+            <span class="mobile-only">Inicio</span>
+        </div>
+    </div>
+
+    <nav class="nav-menu">
+        <a th:href="@{/tablero}" class="nav-item-link" th:classappend="${activeTab == 'tablero'} ? 'active'">Tablero</a>
+        <a th:href="@{/carga}" class="nav-item-link" th:classappend="${activeTab == 'carga'} ? 'active'">Carga Académica</a>
+        <a th:href="@{/horario}" class="nav-item-link" th:classappend="${activeTab == 'horario'} ? 'active'">Horarios</a>
+        <a th:href="@{/historial}" class="nav-item-link" th:classappend="${activeTab == 'historial'} ? 'active'">Historial</a>
+    </nav>
+
+    <div class="header-actions">
+        <i class="fa-solid fa-gear action-icon"></i>
+        <div class="notification-icon">
+            <i class="fa-regular fa-bell"></i>
+            <div class="notification-dot"></div>
+        </div>
+        <div class="user-profile">
+            <div class="avatar">
+                <img src="https://ui-avatars.com/api/?name=Valeria+Mendez&background=3182CE&color=fff" alt="User">
+            </div>
+            <div class="avatar-info">
+                <span class="user-name">Valeria Mendez</span>
+                <span class="user-id">ID: 2022091448</span>
+            </div>
+        </div>
+    </div>
+</header>
+
+</body>
+</html>

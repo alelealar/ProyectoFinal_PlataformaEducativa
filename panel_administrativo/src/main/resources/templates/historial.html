@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Portal de acceso de la Universidad Nexus">
+        <title>Historial de cargas</title>
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+        <!-- Icons -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+        <!-- Estilos del proyecto -->
+        <link rel="stylesheet" th:href="@{/styles.css}">
+    </head>
+    <body>
+        <main class="mobile-screen">
+            <div class="screen-content">
+                <header class="top-bar">
+                    <div class="brand">
+                        <div class="return">
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </div>
+                        <div class="brand-icon">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+                        <div class="brand-text">
+                            <h2>Portal Nexus</h2>
+                            <span>Inicio</span>
+                        </div>
+                    </div>
+                    <div class="header-actions">
+                        <i class="fa-solid fa-gear"></i>
+                        <div class="notification-icon">
+                            <i class="fa-regular fa-bell"></i>
+                            <div class="notification-dot"></div>
+                        </div>
+                        <!-- en un furuo: th:src="@{/img/user.jpg}" -->
+                        <div class="avatar">
+                            <img src="https://ui-avatars.com/api/?name=Valeria+Mendez&background=3182CE&color=fff" alt="User">
+                        </div>
+                    </div>
+                </header>
+
+                <div class="contenedor-historial">
+                    <section class="greeting-section">
+                        <div class="greeting-header">
+                            <h1>Historial de cargas</h1>
+                        </div>
+                        <p class="user-id">Consulta de periodos cursados y avance reticular oficial.</p>
+
+                    </section>
+
+                    <section class="selector-periodo">
+                        <select name="periodo-escolar" id="periodo-escolar">
+                            <option>Periodo 2025-2</option>
+                            <option>Periodo 2026-1</option>
+                            <option>Periodo 2026-2</option>
+                        </select>
+
+                    </section>
+
+                    <section class="contenedor-informacion-historial">
+                        <div class="tarjeta-informacion promedio">
+                            <div class="tarjeta-informacion-header">
+                                <span class="user-id">Promedio</span>
+                                <i class="fa-regular fa-star"></i>
+                            </div>
+                            <span class="span-promedio-numero">9.6</span>
+                            <span class="text-footer-tarjeta">Semestral</span>
+                        </div>
+                        <div class="tarjeta-informacion creditos">
+                            <div class="tarjeta-informacion-header">
+                                <span class="user-id">Créditos</span>
+                                <i class="fa-regular fa-circle-check"></i>
+                            </div>
+                            <span class="span-creditos-numero">32/32</span>
+                            <span class="text-footer-tarjeta">100% cursado</span>
+                        </div>
+                        <div class="tarjeta-informacion estatus">
+                            <div class="tarjeta-informacion-header">
+                                <span class="user-id">Estatus</span>
+                                <i class="fa-solid fa-chart-line"></i>
+                            </div>
+                            <span class="span-estado">Regular</span>
+                            <span class="text-footer-tarjeta">Aprobado</span>
+                        </div>
+                    </section>
+
+                    <section class="contenedor-avance-reticular">
+                        <div class="avance-reticular-linea-texto">
+                            <span class="text-avance-reticular"><i class="fa-solid fa-arrow-trend-up"></i>Avance reticular</span>
+                            <span class="porcentaje-avance-reticular">67%</span>
+                        </div>
+                        <div class="avance-reticular-body"></div>
+                        <div class="avance-reticular-linea-texto">
+                            <span>240 de 350 créditos</span>
+                            <span>110 restantes</span>
+                        </div>
+                    </section>
+
+                    <section class="contenedor-materias-cursadas">
+                        <h2>Materias cursadas (4)</h2>
+
+                        <div class="materias-cursadas">
+                            <div class="tarjeta-materia">
+                                <div class="top-tarjeta-materia">
+                                    <div class="titulo-materia">
+                                        <span class="codigo-materia">INF-501 ● 8 créditos</span>
+                                        <span class="nombre-materia">Algoritmos y Estructuras complejas</span>
+                                    </div>
+                                    <div class="calificacion-materia">
+                                        <span class="calificacion">98/100</span>
+                                        <span class="pill-acreditada">Acreditada</span>
+                                    </div>
+                                </div>
+                                <div class="bottom-tarjeta-materia">
+                                    <span class="nombre-maestro"><i class="fa-regular fa-user"></i> Ing. Arturo Peña</span>
+                                </div>
+                            </div>
+
+                            <div class="tarjeta-materia">
+                                <div class="top-tarjeta-materia">
+                                    <div class="titulo-materia">
+                                        <span class="codigo-materia">INF-501 ● 8 créditos</span>
+                                        <span class="nombre-materia">Algoritmos y Estructuras complejas</span>
+                                    </div>
+                                    <div class="calificacion-materia">
+                                        <span class="calificacion">98/100</span>
+                                        <span class="pill-acreditada">Acreditada</span>
+                                    </div>
+                                </div>
+                                <div class="bottom-tarjeta-materia">
+                                    <span class="nombre-maestro"><i class="fa-regular fa-user"></i> Ing. Arturo Peña</span>
+                                </div>
+                            </div>
+
+                            <div class="tarjeta-materia">
+                                <div class="top-tarjeta-materia">
+                                    <div class="titulo-materia">
+                                        <span class="codigo-materia">INF-501 ● 8 créditos</span>
+                                        <span class="nombre-materia">Algoritmos y Estructuras complejas</span>
+                                    </div>
+                                    <div class="calificacion-materia">
+                                        <span class="calificacion">98/100</span>
+                                        <span class="pill-acreditada">Acreditada</span>
+                                    </div>
+                                </div>
+                                <div class="bottom-tarjeta-materia">
+                                    <span class="nombre-maestro"><i class="fa-regular fa-user"></i> Ing. Arturo Peña</span>
+                                </div>
+                            </div>
+
+                            <div class="tarjeta-materia">
+                                <div class="top-tarjeta-materia">
+                                    <div class="titulo-materia">
+                                        <span class="codigo-materia">INF-501 ● 8 créditos</span>
+                                        <span class="nombre-materia">Algoritmos y Estructuras complejas</span>
+                                    </div>
+                                    <div class="calificacion-materia">
+                                        <span class="calificacion">98/100</span>
+                                        <span class="pill-acreditada">Acreditada</span>
+                                    </div>
+                                </div>
+                                <div class="bottom-tarjeta-materia">
+                                    <span class="nombre-maestro"><i class="fa-regular fa-user"></i> Ing. Arturo Peña</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </section>
+
+                    <section class="contenedor-descargar-kardex">
+                        <button class="boton-kardex"><i class="fa-solid fa-download"></i>  Descargar Kardex oficial (PDF)</button>
+                    </section>
+                </div>
+            </div>
+
+
+
+            <nav class="bottom-nav">
+                <div class="nav-item active">
+                    <div class="nav-icon"><i class="fa-solid fa-house"></i></div>
+                    <span>Inicio</span>
+                </div>
+                <div class="nav-item">
+                    <div class="nav-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                    <span>Inscripción</span>
+                </div>
+                <div class="nav-item">
+                    <div class="nav-icon"><i class="fa-regular fa-calendar"></i></div>
+                    <span>Horario</span>
+                </div>
+                <div class="nav-item">
+                    <div class="nav-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                    <span>Historial</span>
+                </div>
+            </nav>
+        </main>
+    </body>
+</html>

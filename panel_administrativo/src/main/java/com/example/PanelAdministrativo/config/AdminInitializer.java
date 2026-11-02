@@ -24,11 +24,15 @@ public class AdminInitializer implements CommandLineRunner {
             return;
         }
 
-        Usuario admin = new Usuario();
-        admin.setNombre("Administrador");
-        admin.setEmail("admin@nexus.edu");
-        admin.setContrasenia("Admin123!");
+        Usuario admin = Usuario.builder()
+                .nombre("Administrador")
+                .apellidoPaterno("Nexus")
+                .correo("admin@nexus.edu")
+                .correoInstitucional("admin@nexus.edu")
+                .contraseña("Admin123!")
+                .build();
+
         usuarioService.registrarAdministrador(admin);
-        log.info("Administrador inicial creado (email: admin@nexus.edu). La contraseña se guardó con BCrypt.");
+        log.info("Administrador inicial creado (correo: admin@nexus.edu). La contraseña se guardó con BCrypt.");
     }
 }
