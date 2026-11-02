@@ -1,36 +1,58 @@
 package com.example.PanelAdministrativo.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Clase base para la gestión de usuarios del sistema.
+ *
+ * @author Equipo 2 - Amarillo
+ */
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@SuperBuilder
 @Entity
 @Table(name = "usuarios")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Usuario {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @NotBlank(message = "El nombre no puede estar vacio")
     private String nombre;
 
-    @Column(nullable = false, unique = true)
-    private String email;
+    @NotBlank(message = "El apellido no puede estar vacio")
+    private String apellidoPaterno;
 
-    /** Hash BCrypt; nunca se persiste en texto plano. */
-    @Column(nullable = false)
-    private String contrasenia;
+    private String apellidoMaterno;
 
-    @Column(nullable = false, length = 20)
-    private String rol;
+    @Email(message = "El correo debe de tener un formato válido")
+    @NotBlank(message = "El correo no puede estar vacio")
+    private String correo;
+
+    @Email(message = "El correo debe de tener un formato válido")
+    private String correoInstitucional;
+
+    @NotBlank(message = "La contraseña no puede estar vacia")
+    private String contraseña;
+
+    @Pattern(regexp = "^\\d{10}$", message = "Formato de teléfono no válido")
+    private String telefono;
+
+    @Enumerated(EnumType.STRING)
+    private Rol rol; // Implementación de EnumRol
+
 }
