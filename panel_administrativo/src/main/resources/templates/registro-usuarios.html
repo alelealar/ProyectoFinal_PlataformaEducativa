@@ -1,187 +1,207 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de usuarios</title>
+    <title>Registro de usuarios | Portal Nexus</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" th:href="@{/styles.css}">
+    <link rel="stylesheet" th:href="@{/styles/style.css}">
 </head>
-<body>
-<main class="mobile-screen">
-    <header th:replace="~{fragments/admin-header :: adminHeader('Registro de usuarios', 'Portal Nexus Administration')}"></header>
-    <div class="screen-content">
+<body class="admin-workspace-page">
+<header class="workspace-header">
+    <a class="workspace-brand" th:href="@{/panel-administrador}">
+        <span class="workspace-brand-icon"><i class="fa-solid fa-graduation-cap"></i></span>
+        <span><strong>UNIVERSIDAD NEXUS</strong><small>ADMINISTRACIÓN ESCOLAR</small></span>
+    </a>
+    <nav class="workspace-nav" aria-label="Navegación administrativa">
+        <a th:href="@{/panel-administrador}"><i class="fa-solid fa-chart-line"></i> Panel</a>
+        <a th:href="@{/gestion-materias}"><i class="fa-solid fa-book"></i> Materias</a>
+        <a class="active" th:href="@{/registro-usuarios}"><i class="fa-solid fa-users"></i> Usuarios</a>
+        <a th:href="@{/avisos}"><i class="fa-solid fa-bullhorn"></i> Avisos</a>
+    </nav>
+    <div class="workspace-user"><span class="workspace-avatar">AD</span><strong th:text="${nombreUsuario}">Administrador</strong></div>
+</header>
 
-        <section class="info-card user-management-card">
-            <div class="info-icon logo-box-small">
-                <i class="fa-regular fa-id-card"></i>
+<main class="workspace-main">
+    <section class="workspace-heading">
+        <div>
+            <p class="workspace-eyebrow"><i class="fa-solid fa-user-plus"></i> CUENTAS Y ACCESOS</p>
+            <h1>Registro de usuarios</h1>
+            <p>Administra cuentas institucionales desde un solo lugar.</p>
+        </div>
+        <div class="user-count-pill"><i class="fa-solid fa-users"></i> <strong th:text="${totalUsuarios}">0</strong> cuentas</div>
+    </section>
+
+    <div th:if="${mensajeError}" class="workspace-alert error" role="alert" th:text="${mensajeError}"></div>
+    <section class="workspace-alert success result-password" th:if="${usuarioCreado}" role="status">
+        <div><i class="fa-solid fa-circle-check"></i> <strong>Cuenta creada: </strong>
+            <span th:text="|${usuarioCreado.nombre} • ${usuarioCreado.correo}|">Usuario</span></div>
+        <div class="temporary-password"><span>Contraseña temporal (se muestra una sola vez):</span>
+            <code th:text="${usuarioCreado.contrasenaTemporal}">Temporal</code></div>
+        <p>Comunica esta contraseña al usuario de forma segura; no se envía correo automáticamente.</p>
+    </section>
+    <div th:if="${mensajeCsv}" class="workspace-alert success" role="status" th:text="${mensajeCsv}"></div>
+
+    <section class="user-count-grid" aria-label="Resumen de cuentas">
+        <article><span class="user-count-icon blue"><i class="fa-solid fa-users"></i></span><div><small>TODAS LAS CUENTAS</small><strong th:text="${totalUsuarios}">0</strong></div></article>
+        <article><span class="user-count-icon purple"><i class="fa-solid fa-user-graduate"></i></span><div><small>ALUMNOS</small><strong th:text="${totalAlumnos}">0</strong></div></article>
+        <article><span class="user-count-icon green"><i class="fa-solid fa-chalkboard-user"></i></span><div><small>DOCENTES</small><strong th:text="${totalDocentes}">0</strong></div></article>
+    </section>
+
+    <section class="workspace-card registration-card">
+        <div class="registration-tabs" role="tablist" aria-label="Método de registro">
+            <button type="button" class="registration-tab active" id="tab-manual" role="tab" aria-selected="true" aria-controls="manual-view">
+                <i class="fa-solid fa-user-plus"></i> Registro individual
+            </button>
+            <button type="button" class="registration-tab" id="tab-csv" role="tab" aria-selected="false" aria-controls="csv-view">
+                <i class="fa-solid fa-file-csv"></i> Importar CSV
+            </button>
+        </div>
+
+        <section id="manual-view" class="registration-view" role="tabpanel" aria-labelledby="tab-manual">
+            <div class="workspace-card-heading form-section-title">
+                <div><span class="heading-icon blue"><i class="fa-regular fa-id-card"></i></span>
+                    <div><h2>Datos de la cuenta</h2><p>Los campos se validan antes de guardar en la base de datos.</p></div></div>
             </div>
-            <div class="info-card-content">
-                <span class="subtitle-small">PERÍODO ACADÉMICO 2026–1</span>
-                <h2>Gestión de Cuentas</h2>
-            </div>
-            <div class="cupos-summary">
-                <span class="cupos-title">Cupos Activos</span>
-                <strong>1,420 / 1,500</strong>
-            </div>
+            <form method="post" th:action="@{/admin/usuarios}" id="manual-user-form" class="workspace-form">
+                <div class="registration-fields-grid">
+                    <label class="workspace-field" for="user-name">Nombre completo
+                        <input id="user-name" name="nombreCompleto" type="text" autocomplete="name" maxlength="160" required placeholder="Ej. Sofía Mariana Ramírez Gómez">
+                    </label>
+                    <div class="workspace-field">
+                        <label for="user-email-alias">Correo institucional</label>
+                        <div class="email-domain-field"><input id="user-email-alias" name="aliasCorreo" type="text" autocomplete="username" maxlength="100" required placeholder="usuario"><span>@nexus.edu</span></div>
+                        <small>Escribe el alias o el correo completo con dominio @nexus.edu.</small>
+                    </div>
+                    <fieldset class="role-selection-field">
+                        <legend>Rol en el portal</legend>
+                        <div class="role-selection-options">
+                            <label><input type="radio" name="rol" value="ALUMNO" checked><span><i class="fa-solid fa-user-graduate"></i><strong>Alumno</strong></span></label>
+                            <label><input type="radio" name="rol" value="MAESTRO"><span><i class="fa-solid fa-chalkboard-user"></i><strong>Docente</strong></span></label>
+                            <label><input type="radio" name="rol" value="ADMINISTRATIVO"><span><i class="fa-solid fa-user-shield"></i><strong>Admin</strong></span></label>
+                        </div>
+                    </fieldset>
+                    <label class="workspace-field role-dependent" id="student-id-field" for="user-identifier">Matrícula
+                        <input id="user-identifier" name="identificador" type="text" maxlength="40" placeholder="Ej. 23450001">
+                    </label>
+                    <label class="workspace-field role-dependent" id="teacher-id-field" for="teacher-number" hidden>Número de empleado
+                        <input id="teacher-number" name="numEmpleado" type="text" maxlength="40" placeholder="Ej. DOC-1024">
+                    </label>
+                    <label class="workspace-field role-dependent" id="career-field" for="user-career">Carrera del alumno
+                        <select id="user-career" name="carreraId">
+                            <option value="">Selecciona una carrera</option>
+                            <option th:each="carrera : ${carreras}" th:value="${carrera.id}" th:text="${carrera.nombre}">Carrera</option>
+                        </select>
+                        <small th:if="${#lists.isEmpty(carreras)}">No hay carreras registradas; agrega una antes de dar de alta alumnos.</small>
+                    </label>
+                </div>
+                <div class="registration-security-note"><i class="fa-solid fa-lock"></i>
+                    <span>Se generará una contraseña temporal aleatoria, almacenada con BCrypt y mostrada una sola vez al guardar.</span>
+                </div>
+                <div class="registration-submit-row">
+                    <span><i class="fa-solid fa-circle-info"></i> El sistema no tiene configurado el envío de correo.</span>
+                    <button class="workspace-primary-button" type="submit"><i class="fa-solid fa-user-plus"></i> Crear cuenta</button>
+                </div>
+            </form>
         </section>
 
-        <!-- TOGGLE DE PESTAÑAS -->
-        <div class="role-toggle register-mode-toggle">
-            <button type="button" class="role-btn is-active" id="btn-manual">
-                <i class="fa-solid fa-user-plus"></i> Manual
-            </button>
-            <button type="button" class="role-btn" id="btn-csv">
-                <i class="fa-solid fa-file-csv"></i> Carga Masiva CSV
-            </button>
+        <section id="csv-view" class="registration-view" role="tabpanel" aria-labelledby="tab-csv" hidden>
+            <div class="workspace-card-heading form-section-title">
+                <div><span class="heading-icon green"><i class="fa-solid fa-file-csv"></i></span>
+                    <div><h2>Carga masiva CSV</h2><p>Importa hasta 500 cuentas por archivo, con máximo 2 MB.</p></div></div>
+            </div>
+            <form method="post" enctype="multipart/form-data" th:action="@{/admin/usuarios/csv}" class="workspace-form">
+                <label class="csv-dropzone" for="csv-file">
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                    <strong id="csv-file-name">Selecciona el archivo CSV</strong>
+                    <span>Formato UTF-8 • columnas separadas por coma • máximo 1 MB</span>
+                    <input id="csv-file" name="archivo" type="file" accept=".csv,text/csv" required>
+                </label>
+                <div class="csv-column-info">
+                    <strong>Columnas requeridas:</strong> <code>nombre_completo, correo_alias, rol</code><br>
+                    <strong>Opcionales:</strong> <code>matricula, carrera, num_empleado</code><br>
+                    <small>Para alumnos se requiere matrícula y el nombre exacto de una carrera registrada. Para docentes se requiere num_empleado.</small>
+                </div>
+                <a href="#" id="csv-template-download" class="workspace-text-link"><i class="fa-solid fa-download"></i> Descargar plantilla CSV</a>
+                <div class="registration-security-note"><i class="fa-solid fa-shield-halved"></i>
+                    <span>Las filas inválidas se reportan y no detienen el procesamiento de las demás. Las contraseñas temporales generadas se muestran en el resultado.</span>
+                </div>
+                <div class="registration-submit-row">
+                    <span id="csv-selection-status">Elige un archivo para continuar.</span>
+                    <button class="workspace-primary-button" type="submit"><i class="fa-solid fa-upload"></i> Procesar archivo</button>
+                </div>
+            </form>
+        </section>
+    </section>
+
+    <section class="workspace-card csv-results-card" th:if="${resultadosCsv != null}">
+        <div class="workspace-card-heading"><div><span class="heading-icon purple"><i class="fa-solid fa-list-check"></i></span>
+            <div><h2>Resultado de importación</h2><p>Revisa las filas y entrega las contraseñas temporales de forma segura.</p></div></div></div>
+        <div class="csv-results-table-wrap">
+            <table class="csv-results-table">
+                <thead><tr><th>Fila</th><th>Resultado</th><th>Cuenta / error</th><th>Contraseña temporal</th></tr></thead>
+                <tbody>
+                <tr th:each="resultado : ${resultadosCsv}" th:classappend="${resultado.exitosa ? ' row-success' : ' row-error'}">
+                    <td th:text="${resultado.fila}">2</td>
+                    <td th:text="${resultado.exitosa ? 'Creada' : 'Error'}">Estado</td>
+                    <td th:text="${resultado.exitosa ? resultado.usuario.correo : resultado.mensaje}">Detalle</td>
+                    <td><code th:if="${resultado.usuario != null}" th:text="${resultado.usuario.contrasenaTemporal}">Temporal</code><span th:if="${resultado.usuario == null}">—</span></td>
+                </tr>
+                </tbody>
+            </table>
         </div>
-
-        <!-- VISTA 1: FORMULARIO MANUAL (Visible por defecto) -->
-        <div id="vista-manual">
-            <!-- Formulario Principal -->
-            <section class="card form-card">
-                <!-- Nombre Completo -->
-                <div class="form-group">
-                    <div class="form-label-row">
-                        <label class="form-label">Nombre Completo</label>
-                        <span class="input-helper-label">Obligatorio</span>
-                    </div>
-                    <div class="input-wrapper">
-                        <i class="fa-regular fa-circle-user input-icon input-icon-left"></i>
-                        <input type="text" class="form-control" value="Sofía Mariana Ramírez Gómez" placeholder="Ingresa el nombre completo">
-                    </div>
-                </div>
-
-                <!-- Correo Institucional -->
-                <div class="form-group">
-                    <label class="form-label">Correo Institucional</label>
-                    <div class="input-group-domain">
-                        <div class="input-wrapper">
-                            <i class="fa-solid fa-at input-icon input-icon-left"></i>
-                            <input type="text" class="form-control" value="s.ramirez" placeholder="usuario">
-                        </div>
-                        <span class="domain-badge">@nexus.edu</span>
-                    </div>
-                    <span class="input-helper">Se enviará el enlace de activación temporal a este alias.</span>
-                </div>
-
-                <!-- Matrícula / ID -->
-                <div class="form-group">
-                    <div class="form-label-row">
-                        <label class="form-label">Matrícula / ID Institucional</label>
-                        <button type="button" class="btn-action-text"><i class="fa-solid fa-arrows-rotate"></i> Autogenerar</button>
-                    </div>
-                    <div class="input-wrapper has-right-badge">
-                        <i class="fa-solid fa-arrow-down-1-9 input-icon input-icon-left"></i>
-                        <input type="text" class="form-control" value="NX - 2026 - 9041">
-                        <span class="status-badge-valid">Válido</span>
-                    </div>
-                </div>
-
-                <!-- Rol en el Portal -->
-                <div class="form-group">
-                    <label class="form-label">Rol en el Portal</label>
-                    <div class="role-cards-grid">
-                        <label class="role-option-card">
-                            <input type="radio" name="portal_role" value="alumno" checked>
-                            <i class="fa-regular fa-circle-check"></i>
-                            <strong>Alumno</strong>
-                            <span>Pregrado</span>
-                        </label>
-
-                        <label class="role-option-card">
-                            <input type="radio" name="portal_role" value="docente">
-                            <i class="fa-solid fa-graduation-cap"></i>
-                            <strong>Docente</strong>
-                            <span>Cátedra</span>
-                        </label>
-
-                        <label class="role-option-card">
-                            <input type="radio" name="portal_role" value="admin">
-                            <i class="fa-solid fa-shield-halved"></i>
-                            <strong>Admin</strong>
-                            <span>Control</span>
-                        </label>
-                    </div>
-                </div>
-
-                <!-- Facultad / Carrera -->
-                <div class="form-group">
-                    <label class="form-label">Facultad / Carrera</label>
-                    <div class="custom-select-wrapper full-width">
-                        <i class="fa-solid fa-building-columns select-icon-left"></i>
-                        <select class="custom-select full-width-select">
-                            <option value="ing_soft" selected>Ingeniería de Software</option>
-                            <option value="ing_ind">Ingeniería Industrial</option>
-                            <option value="lic_admin">Administración de Empresas</option>
-                        </select>
-                        <i class="fa-solid fa-chevron-up-down select-arrow"></i>
-                    </div>
-                </div>
-
-                <!-- Checklist de Verificación -->
-                <ul class="validation-checklist">
-                    <li>
-                        <i class="fa-regular fa-circle-check check-icon"></i>
-                        Sintaxis de correo institucional válida y sin duplicados
-                    </li>
-                    <li>
-                        <i class="fa-regular fa-circle-check check-icon"></i>
-                        Permisos estándar de alumno asignados (Campus Virtual + Biblioteca)
-                    </li>
-                    <li>
-                        <i class="fa-solid fa-circle-info info-icon"></i>
-                        Se generará contraseña temporal enviada por email
-                    </li>
-                </ul>
-
-                <!-- Botón Submit -->
-                <button type="submit" class="btn-primary btn-submit-user">
-                    <i class="fa-solid fa-user-plus"></i> Dar de Alta Usuario
-                </button>
-            </section>
-
-            <!-- Vista Previa de Usuario Creado -->
-            <section class="card user-preview-card">
-                <div class="user-avatar-initials">SR</div>
-                <div class="user-preview-info">
-                    <div class="user-preview-header">
-                        <h3>Sofía M. Ramírez</h3>
-                        <span class="badge-new">Nuevo</span>
-                    </div>
-                    <p>s.ramirez@nexus.edu • Ing. de Software</p>
-                </div>
-                <div class="user-verified-badge">
-                    <i class="fa-solid fa-circle-check"></i>
-                </div>
-            </section>
-        </div>
-
-        <!-- VISTA 2: CARGA MASIVA CSV (Oculta por defecto) -->
-        <div id="vista-csv" class="is-hidden">
-            <section class="card form-card">
-                <div class="dropzone-csv" onclick="document.getElementById('input-file-csv').click()">
-                    <i class="fa-solid fa-cloud-arrow-up icon-csv"></i>
-                    <h3>Arrastra tu archivo CSV aquí</h3>
-                    <p>o haz clic para seleccionar tu archivo (.csv)</p>
-                    <input type="file" id="input-file-csv" accept=".csv" style="display: none;">
-                </div>
-
-                <div class="csv-template-info">
-                    <i class="fa-solid fa-circle-info"></i>
-                    <span>Asegúrate de incluir las columnas: <strong>nombre_completo, correo_alias, matricula, rol, carrera</strong>.</span>
-                </div>
-
-                <button type="button" class="btn-submit-user" style="margin-top: 16px;">
-                    <i class="fa-solid fa-upload"></i> Procesar Carga Masiva
-                </button>
-            </section>
-        </div>
-    </div>
+    </section>
 </main>
-<script src="/theme.js"></script>
+<script>
+    const tabs = [document.querySelector('#tab-manual'), document.querySelector('#tab-csv')];
+    const views = [document.querySelector('#manual-view'), document.querySelector('#csv-view')];
+    tabs.forEach((tab, index) => tab.addEventListener('click', () => {
+        tabs.forEach((item, current) => {
+            const active = index === current;
+            item.classList.toggle('active', active);
+            item.setAttribute('aria-selected', String(active));
+            views[current].hidden = !active;
+        });
+    }));
+
+    const roleOptions = [...document.querySelectorAll('input[name="rol"]')];
+    const studentId = document.querySelector('#student-id-field');
+    const teacherId = document.querySelector('#teacher-id-field');
+    const careerField = document.querySelector('#career-field');
+    const studentIdInput = document.querySelector('#user-identifier');
+    const teacherIdInput = document.querySelector('#teacher-number');
+    const careerSelect = document.querySelector('#user-career');
+    function updateRoleFields() {
+        const role = document.querySelector('input[name="rol"]:checked').value;
+        studentId.hidden = role !== 'ALUMNO';
+        careerField.hidden = role !== 'ALUMNO';
+        teacherId.hidden = role !== 'MAESTRO';
+        studentIdInput.required = role === 'ALUMNO';
+        careerSelect.required = role === 'ALUMNO';
+        teacherIdInput.required = role === 'MAESTRO';
+    }
+    roleOptions.forEach((radio) => radio.addEventListener('change', updateRoleFields));
+    updateRoleFields();
+
+    const csvFile = document.querySelector('#csv-file');
+    csvFile.addEventListener('change', () => {
+        const selected = csvFile.files[0];
+        document.querySelector('#csv-file-name').textContent = selected ? selected.name : 'Selecciona el archivo CSV';
+        document.querySelector('#csv-selection-status').textContent = selected
+            ? `${(selected.size / 1024).toFixed(1)} KB seleccionados` : 'Elige un archivo para continuar.';
+    });
+    document.querySelector('#csv-template-download').addEventListener('click', (event) => {
+        event.preventDefault();
+        const csv = 'nombre_completo,correo_alias,matricula,rol,carrera,num_empleado\n"Sofia Mariana Ramirez Gomez",s.ramirez,23450001,ALUMNO,"Ingenieria de Software",\n"Carlos Ortiz",c.ortiz,,MAESTRO,,DOC-1024\n';
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
+        link.download = 'plantilla-usuarios.csv';
+        link.click();
+        URL.revokeObjectURL(link.href);
+    });
+</script>
 </body>
 </html>

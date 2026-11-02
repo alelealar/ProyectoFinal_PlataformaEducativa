@@ -3,100 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Publicar Comunicado Escolar - Portal Nexus</title>
+    <title>Avisos | Portal Nexus</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" th:href="@{/styles/style.css}" href="../static/styles/style.css">
+    <link rel="stylesheet" th:href="@{/styles/style.css}">
 </head>
-<body>
-<main class="mobile-screen">
-    <div class="screen-content screen-avisos-desktop">
-        <header class="top-bar">
-            <div class="brand">
-                <a th:href="@{/panel-administrador}" class="icon-button btn-regresar">
-                    <i class="fa-solid fa-arrow-left"></i>
-                </a>
-                <div class="brand-text">
-                    <h2>Avisos <span class="badge-admin-pill">ADMIN</span></h2>
-                    <p class="brand-subtitle">Portal Nexus Administration</p>
-                </div>
-            </div>
-            <div class="header-actions">
-                <div class="avatar">
-                    <img src="https://ui-avatars.com/api/?name=Valeria+Mendez&background=3182CE&color=fff" alt="Usuario">
-                </div>
-            </div>
-        </header>
+<body class="admin-workspace-page">
+<header class="workspace-header">
+    <a class="workspace-brand" th:href="@{/panel-administrador}">
+        <span class="workspace-brand-icon"><i class="fa-solid fa-graduation-cap"></i></span>
+        <span><strong>UNIVERSIDAD NEXUS</strong><small>ADMINISTRACIÓN ESCOLAR</small></span>
+    </a>
+    <nav class="workspace-nav" aria-label="Navegación administrativa">
+        <a th:href="@{/panel-administrador}"><i class="fa-solid fa-chart-line"></i> Panel</a>
+        <a th:href="@{/gestion-materias}"><i class="fa-solid fa-book"></i> Materias</a>
+        <a th:href="@{/registro-usuarios}"><i class="fa-solid fa-users"></i> Usuarios</a>
+        <a class="active" th:href="@{/avisos}"><i class="fa-solid fa-bullhorn"></i> Avisos</a>
+    </nav>
+    <div class="workspace-user"><span class="workspace-avatar">AD</span><strong th:text="${nombreUsuario}">Administrador</strong></div>
+</header>
 
-        <div class="avisos-main-layout">
-            <div class="avisos-form-column">
-                <div class="broadcast-header-row">
-                    <span class="broadcast-label"><i class="fa-solid fa-circle"></i> CANAL OFICIAL BROADCAST</span>
-                    <span class="broadcast-badge"><i class="fa-solid fa-tower-broadcast"></i> Pasarela Push Activa</span>
-                </div>
-
-                <section class="form-comunicado-container">
-                    <div class="form-group-block">
-                        <label class="form-label-title"><i class="fa-solid fa-flag"></i> Prioridad del Mensaje</label>
-                        <div class="prioridad-options-grid">
-                            <label class="prioridad-card">
-                                <input type="radio" name="prioridad" value="informativo" checked>
-                                <div class="prioridad-content">
-                                    <strong>Informativo</strong>
-                                    <span>Azul regular</span>
-                                </div>
-                            </label>
-                            <label class="prioridad-card">
-                                <input type="radio" name="prioridad" value="urgente">
-                                <div class="prioridad-content">
-                                    <strong>Urgente</strong>
-                                    <span>Alerta push roja</span>
-                                </div>
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="form-group-block">
-                        <div class="form-label-row">
-                            <label><i class="fa-solid fa-t"></i> Título del Comunicado</label>
-                            <span class="label-obligatorio">Obligatorio</span>
-                        </div>
-                        <input type="text" class="input-comunicado-text" value="Ampliación de plazo: Selección de asignaturas Ci">
-                    </div>
-
-                    <div class="form-group-block">
-                        <div class="form-label-row">
-                            <label><i class="fa-solid fa-bars-staggered"></i> Cuerpo del Comunicado</label>
-                            <span class="counter-text">168 / 500</span>
-                        </div>
-                        <textarea class="textarea-comunicado">Se extiende la ventana oficial de matrícula extraordinaria hasta el viernes a las 23:59 hrs. Por favor revisen sus cupos validados en el módulo de Portal Nexus.</textarea>
-                    </div>
-                </section>
-
-                <button type="button" class="btn-emitir-push">
-                    <i class="fa-solid fa-bullhorn"></i> Emitir Notificación Push (842 alumnos)
-                </button>
-            </div>
-
-            <div class="avisos-sidebar-column">
-                <div class="sidebar-card-info">
-                    <div class="sidebar-card-header">
-                        <span><i class="fa-solid fa-clock-rotate-left"></i> Historial Reciente</span>
-                    </div>
-                    <div class="historial-item-mini">
-                        <strong>Apertura Turno 01 Matrícula</strong>
-                        <p>Emitido hace 2 días • 1,200 alumnos</p>
-                    </div>
-                    <div class="historial-item-mini">
-                        <strong>Mantenimiento de Servidores TI</strong>
-                        <p>Emitido hace 1 semana • Informativo</p>
-                    </div>
-                </div>
-            </div>
+<main class="workspace-main">
+    <section class="workspace-heading">
+        <div>
+            <p class="workspace-eyebrow"><i class="fa-solid fa-tower-broadcast"></i> COMUNICACIÓN ESCOLAR</p>
+            <h1>Avisos y comunicados</h1>
+            <p>Redacta comunicados para la comunidad universitaria y consulta el historial guardado.</p>
         </div>
+        <span class="workspace-status"><i class="fa-solid fa-circle-check"></i> Historial conectado a la base de datos</span>
+    </section>
+
+    <div th:if="${mensajeExito}" class="workspace-alert success" role="status" th:text="${mensajeExito}"></div>
+    <div th:if="${mensajeError}" class="workspace-alert error" role="alert" th:text="${mensajeError}"></div>
+
+    <div class="notice-layout">
+        <section class="workspace-card notice-compose-card">
+            <div class="workspace-card-heading">
+                <div><span class="heading-icon blue"><i class="fa-solid fa-pen-to-square"></i></span>
+                    <div><h2>Redactar comunicado</h2><p>El aviso se guardará en el historial administrativo.</p></div></div>
+                <span class="draft-chip">NUEVO AVISO</span>
+            </div>
+
+            <form method="post" th:action="@{/admin/avisos}" id="notice-form" class="workspace-form">
+                <fieldset>
+                    <legend>Prioridad</legend>
+                    <div class="priority-options">
+                        <label class="priority-choice informational">
+                            <input type="radio" name="prioridad" value="INFORMATIVO" checked>
+                            <span class="priority-icon"><i class="fa-solid fa-circle-info"></i></span>
+                            <span><strong>Informativo</strong><small>Comunicado regular</small></span>
+                        </label>
+                        <label class="priority-choice urgent">
+                            <input type="radio" name="prioridad" value="URGENTE">
+                            <span class="priority-icon"><i class="fa-solid fa-triangle-exclamation"></i></span>
+                            <span><strong>Urgente</strong><small>Atención prioritaria</small></span>
+                        </label>
+                    </div>
+                </fieldset>
+
+                <label class="workspace-field" for="aviso-titulo">Título <span>Obligatorio</span>
+                    <input id="aviso-titulo" name="titulo" type="text" maxlength="120" required placeholder="Ej. Ampliación del periodo de inscripción">
+                </label>
+                <label class="workspace-field" for="aviso-contenido">Contenido <span><b id="notice-count">0</b> / 500</span>
+                    <textarea id="aviso-contenido" name="contenido" maxlength="500" rows="6" required placeholder="Escribe la información que necesitan conocer los destinatarios..."></textarea>
+                </label>
+                <label class="workspace-field" for="aviso-destinatarios">Destinatarios
+                    <select id="aviso-destinatarios" name="destinatarios" required>
+                        <option value="TODOS" th:text="|Toda la comunidad (${totalUsuarios})|">Toda la comunidad</option>
+                        <option value="ALUMNOS" th:text="|Alumnos (${alumnos})|">Alumnos</option>
+                        <option value="DOCENTES" th:text="|Docentes (${docentes})|">Docentes</option>
+                        <option value="ADMINISTRATIVOS">Administrativos</option>
+                    </select>
+                </label>
+                <div class="notice-configuration-note">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <span>Esta aplicación no tiene configurado un proveedor de correo o notificaciones push. Publicar guardará el comunicado en la base de datos, pero no lo enviará externamente.</span>
+                </div>
+                <button class="workspace-primary-button" type="submit"><i class="fa-solid fa-floppy-disk"></i> Guardar comunicado</button>
+            </form>
+        </section>
+
+        <aside class="workspace-card notice-history-card">
+            <div class="workspace-card-heading">
+                <div><span class="heading-icon purple"><i class="fa-solid fa-clock-rotate-left"></i></span>
+                    <div><h2>Historial reciente</h2><p>Últimos 10 avisos registrados</p></div></div>
+                <span class="history-count" th:text="${#lists.size(avisos)}">0</span>
+            </div>
+            <div class="notice-history-list" th:if="${!#lists.isEmpty(avisos)}">
+                <article class="notice-history-item" th:each="aviso : ${avisos}">
+                    <div class="history-item-top">
+                        <span class="notice-priority-pill" th:classappend="${aviso.prioridad == 'URGENTE' ? ' urgent' : ''}"
+                              th:text="${aviso.prioridad == 'URGENTE' ? 'Urgente' : 'Informativo'}">Informativo</span>
+                        <time th:text="${#temporals.format(aviso.fechaCreacion, 'dd/MM/yyyy HH:mm')}">Fecha</time>
+                    </div>
+                    <h3 th:text="${aviso.titulo}">Título</h3>
+                    <p class="history-message" th:text="${aviso.contenido}">Contenido</p>
+                    <div class="history-audience"><i class="fa-solid fa-users"></i>
+                        <span th:text="|${aviso.destinatarios} • ${aviso.cantidadDestinatarios} cuentas|">Destinatarios</span>
+                    </div>
+                </article>
+            </div>
+            <div class="workspace-empty" th:if="${#lists.isEmpty(avisos)}">
+                <i class="fa-regular fa-bell"></i><strong>Aún no hay avisos</strong>
+                <span>Al guardar tu primer comunicado aparecerá aquí.</span>
+            </div>
+        </aside>
     </div>
 </main>
+<script>
+    const bodyField = document.querySelector('#aviso-contenido');
+    const bodyCount = document.querySelector('#notice-count');
+    bodyField.addEventListener('input', () => { bodyCount.textContent = bodyField.value.length; });
+</script>
 </body>
 </html>

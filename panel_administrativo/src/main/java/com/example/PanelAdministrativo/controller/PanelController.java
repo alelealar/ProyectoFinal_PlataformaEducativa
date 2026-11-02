@@ -2,11 +2,14 @@ package com.example.PanelAdministrativo.controller;
 
 import com.example.PanelAdministrativo.config.AuthInterceptor;
 import com.example.PanelAdministrativo.service.ClaseService;
+import com.example.PanelAdministrativo.service.MateriaService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.Comparator;
 
 /**
  *
@@ -15,9 +18,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class PanelController {
 
     private final ClaseService claseService;
+    private final MateriaService materiaService;
 
-    public PanelController(ClaseService claseService) {
+    public PanelController(ClaseService claseService, MateriaService materiaService) {
         this.claseService = claseService;
+        this.materiaService = materiaService;
     }
     /*
     @GetMapping({"/", "/panel"})
@@ -35,11 +40,20 @@ public class PanelController {
             return "redirect:/login";
         }
 
-        String nombreAdmin = (String) session.getAttribute(AuthInterceptor.SESSION_USUARIO_NOMBRE);
-        model.addAttribute("nombreUsuario", nombreAdmin);
+        Object nombreAdmin = session.getAttribute(AuthInterceptor.SESSION_USUARIO_NOMBRE);
+        model.addAttribute("nombreUsuario", nombreAdmin == null ? "Administrador" : nombreAdmin);
 
         model.addAttribute("stats", claseService.obtenerEstadisticasGenerales());
-        model.addAttribute("monitorCupos", claseService.obtenerMonitorCupos());
+        var monitorCupos = claseService.obtenerMonitorCupos();
+        model.addAttribute("monitorCupos", monitorCupos);
+        model.addAttribute("carrerasMonitor", monitorCupos.stream()
+                .map(com.example.PanelAdministrativo.dto.MateriaCupoDTO::getCarrera)
+                .distinct()
+                .sorted(Comparator.nullsLast(String.CASE_INSENSITIVE_ORDER))
+                .toList());
+        model.addAttribute("periodo", materiaService.obtenerPeriodoActivo()
+                .map(com.example.PanelAdministrativo.model.PeriodoEscolar::getNombrePeriodo)
+                .orElse("Sin periodo activo"));
         return "panel-administrador";
     }
 }

@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MaestroRepository extends JpaRepository<Maestro, Long> {
+    boolean existsByNumEmpleadoIgnoreCase(String numEmpleado);
 }

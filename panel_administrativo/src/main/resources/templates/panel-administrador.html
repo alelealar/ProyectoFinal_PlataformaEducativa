@@ -3,213 +3,163 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portal de administración de la Universidad Nexus">
-    <title>Panel administrador - Universidad Nexus</title>
-    <!-- Fonts -->
+    <meta name="description" content="Panel de administración de la Universidad Nexus">
+    <title>Panel administrativo | Universidad Nexus</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
-    <!-- Estilos del proyecto -->
-    <link rel="stylesheet" th:href="@{/styles/style.css}" href="../static/styles/style.css">
+    <link rel="stylesheet" th:href="@{/styles/style.css}">
 </head>
-<body>
-<main class="mobile-screen">
-    <div class="screen-content">
-        <!-- Header -->
-        <header class="top-bar">
-            <div class="brand">
-                <button type="button" class="icon-button btn-regresar">
-                    <i class="fa-solid fa-arrow-left"></i>
-                </button>
-                <div class="brand-icon">
-                    <i class="fa-solid fa-graduation-cap"></i>
-                </div>
-                <div class="brand-text">
-                    <h2>Detalle Asignatura</h2>
-                </div>
-            </div>
-            <div class="header-actions">
-                <button type="button" class="icon-button">
-                    <i class="fa-solid fa-gear"></i>
-                </button>
-                <button type="button" class="icon-button notification-icon">
-                    <i class="fa-regular fa-bell"></i>
-                    <div class="notification-dot"></div>
-                </button>
-                <div class="avatar">
-                    <img src="https://ui-avatars.com/api/?name=Valeria+Mendez&background=3182CE&color=fff" alt="Usuario">
-                </div>
-            </div>
-        </header>
+<body class="admin-workspace-page">
+<header class="workspace-header">
+    <a class="workspace-brand" th:href="@{/panel-administrador}">
+        <span class="workspace-brand-icon"><i class="fa-solid fa-graduation-cap"></i></span>
+        <span><strong>UNIVERSIDAD NEXUS</strong><small>ADMINISTRACIÓN ESCOLAR</small></span>
+    </a>
+    <nav class="workspace-nav" aria-label="Navegación administrativa">
+        <a class="active" th:href="@{/panel-administrador}"><i class="fa-solid fa-chart-line"></i> Panel</a>
+        <a th:href="@{/gestion-materias}"><i class="fa-solid fa-book"></i> Materias y cupos</a>
+        <a th:href="@{/registro-usuarios}"><i class="fa-solid fa-users"></i> Usuarios</a>
+        <a th:href="@{/avisos}"><i class="fa-solid fa-bullhorn"></i> Avisos</a>
+    </nav>
+    <div class="workspace-user"><span class="workspace-avatar">AD</span><strong th:text="${nombreUsuario}">Administrador</strong></div>
+</header>
 
-        <!-- Badge Administrador -->
-        <div class="administrador-pill">
-            <i class="fa-solid fa-user-shield"></i> ADMINISTRADOR • SERVICIOS ESCOLARES
+<main class="workspace-main dashboard-main">
+    <section class="workspace-heading dashboard-welcome">
+        <div>
+            <p class="workspace-eyebrow"><i class="fa-solid fa-circle"></i> CONSOLA ADMINISTRATIVA</p>
+            <h1>Hola, <span th:text="${nombreUsuario}">Administrador</span></h1>
+            <p>Resumen operativo del periodo <strong th:text="${periodo}">Sin periodo activo</strong>.</p>
         </div>
+        <a class="workspace-secondary-button" th:href="@{/logout}"><i class="fa-solid fa-arrow-right-from-bracket"></i> Cerrar sesión</a>
+    </section>
 
-        <!-- Encabezado de Título -->
-        <section class="greeting-section admin-title-row">
-            <h1>Consola Escolar 2026–1</h1>
-            <span class="badge-live"><i class="fa-solid fa-circle"></i> En Vivo</span>
-        </section>
+    <section class="dashboard-stats" aria-label="Estadísticas del sistema">
+        <article class="dashboard-stat-card">
+            <span class="dashboard-stat-icon blue"><i class="fa-solid fa-users"></i></span>
+            <div class="dashboard-stat-label">CUENTAS REGISTRADAS</div>
+            <strong th:text="${stats.totalUsuarios}">0</strong>
+            <small th:text="|${stats.totalAlumnos} alumnos • ${stats.totalDocentes} docentes|">Alumnos y docentes</small>
+        </article>
+        <article class="dashboard-stat-card">
+            <span class="dashboard-stat-icon green"><i class="fa-solid fa-user-check"></i></span>
+            <div class="dashboard-stat-label">INSCRIPCIONES ACTIVAS</div>
+            <strong th:text="${stats.totalInscritos}">0</strong>
+            <small th:text="|Capacidad ofertada: ${stats.metaInscritos}|">Capacidad ofertada</small>
+        </article>
+        <article class="dashboard-stat-card">
+            <span class="dashboard-stat-icon purple"><i class="fa-solid fa-book-open"></i></span>
+            <div class="dashboard-stat-label">MATERIAS OFERTADAS</div>
+            <strong th:text="${stats.materiasActivas}">0</strong>
+            <small th:text="|${stats.periodosActivos} periodo(s) activo(s)|">Periodo activo</small>
+        </article>
+        <article class="dashboard-stat-card alert">
+            <span class="dashboard-stat-icon red"><i class="fa-solid fa-triangle-exclamation"></i></span>
+            <div class="dashboard-stat-label">GRUPOS SIN CUPO</div>
+            <strong th:text="${stats.gruposLlenos}">0</strong>
+            <small>En el periodo activo</small>
+        </article>
+    </section>
 
-        <section class="slider-consola-escolar">
-            <div class="tarjeta-slider">
-                <div class="tarjeta-slider-header">
-                    <span>INSCRITOS</span>
-                    <i class="fa-regular fa-user"></i>
-                </div>
-                <div class="tarjeta-slider-val" th:text="${stats.totalInscritos}">4,820</div>
-                <div class="slider-progress-bar">
-                    <div class="slider-progress-fill" th:style="'width: ' + ${stats.porcentajeInscritos} + '%;'"></div>
-                </div>
-                <div class="metric-footer-info">
-                    <span th:text="${stats.porcentajeInscritos} + '% del padrón total'">91.4% del padrón total</span>
-                    <strong th:text="'Meta: ' + ${stats.metaInscritos}">Meta: 5,270</strong>
-                </div>
-            </div>
+    <section class="dashboard-section">
+        <div class="dashboard-section-heading">
+            <div><p class="workspace-eyebrow">ACCESOS DIRECTOS</p><h2>Gestión rápida</h2></div>
+        </div>
+        <div class="dashboard-shortcuts">
+            <a class="dashboard-shortcut" th:href="@{/gestion-materias}">
+                <span class="shortcut-icon blue"><i class="fa-solid fa-book"></i></span>
+                <span><strong>Materias y cupos</strong><small>Oferta, grupos, docentes y aforo</small></span>
+                <i class="fa-solid fa-arrow-right shortcut-arrow"></i>
+            </a>
+            <a class="dashboard-shortcut" th:href="@{/registro-usuarios}">
+                <span class="shortcut-icon purple"><i class="fa-solid fa-user-plus"></i></span>
+                <span><strong>Registro de usuarios</strong><small>Alta individual o importación CSV</small></span>
+                <i class="fa-solid fa-arrow-right shortcut-arrow"></i>
+            </a>
+            <a class="dashboard-shortcut" th:href="@{/avisos}">
+                <span class="shortcut-icon orange"><i class="fa-solid fa-bullhorn"></i></span>
+                <span><strong>Avisos</strong><small>Comunicados e historial administrativo</small></span>
+                <i class="fa-solid fa-arrow-right shortcut-arrow"></i>
+            </a>
+        </div>
+    </section>
 
-            <div class="tarjeta-slider">
-                <div class="tarjeta-slider-header">
-                    <span>PERÍODOS</span>
-                    <i class="fa-regular fa-calendar-check"></i>
-                </div>
-                <div class="tarjeta-slider-val" th:text="${stats.periodosActivos}">3</div>
-                <span class="badge-mini-active">Activos hoy</span>
-                <div class="tarjeta-slider-footer">Pregrado, Posgrado, Online</div>
-            </div>
-
-            <div class="tarjeta-slider">
-                <div class="tarjeta-slider-header">
-                    <span>MATERIAS ACTIVAS</span>
-                    <i class="fa-solid fa-book"></i>
-                </div>
-                <div class="tarjeta-slider-val" th:text="${stats.materiasActivas}">142</div>
-                <div class="slider-progress-bar">
-                    <div class="slider-progress-fill success" th:style="'width: ' + ${stats.ocupacionGlobal} + '%;'"></div>
-                </div>
-                <div class="metric-footer-info">
-                    <span th:text="${stats.ocupacionGlobal} + '% ocupación global'">88% ocupación global</span>
-                    <strong class="text-success-highlight" th:text="${stats.gruposLlenos} + ' grupos llenos'">18 grupos llenos</strong>
-                </div>
-            </div>
-        </section>
-
-        <section class="gestion-rapida-accesos">
-            <div class="section-header">
-                <h2>Gestión Rápida</h2>
-                <span class="accesos-count">4 accesos directos</span>
-            </div>
-            <div class="contenedor-accesos-directos">
-                <div class="tarjeta-acceso-directo">
-                    <div class="icono-acceso-directo azul-pastel-bg"><i class="fa-solid fa-box-archive"></i></div>
-                    <h3>Gestión de Materias</h3>
-                    <p class="texto-acceso-directo">Crear y editar cursos, cupos, profesores y horarios académicos.</p>
-                    <a th:href="@{/gestion-materias}" class="card-bottom-link">Configurar catálogo <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-
-                <div class="tarjeta-acceso-directo">
-                    <div class="icono-acceso-directo morado-pastel-bg"><i class="fa-regular fa-calendar"></i></div>
-                    <h3>Períodos Escolares</h3>
-                    <p class="texto-acceso-directo">Ventanas de inscripción y fechas de altas/bajas para alumnos.</p>
-                    <a href="#" class="card-bottom-link">Apertura de ciclos <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-
-                <div class="tarjeta-acceso-directo">
-                    <div class="icono-acceso-directo neutral-pastel-bg"><i class="fa-solid fa-user-plus"></i></div>
-                    <h3>Registro Usuarios</h3>
-                    <p class="texto-acceso-directo">Alta masiva con correo @nexus.edu e importación CSV.</p>
-                    <a href="#" class="card-bottom-link">Carga de alumnos <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-
-                <div class="tarjeta-acceso-directo">
-                    <div class="icono-acceso-directo naranja-pastel-bg"><i class="fa-solid fa-bullhorn"></i></div>
-                    <h3>Publicar Avisos</h3>
-                    <p class="texto-acceso-directo">Comunicados push prioritarios al portal de alumnos y docentes.</p>
-                    <a href="#" class="card-bottom-link">Redactar aviso <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-            </div>
-        </section>
-
-        <section class="monitor-de-cupos">
-            <div class="monitor-header-responsive">
-                <div class="monitor-title-wrapper">
-                    <h2>Monitor de Cupos en Vivo</h2>
-                    <p class="monitor-subtitle">Visualización de aforos y demanda en tiempo real para asignación de aulas</p>
-                </div>
-
-                <div class="monitor-controls-group">
-                    <div class="custom-select-wrapper">
-                        <select name="selector-carrera" id="selector-carrera" class="select-carrera-admin">
-                            <option>Todas las facultades</option>
-                            <option>Ing. en Software</option>
-                            <option>Ciencias Computacionales</option>
-                            <option>Inteligencia Artificial</option>
-                        </select>
-                        <i class="fa-solid fa-chevron-down select-arrow"></i>
+    <section class="dashboard-section dashboard-monitor">
+        <div class="dashboard-section-heading monitor-heading">
+            <div><p class="workspace-eyebrow">PERIODO ACTIVO</p><h2>Monitor de cupos</h2>
+                <p>Ocupación calculada con inscripciones que no están dadas de baja.</p></div>
+            <a class="workspace-secondary-button" th:href="@{/gestion-materias}">Administrar grupos <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <div class="monitor-filters">
+            <label for="monitor-search">Buscar materia o docente
+                <input id="monitor-search" type="search" placeholder="Nombre, NRC o docente">
+            </label>
+            <label for="monitor-career">Carrera
+                <select id="monitor-career">
+                    <option value="">Todas las carreras</option>
+                    <option th:each="carrera : ${carrerasMonitor}" th:value="${carrera}" th:text="${carrera}">Carrera</option>
+                </select>
+            </label>
+            <label for="monitor-state">Disponibilidad
+                <select id="monitor-state">
+                    <option value="">Todos los grupos</option>
+                    <option value="SATURADA">Sin cupo</option>
+                    <option value="CASI_LLENA">Casi llenos</option>
+                    <option value="DISPONIBLE">Disponibles</option>
+                </select>
+            </label>
+        </div>
+        <div class="monitor-list" id="monitor-list" th:if="${!#lists.isEmpty(monitorCupos)}">
+            <article class="monitor-course" th:each="grupo : ${monitorCupos}"
+                     th:attr="data-state=${grupo.estado},data-career=${grupo.carrera},data-search=|${grupo.nombreMateria} ${grupo.codigo} ${grupo.profesor}|">
+                <div class="monitor-course-main">
+                    <div class="monitor-course-top">
+                        <span class="monitor-course-code" th:text="|NRC ${grupo.codigo}|">NRC</span>
+                        <span class="monitor-state-pill" th:classappend="${grupo.estado == 'SATURADA' ? ' danger' : (grupo.estado == 'CASI_LLENA' ? ' warning' : ' success')}"
+                              th:text="${grupo.textoEstado}">Disponible</span>
                     </div>
-
-                    <div class="filter-pills-group">
-                        <button type="button" class="pill-filter active">Todos (142)</button>
-                        <button type="button" class="pill-filter">Críticos (18)</button>
-                        <button type="button" class="pill-filter">Disponibles (124)</button>
-                    </div>
-
-                    <button type="button" class="icon-refresh-btn"><i class="fa-solid fa-rotate"></i></button>
-                </div>
-            </div>
-
-            <div class="contenedor-cupos-materia">
-                <div class="cupos-materia" th:each="materia : ${monitorCupos}">
-                    <div class="materia-info-col">
-                        <div class="cupos-materia-header">
-                            <span class="cupos-materia-nombre" th:text="${materia.nrc} + ' • ' + ${materia.carrera}">NRC 3310 • ING. EN SOFTWARE</span>
-                            <!-- Badge de estado dinámico -->
-                            <span class="badge-status-cupo"
-                                  th:classappend="${materia.estado == 'SATURADA' ? 'danger' : (materia.estado == 'CASI_LLENA' ? 'warning' : 'info')}"
-                                  th:text="${materia.textoEstado}">¡Saturada!</span>
-                        </div>
-                        <h3 th:text="${materia.nombreMateria}">Ciberseguridad</h3>
-                        <div class="materia-meta-details-mobile">
-                            <span><i class="fa-regular fa-user"></i> <span th:text="${materia.profesor}">Prof. Carlos Estrada</span></span>
-                            <span><i class="fa-regular fa-building"></i> <span th:text="${materia.aula}">Lab. Central L-302</span></span>
-                            <span><i class="fa-regular fa-clock"></i> <span th:text="${materia.horario}">Lun - Mié - Vie 08:00</span></span>
-                        </div>
-                    </div>
-
-                    <div class="materia-stats-col">
-                        <div class="cupos-materia-info">
-                            <span>Cupos ocupados</span>
-                            <strong th:class="${materia.claseTextoColor}"
-                                    th:text="${materia.ocupados} + ' / ' + ${materia.totalCupos} + ' (' + ${materia.porcentajeOcupacion} + '%)'">30 / 30 (100%)</strong>
-                        </div>
-
-                        <!-- Barra de progreso dinámica -->
-                        <div class="barra-progreso-cupos-materia"
-                             th:classappend="${materia.claseBarraColor}"
-                             th:style="'--progreso: ' + ${materia.porcentajeOcupacion} + '%;'"></div>
-
-                        <div class="materia-actions-row-mobile">
-                            <button type="button" class="btn-action-primary" th:if="${materia.permiteAbrirGrupo}">
-                                <i class="fa-solid fa-plus"></i> Abrir Grupo B
-                            </button>
-                            <button type="button" class="btn-action-secondary" th:text="${materia.textoAccionSecundaria}">Lista de Espera (7)</button>
-                        </div>
+                    <h3 th:text="${grupo.nombreMateria}">Materia</h3>
+                    <div class="monitor-course-meta">
+                        <span><i class="fa-regular fa-user"></i> <span th:text="${grupo.profesor}">Docente</span></span>
+                        <span><i class="fa-solid fa-building-columns"></i> <span th:text="${grupo.carrera}">Carrera</span></span>
+                        <span><i class="fa-regular fa-clock"></i> <span th:text="${grupo.horario}">Horario</span></span>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <p class="count-register-mobile">Mostrando asignaturas activas registradas en el sistema</p>
-
-        <a th:href="@{/gestion-materias}" class="nueva-materia-boton">
-            <i class="fa-solid fa-plus"></i> Nueva Materia o Grupo
-        </a>
-    </div>
+                <div class="monitor-course-capacity">
+                    <div><span>Ocupación</span><strong th:text="|${grupo.ocupados} / ${grupo.totalCupos} (${#numbers.formatDecimal(grupo.porcentajeOcupacion, 1, 0)}%)|">0 / 0</strong></div>
+                    <div class="capacity-track"><span th:classappend="${grupo.estado == 'SATURADA' ? ' danger' : (grupo.estado == 'CASI_LLENA' ? ' warning' : '')}"
+                                                          th:style="|width: ${T(java.lang.Math).min(grupo.porcentajeOcupacion, 100.0)}%|"></span></div>
+                </div>
+            </article>
+        </div>
+        <div class="workspace-empty dashboard-empty" th:if="${#lists.isEmpty(monitorCupos)}">
+            <i class="fa-solid fa-book-open"></i><strong>No hay grupos para el periodo activo</strong>
+            <span>Activa un periodo y registra grupos para consultar su ocupación.</span>
+            <a class="workspace-primary-button" th:href="@{/gestion-materias}">Ir a materias y cupos</a>
+        </div>
+        <p id="monitor-no-results" class="monitor-no-results" hidden>No hay grupos que coincidan con los filtros.</p>
+    </section>
 </main>
+<script>
+    const monitorFilters = ['monitor-search', 'monitor-career', 'monitor-state'].map((id) => document.getElementById(id));
+    const courseRows = [...document.querySelectorAll('.monitor-course')];
+    const emptyResult = document.getElementById('monitor-no-results');
+    function filterMonitor() {
+        const [search, career, state] = monitorFilters.map((input) => input.value.trim().toLowerCase());
+        let visible = 0;
+        courseRows.forEach((row) => {
+            const matches = row.dataset.search.toLowerCase().includes(search)
+                && (!career || row.dataset.career.toLowerCase() === career)
+                && (!state || row.dataset.state === state.toUpperCase());
+            row.hidden = !matches;
+            if (matches) visible++;
+        });
+        if (emptyResult) emptyResult.hidden = visible !== 0;
+    }
+    monitorFilters.forEach((input) => input.addEventListener('input', filterMonitor));
+    monitorFilters.forEach((input) => input.addEventListener('change', filterMonitor));
+</script>
 </body>
 </html>

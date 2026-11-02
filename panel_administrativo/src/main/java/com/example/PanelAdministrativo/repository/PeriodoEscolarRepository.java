@@ -10,4 +10,6 @@ import java.util.Optional;
 public interface PeriodoEscolarRepository extends JpaRepository<PeriodoEscolar, Long> {
 
     Optional<PeriodoEscolar> findByActivoTrue();
+
+    long countByActivoTrue();
 }

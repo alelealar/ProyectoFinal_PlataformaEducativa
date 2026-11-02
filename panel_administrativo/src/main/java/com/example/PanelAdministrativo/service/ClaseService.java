@@ -2,14 +2,20 @@ package com.example.PanelAdministrativo.service;
 import com.example.PanelAdministrativo.dto.EstadisticasAdminDTO;
 import com.example.PanelAdministrativo.dto.MateriaCupoDTO;
 import com.example.PanelAdministrativo.model.Clase;
+import com.example.PanelAdministrativo.model.EstadoInscripcion;
 import com.example.PanelAdministrativo.model.HorarioClase;
+import com.example.PanelAdministrativo.model.Materia;
 import com.example.PanelAdministrativo.model.PlanMateria;
+import com.example.PanelAdministrativo.model.Rol;
 import com.example.PanelAdministrativo.repository.ClaseRepository;
+import com.example.PanelAdministrativo.repository.UsuarioRepository;
 import com.example.PanelAdministrativo.repository.PeriodoEscolarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.List;
 
 @Service
@@ -21,18 +27,28 @@ public class ClaseService {
     @Autowired
     private PeriodoEscolarRepository periodoEscolarRepository;
 
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
+    @Transactional(readOnly = true)
     public EstadisticasAdminDTO obtenerEstadisticasGenerales() {
-        List<Clase> clases = claseRepository.findAll();
+        List<Clase> clases = periodoEscolarRepository.findByActivoTrue()
+                .map(periodo -> claseRepository.findByPeriodoEscolar_Id(periodo.getId()))
+                .orElseGet(List::of);
 
         int totalInscritos = 0;
         int totalCapacidad = 0;
         int gruposLlenos = 0;
-        int materiasActivas = clases.size();
+        int materiasActivas = (int) clases.stream()
+                .map(Clase::getMateria)
+                .filter(Objects::nonNull)
+                .map(Materia::getId)
+                .distinct()
+                .count();
 
         for (Clase clase : clases) {
             int cupoMax = clase.getCupoMaximo();
-            int disponibles = clase.getCupoDisponible();
-            int ocupados = cupoMax - disponibles;
+            int ocupados = contarInscritosActivos(clase);
 
             totalInscritos += ocupados;
             totalCapacidad += cupoMax;
@@ -54,7 +70,7 @@ public class ClaseService {
             ocupacionGlobal = Math.round(((double) totalInscritos / totalCapacidad) * 100.0);
         }
 
-        long periodosCount = periodoEscolarRepository.count();
+        long periodosCount = periodoEscolarRepository.countByActivoTrue();
         int periodosActivos = (int) periodosCount;
 
         EstadisticasAdminDTO stats = new EstadisticasAdminDTO();
@@ -65,12 +81,18 @@ public class ClaseService {
         stats.setMateriasActivas(materiasActivas);
         stats.setOcupacionGlobal(ocupacionGlobal);
         stats.setGruposLlenos(gruposLlenos);
+        stats.setTotalUsuarios(usuarioRepository.count());
+        stats.setTotalAlumnos(usuarioRepository.countByRol(Rol.ALUMNO));
+        stats.setTotalDocentes(usuarioRepository.countByRol(Rol.MAESTRO));
 
         return stats;
     }
 
+    @Transactional(readOnly = true)
     public List<MateriaCupoDTO> obtenerMonitorCupos() {
-        List<Clase> clases = claseRepository.findAll();
+        List<Clase> clases = periodoEscolarRepository.findByActivoTrue()
+                .map(periodo -> claseRepository.findByPeriodoEscolar_Id(periodo.getId()))
+                .orElseGet(List::of);
         List<MateriaCupoDTO> listaDtos = new ArrayList<>();
 
         for (Clase clase : clases) {
@@ -79,56 +101,64 @@ public class ClaseService {
 
             dto.setCodigo(clase.getClave());
 
-            String nombreCarrera = "Sin carrera";
+            String nombreCarrera = "Sin carrera asignada";
             if (clase.getMateria() != null) {
                 dto.setNombreMateria(clase.getMateria().getNombre());
+                String carreraMateria = clase.getMateria().getPlanMaterias() == null ? "Sin carrera asignada"
+                        : clase.getMateria().getPlanMaterias().stream()
+                        .map(PlanMateria::getPlanEstudio)
+                        .filter(Objects::nonNull)
+                        .map(com.example.PanelAdministrativo.model.PlanEstudio::getCarrera)
+                        .filter(Objects::nonNull)
+                        .map(com.example.PanelAdministrativo.model.Carrera::getNombre)
+                        .findFirst()
+                        .orElse("Sin carrera asignada");
+                nombreCarrera = carreraMateria;
             } else {
                 dto.setNombreMateria(clase.getNombre());
             }
             dto.setCarrera(nombreCarrera);
 
             int totalCupos = clase.getCupoMaximo();
-            int disponibles = clase.getCupoDisponible();
-            int ocupados = totalCupos - disponibles;
+            int ocupados = contarInscritosActivos(clase);
+            int disponibles = Math.max(totalCupos - ocupados, 0);
 
             dto.setOcupados(ocupados);
             dto.setTotalCupos(totalCupos);
 
             double porcentaje = 0.0;
             if (totalCupos > 0) {
-                porcentaje = Math.round(((double) ocupados / totalCupos) * 100.0);
+                porcentaje = Math.round(((double) ocupados / totalCupos) * 1000.0) / 10.0;
             }
             dto.setPorcentajeOcupacion(porcentaje);
 
-            if (porcentaje >= 100.0) {
+            if (totalCupos > 0 && ocupados >= totalCupos) {
                 dto.setEstado("SATURADA");
                 dto.setTextoEstado("¡Saturada!");
                 dto.setClaseTextoColor("text-danger");
                 dto.setClaseBarraColor("barra-roja");
                 dto.setPermiteAbrirGrupo(true);
                 dto.setTextoAccionSecundaria("Lista de Espera");
-            } else {
-                if (porcentaje >= 85.0) {
+            } else if (porcentaje >= 85.0) {
                     dto.setEstado("CASI_LLENA");
-                    int restan = totalCupos - ocupados;
-                    dto.setTextoEstado("Casi Llena (" + restan + " cupos)");
+                    dto.setTextoEstado("Casi Llena (" + disponibles + " cupos)");
                     dto.setClaseTextoColor("text-warning");
                     dto.setClaseBarraColor("barra-naranja");
                     dto.setPermiteAbrirGrupo(false);
                     dto.setTextoAccionSecundaria("Detalle Grupo");
-                } else {
+            } else {
                     dto.setEstado("DISPONIBLE");
                     dto.setTextoEstado("Disponible");
                     dto.setClaseTextoColor("text-info");
                     dto.setClaseBarraColor("barra-azul");
                     dto.setPermiteAbrirGrupo(false);
                     dto.setTextoAccionSecundaria("Detalle Grupo");
-                }
             }
 
 
             if (clase.getMaestro() != null) {
-                String nombreProfesor = clase.getMaestro().getNombre() + " " + clase.getMaestro().getApellidoPaterno();
+                String nombreProfesor = clase.getMaestro().getNombre() + " " + clase.getMaestro().getApellidoPaterno()
+                        + (clase.getMaestro().getApellidoMaterno() == null ? "" : " " + clase.getMaestro().getApellidoMaterno());
                 dto.setProfesor(nombreProfesor);
             } else {
                 dto.setProfesor("Por asignar");
@@ -156,5 +186,14 @@ public class ClaseService {
         }
 
         return listaDtos;
+    }
+
+    private int contarInscritosActivos(Clase clase) {
+        if (clase.getInscripciones() == null) {
+            return 0;
+        }
+        return (int) clase.getInscripciones().stream()
+                .filter(inscripcion -> inscripcion.getEstado() != EstadoInscripcion.BAJA)
+                .count();
     }
 }
