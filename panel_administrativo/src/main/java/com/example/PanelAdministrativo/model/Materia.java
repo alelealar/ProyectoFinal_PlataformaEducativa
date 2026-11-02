@@ -1,10 +1,10 @@
 package com.example.PanelAdministrativo.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,14 +42,15 @@ public class Materia {
     /**
      * Descripción del contenido o propósito de la materia.
      */
-    @Min(value = 1)
-    @Max(value = 400)
+    @Size(max = 400, message = "La descripción no puede exceder 400 caracteres")
+    @Column(length = 400)
     private String descripcion;
 
     /**
      * Número de créditos académicos que otorga la materia.
      */
-    @NotBlank(message = "Los creditos no pueden estar vacios")
+    @Min(value = 1, message = "Los créditos deben ser al menos 1")
+    @Max(value = 16, message = "Los créditos no pueden exceder 16")
     private int creditos;
 
     /**
@@ -222,6 +223,14 @@ public class Materia {
 
     public void setClases(List<Clase> clases) {
         this.clases = (clases != null) ? clases : new ArrayList<>();
+    }
+
+    public List<PlanMateria> getPlanMaterias() {
+        return planMaterias;
+    }
+
+    public void setPlanMaterias(List<PlanMateria> planMaterias) {
+        this.planMaterias = (planMaterias != null) ? planMaterias : new ArrayList<>();
     }
 
     @Override

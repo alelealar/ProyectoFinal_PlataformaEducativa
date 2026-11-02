@@ -6,6 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MateriaRepository extends JpaRepository<Materia, Long> {
-
-
+    boolean existsByClaveIgnoreCase(String clave);
 }

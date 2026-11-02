@@ -3,421 +3,238 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Gestión de materias y cupos</title>
-
-    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
-          rel="stylesheet">
-
-    
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
-
-    <link rel="stylesheet" th:href="@{/styles.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/styles/style.css}">
 </head>
-
-<body>
-
-<main class="mobile-screen">
-
-    <div class="screen-content">
-
-        <!-- HEADER -->
-        <header class="top-bar">
-
-            <div class="brand">
-
-                <div class="return">
-                    <i class="fa-solid fa-arrow-left"></i>
-                </div>
-
-                <div class="brand-text">
-                    <h2>Gestión de materias y cupos</h2>
-                    <span>Portal Nexus Administration</span>
-                </div>
-
+<body class="gestion-page">
+<header class="top-bar-desktop" th:fragment="top-bar-admin">
+    <a class="brand-desktop" th:href="@{/panel-administrador}">
+        <span class="brand-icon-desktop"><i class="fa-solid fa-graduation-cap"></i></span>
+        <span class="brand-text-desktop">
+            <strong>UNIVERSIDAD NEXUS</strong>
+            <span>SERVICIOS ESCOLARES • GESTIÓN CENTRAL</span>
+        </span>
+    </a>
+    <div class="breadcrumbs">
+        <span>Facultades</span> / <span class="active-crumb" th:text="${periodo}">Periodo académico</span> /
+        <strong>Gestión de Materias y Cupos</strong>
+    </div>
+    <div class="header-actions-desktop">
+        <a class="btn-regresar-consola" th:href="@{/panel-administrador}">
+            <i class="fa-solid fa-arrow-left"></i> Volver a Consola
+        </a>
+        <div class="user-profile-header">
+            <div class="avatar-circle">AD</div>
+            <div class="user-info-text">
+                <strong th:text="${nombreUsuario}">Administrador</strong>
+                <span>Servicios Escolares</span>
             </div>
-
-            <div class="header-actions">
-
-                <span class="admin-label">ADMIN</span>
-
-                <div class="header-admin-icon">
-                    <i class="fa-solid fa-shield-halved"></i>
-                </div>
-
-                <div class="avatar admin-avatar">
-                    <i class="fa-regular fa-user"></i>
-                </div>
-
-            </div>
-
-        </header>
-
-
-        <!-- RESUMEN DEL PERIODO -->
-        <section class="materias-resumen">
-
-            <div class="periodo-header">
-                <div>
-                    <span class="periodo-titulo">
-                        <i class="fa-solid fa-circle"></i>
-                        PERIODO ACADÉMICO 2026-1
-                    </span>
-                </div>
-
-                <span class="periodo-estado">
-                    Pregrado Regular
-                </span>
-            </div>
-
-
-            <div class="estadisticas-materias">
-
-                <div class="estadistica-materia">
-
-                    <div class="estadistica-titulo">
-                        <i class="fa-regular fa-bookmark"></i>
-                        <span>MATERIAS</span>
-                    </div>
-
-                    <div>
-                        <strong>14</strong>
-                        <span>ofertadas</span>
-                    </div>
-
-                </div>
-
-
-                <div class="estadistica-materia">
-
-                    <div class="estadistica-titulo">
-                        <i class="fa-solid fa-chart-pie"></i>
-                        <span>OCUPACIÓN</span>
-                    </div>
-
-                    <div>
-                        <strong>92%</strong>
-                        <span>promedio</span>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- BUSCADOR -->
-        <div class="buscador-materias">
-
-            <i class="fa-solid fa-magnifying-glass"></i>
-
-            <input
-                    type="text"
-                    placeholder="Buscar por asignatura o NRC..."
-            >
-
-            <span class="shortcut">⌘K</span>
-
         </div>
+    </div>
+</header>
 
-
-        <!-- FILTROS -->
-        <div class="filtros-materias">
-
-            <button class="filtro-materia activo">
-                Todas
-                <span>14</span>
-            </button>
-
-            <button class="filtro-materia">
-                <i class="fa-solid fa-circle filtro-rojo"></i>
-                Cupo Lleno
-                <span>3</span>
-            </button>
-
-            <button class="filtro-materia">
-                <i class="fa-solid fa-circle filtro-amarillo"></i>
-                Disponibles
-                <span>11</span>
-            </button>
-
+<main class="main-container gestion-content">
+    <div class="admin-title-row">
+        <div>
+            <h1>Gestión de materias y cupos <span class="admin-badge">ADMIN</span></h1>
+            <p class="subtitle">
+                <i class="fa-solid fa-circle text-success"></i>
+                Portal Nexus Administración • Periodo Académico <strong th:text="${periodo}">Periodo</strong>
+            </p>
         </div>
-
-
-        <!-- LISTA DE MATERIAS -->
-        <section class="lista-materias">
-
-
-            <!-- MATERIA 1 -->
-            <article class="materia-card">
-
-                <div class="materia-card-top">
-
-                    <div>
-
-                        <div class="materia-codigos">
-                            <span>ARQ-401</span>
-                            <span>NRC 5502</span>
-                        </div>
-
-                        <h3>Arquitectura de Software</h3>
-
-                        <p>
-                            <i class="fa-regular fa-user"></i>
-                            Dr. Alejandro Morales
-                        </p>
-
-                    </div>
-
-                    <span class="badge-cupo libre">
-                        <i class="fa-solid fa-circle"></i>
-                        2 Libres
-                    </span>
-
-                </div>
-
-
-                <div class="ocupacion-info">
-
-                    <div class="ocupacion-texto">
-                        <span>Ocupación de Aula</span>
-                        <strong>38 / 40 plazas (95%)</strong>
-                    </div>
-
-                    <div class="barra-cupo">
-                        <div class="barra-cupo-progreso" style="width:95%"></div>
-                    </div>
-
-                </div>
-
-
-                <div class="acciones-materia">
-
-                    <button>
-                        <i class="fa-solid fa-sliders"></i>
-                        Editar Cupos
-                    </button>
-
-                    <button>
-                        <i class="fa-solid fa-arrow-right-arrow-left"></i>
-                        Cambiar Docente
-                    </button>
-
-                </div>
-
-            </article>
-
-
-            <!-- MATERIA 2 -->
-            <article class="materia-card materia-llena">
-
-                <div class="materia-card-top">
-
-                    <div>
-
-                        <div class="materia-codigos">
-                            <span>ART-502</span>
-                            <span>NRC 7716</span>
-                        </div>
-
-                        <h3>Calidad de software</h3>
-
-                        <p>
-                            <i class="fa-regular fa-user"></i>
-                            Dr. Andrés Villalobos
-                        </p>
-
-                    </div>
-
-                    <span class="badge-cupo lleno">
-                        <i class="fa-solid fa-triangle-exclamation"></i>
-                        Sin Cupo
-                    </span>
-
-                </div>
-
-
-                <div class="ocupacion-info ocupacion-llena">
-
-                    <div class="ocupacion-texto">
-
-                        <span>Capacidad Máxima Excedida</span>
-
-                        <strong>40 / 40 plazas (100%)</strong>
-
-                    </div>
-
-                    <div class="barra-cupo">
-                        <div class="barra-cupo-progreso llena"
-                             style="width:100%"></div>
-                    </div>
-
-                </div>
-
-
-                <div class="acciones-materia">
-
-                    <button class="btn-ampliar">
-                        <i class="fa-solid fa-circle-plus"></i>
-                        Ampliar Cupos
-                    </button>
-
-                    <button>
-                        <i class="fa-solid fa-arrow-right-arrow-left"></i>
-                        Cambiar Docente
-                    </button>
-
-                </div>
-
-            </article>
-
-
-            <!-- MATERIA 3 -->
-            <article class="materia-card">
-
-                <div class="materia-card-top">
-
-                    <div>
-
-                        <div class="materia-codigos">
-                            <span>RED-601</span>
-                            <span>NRC 8840</span>
-                        </div>
-
-                        <h3>Redes de Computadoras</h3>
-
-                        <p>
-                            <i class="fa-regular fa-user"></i>
-                            Ing. Carlos Ortiz
-                        </p>
-
-                    </div>
-
-                    <span class="badge-cupo disponible">
-                        <i class="fa-solid fa-wifi"></i>
-                        13 Libres
-                    </span>
-
-                </div>
-
-
-                <div class="ocupacion-info">
-
-                    <div class="ocupacion-texto">
-                        <span>Ocupación de Aula</span>
-                        <strong>22 / 35 plazas (63%)</strong>
-                    </div>
-
-                    <div class="barra-cupo">
-                        <div class="barra-cupo-progreso"
-                             style="width:63%"></div>
-                    </div>
-
-                </div>
-
-
-                <div class="acciones-materia">
-
-                    <button>
-                        <i class="fa-solid fa-sliders"></i>
-                        Editar Cupos
-                    </button>
-
-                    <button>
-                        <i class="fa-solid fa-arrow-right-arrow-left"></i>
-                        Cambiar Docente
-                    </button>
-
-                </div>
-
-            </article>
-
-
-            <!-- MATERIA 4 -->
-            <article class="materia-card">
-
-                <div class="materia-card-top">
-
-                    <div>
-
-                        <div class="materia-codigos">
-                            <span>BDD-302</span>
-                            <span>NRC 9120</span>
-                        </div>
-
-                        <h3>Bases de Datos Avanzadas</h3>
-
-                        <p>
-                            <i class="fa-regular fa-user"></i>
-                            Mtra. Elena Rostova
-                        </p>
-
-                    </div>
-
-                    <span class="badge-cupo disponible">
-                        <i class="fa-solid fa-wifi"></i>
-                        15 Libres
-                    </span>
-
-                </div>
-
-
-                <div class="ocupacion-info">
-
-                    <div class="ocupacion-texto">
-                        <span>Ocupación de Aula</span>
-                        <strong>15 / 30 plazas (50%)</strong>
-                    </div>
-
-                    <div class="barra-cupo">
-                        <div class="barra-cupo-progreso"
-                             style="width:50%"></div>
-                    </div>
-
-                </div>
-
-
-                <div class="acciones-materia">
-
-                    <button>
-                        <i class="fa-solid fa-sliders"></i>
-                        Editar Cupos
-                    </button>
-
-                    <button>
-                        <i class="fa-solid fa-arrow-right-arrow-left"></i>
-                        Cambiar Docente
-                    </button>
-
-                </div>
-
-            </article>
-
-        </section>
-
-
-        <!-- BOTÓN CREAR MATERIA -->
-        <div class="crear-materia-container">
-
-            <button class="btn-crear-materia">
-
-                <i class="fa-solid fa-plus"></i>
-
-                Crear Nueva Materia
-
-            </button>
-
-        </div>
-
+        <button class="btn-primary desktop-btn" type="button" data-open-form>
+            <i class="fa-solid fa-plus"></i> Crear Nueva Materia
+        </button>
     </div>
 
+    <div th:if="${mensajeExito}" class="gestion-alert success" role="status" th:text="${mensajeExito}"></div>
+    <div th:if="${mensajeError}" class="gestion-alert error" role="alert" th:text="${mensajeError}"></div>
+    <div th:if="${!periodoActivo}" class="gestion-alert warning" role="status">
+        No hay un periodo escolar activo. La oferta actual no se puede modificar ni se pueden abrir grupos.
+    </div>
+
+    <section class="stats-grid" aria-label="Resumen de grupos del periodo">
+        <div class="stat-card">
+            <div class="stat-header"><span>MATERIAS OFERTADAS</span><i class="fa-solid fa-book"></i></div>
+            <div class="stat-value"><strong th:text="${materiasOfertadas}">0</strong> materias</div>
+            <div class="stat-footer" th:text="${totalGrupos} + ' grupos abiertos'">0 grupos abiertos</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-header"><span>OCUPACIÓN</span><i class="fa-solid fa-chart-pie"></i></div>
+            <div class="stat-value"><strong th:text="${#numbers.formatDecimal(ocupacionPromedio, 1, 1)} + '%'">0%</strong> promedio</div>
+            <div class="stat-progress"><div class="progress-fill dark-blue" th:style="|width: ${ocupacionPromedio}%|"></div></div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-header"><span>CUPOS TOTALES</span><i class="fa-solid fa-users"></i></div>
+            <div class="stat-value"><strong th:text="${totalOcupados}">0</strong> <span class="small-text" th:text="|/ ${totalCupos} asignados|">/ 0 asignados</span></div>
+            <div class="stat-footer" th:text="|${totalCupos - totalOcupados} plazas disponibles|">0 plazas disponibles</div>
+        </div>
+        <div class="stat-card alert-card">
+            <div class="stat-header"><span class="text-danger">GRUPOS SATURADOS</span><i class="fa-solid fa-triangle-exclamation text-danger"></i></div>
+            <div class="stat-value text-danger"><strong th:text="${gruposLlenos}">0</strong> <span class="small-text">grupos</span></div>
+            <div class="stat-footer text-danger">Requieren revisión o ampliación</div>
+        </div>
+    </section>
+
+    <section class="filters-row" aria-label="Filtros de grupos">
+        <nav class="filter-pills" aria-label="Filtrar por disponibilidad">
+            <a class="pill" th:classappend="${estadoSeleccionado == 'TODAS' ? ' active' : ''}"
+               th:href="@{/gestion-materias(estado='TODAS', carrera=${carreraSeleccionada}, busqueda=${busqueda})}">
+                Todas <span th:text="${totalGrupos}">0</span>
+            </a>
+            <a class="pill" th:classappend="${estadoSeleccionado == 'LLENAS' ? ' active' : ''}"
+               th:href="@{/gestion-materias(estado='LLENAS', carrera=${carreraSeleccionada}, busqueda=${busqueda})}">
+                <i class="fa-solid fa-circle text-danger"></i> Cupo Lleno <span th:text="${gruposLlenos}">0</span>
+            </a>
+            <a class="pill" th:classappend="${estadoSeleccionado == 'DISPONIBLES' ? ' active' : ''}"
+               th:href="@{/gestion-materias(estado='DISPONIBLES', carrera=${carreraSeleccionada}, busqueda=${busqueda})}">
+                <i class="fa-solid fa-circle text-warning"></i> Disponibles <span th:text="${gruposDisponibles}">0</span>
+            </a>
+        </nav>
+        <form class="filter-actions" method="get" th:action="@{/gestion-materias}">
+            <input type="hidden" name="estado" th:value="${estadoSeleccionado}">
+            <select class="custom-select-desktop" name="carrera" aria-label="Filtrar por carrera">
+                <option value="">Todas las carreras</option>
+                <option th:each="opcion : ${carreras}" th:value="${opcion}" th:text="${opcion}"
+                        th:selected="${opcion == carreraSeleccionada}">Carrera</option>
+            </select>
+            <div class="search-input-wrapper">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <label class="visually-hidden" for="busqueda-materia">Filtrar materias</label>
+                <input id="busqueda-materia" type="search" name="busqueda" th:value="${busqueda}" placeholder="Filtrar materia, NRC o docente...">
+            </div>
+            <button type="submit" class="btn-filter">Filtrar</button>
+        </form>
+    </section>
+
+    <section class="create-materia-panel" id="formulario-materia">
+        <details>
+            <summary><i class="fa-solid fa-plus"></i> Crear materia y abrir grupo</summary>
+            <form method="post" th:action="@{/admin/materias}" class="create-materia-form">
+                <fieldset th:disabled="${!periodoActivo}">
+                    <div class="create-form-grid">
+                        <label>Nombre de la materia
+                            <input name="nombre" type="text" maxlength="120" required placeholder="Ej. Arquitectura de Software">
+                        </label>
+                        <label>Clave de materia
+                            <input name="clave" type="text" maxlength="30" required placeholder="Ej. ARQ-401">
+                        </label>
+                        <label>Créditos SATCA
+                            <input name="creditos" type="number" min="1" max="16" required value="8">
+                        </label>
+                        <label>NRC / clave del grupo
+                            <input name="nrc" type="text" maxlength="30" required placeholder="Ej. 5502">
+                        </label>
+                        <label>Cupo máximo
+                            <input name="cupoMaximo" type="number" min="1" required value="30">
+                        </label>
+                        <label>Docente
+                            <select name="docenteId">
+                                <option value="">Sin asignar</option>
+                                <option th:each="docente : ${docentes}" th:value="${docente.id}"
+                                        th:text="|${docente.nombre} ${docente.apellidoPaterno}|">Docente</option>
+                            </select>
+                        </label>
+                        <label class="description-field">Descripción (opcional)
+                            <textarea name="descripcion" maxlength="400" rows="2" placeholder="Descripción breve"></textarea>
+                        </label>
+                    </div>
+                    <div class="create-form-footer">
+                        <span>Se creará un grupo dentro del periodo activo.</span>
+                        <button class="btn-primary" type="submit"><i class="fa-solid fa-floppy-disk"></i> Guardar materia y grupo</button>
+                    </div>
+                </fieldset>
+            </form>
+        </details>
+    </section>
+
+    <section class="materias-grid" aria-label="Grupos ofertados">
+        <article class="materia-card-desktop" th:each="clase : ${clases}"
+                 th:classappend="${clase.cuposDisponibles == 0 ? ' full-capacity' : ''}">
+            <div class="card-header-desktop">
+                <div class="tags">
+                    <span class="tag-code" th:text="${clase.materiaClave}">MAT-101</span>
+                    <span class="tag-nrc" th:text="|NRC ${clase.nrc}|">NRC 0000</span>
+                </div>
+                <span class="badge-status" th:classappend="${clase.cuposDisponibles == 0 ? ' danger' : (clase.porcentajeOcupacion >= 85 ? ' warning' : ' info')}">
+                    <i class="fa-solid" th:classappend="${clase.cuposDisponibles == 0 ? ' fa-triangle-exclamation' : ' fa-circle-check'}"></i>
+                    <span th:text="${clase.cuposDisponibles == 0 ? 'Sin cupo' : clase.cuposDisponibles + ' libres'}">Disponibles</span>
+                </span>
+            </div>
+            <h3 th:text="${clase.materiaNombre}">Nombre de la materia</h3>
+            <p class="docente"><i class="fa-regular fa-user"></i> <span th:text="${clase.docente}">Por asignar</span></p>
+            <p class="career-label"><i class="fa-solid fa-building-columns"></i> <span th:text="${clase.carrera}">Carrera</span></p>
+
+            <div class="ocupacion-box" th:classappend="${clase.cuposDisponibles == 0 ? ' danger-box' : ''}">
+                <div class="ocupacion-labels">
+                    <span>Ocupación del grupo</span>
+                    <strong th:text="|${clase.ocupados} / ${clase.cupoMaximo} plazas (${#numbers.formatDecimal(clase.porcentajeOcupacion, 1, 0)}%)|">0 / 0 plazas (0%)</strong>
+                </div>
+                <div class="progress-bg">
+                    <div class="progress-fill" th:classappend="${clase.cuposDisponibles == 0 ? ' danger' : (clase.porcentajeOcupacion >= 85 ? ' warning' : ' info')}"
+                         th:style="|width: ${clase.porcentajeBarra}%|"></div>
+                </div>
+            </div>
+
+            <div class="card-actions-desktop">
+                <form method="post" class="inline-action-form" th:action="@{/admin/materias/clases/{id}/cupo(id=${clase.claseId})}">
+                    <label class="visually-hidden" th:for="|cupo-${clase.claseId}|">Nuevo cupo máximo</label>
+                    <input type="number" min="1" required name="cupoMaximo" th:id="|cupo-${clase.claseId}|"
+                           th:value="${clase.cupoMaximo}" aria-label="Nuevo cupo máximo">
+                    <button class="btn-action" type="submit"><i class="fa-solid fa-sliders"></i> Actualizar cupo</button>
+                </form>
+                <form method="post" class="inline-action-form teacher-action-form"
+                      th:action="@{/admin/materias/clases/{id}/docente(id=${clase.claseId})}">
+                    <label class="visually-hidden" th:for="|docente-${clase.claseId}|" th:text="|Docente para ${clase.materiaNombre}|">Docente</label>
+                    <select name="docenteId" th:id="|docente-${clase.claseId}|" aria-label="Docente asignado">
+                        <option value="" th:selected="${clase.docenteId == null}">Sin asignar</option>
+                        <option th:each="docente : ${docentes}" th:value="${docente.id}"
+                                th:text="|${docente.nombre} ${docente.apellidoPaterno}|"
+                                th:selected="${docente.id == clase.docenteId}">Docente</option>
+                    </select>
+                    <button class="btn-action" type="submit"><i class="fa-solid fa-arrow-right-arrow-left"></i> Cambiar docente</button>
+                </form>
+            </div>
+        </article>
+
+        <div class="empty-state" th:if="${#lists.isEmpty(clases)}">
+            <i class="fa-solid fa-book-open"></i>
+            <h3>No hay grupos para mostrar</h3>
+            <p th:if="${totalGrupos == 0}">No hay grupos registrados en el periodo activo. Puedes crear una materia y abrir su primer grupo.</p>
+            <p th:if="${totalGrupos > 0}">No hay resultados con los filtros seleccionados. Cambia la búsqueda o el filtro de carrera.</p>
+        </div>
+    </section>
+
+    <section class="bottom-banner-action">
+        <div class="banner-content">
+            <i class="fa-solid fa-inbox"></i>
+            <div>
+                <h4>¿Deseas agregar una cátedra al catálogo general?</h4>
+                <p>Registra la materia y su primer grupo para el periodo activo.</p>
+            </div>
+        </div>
+        <button class="btn-primary desktop-btn" type="button" data-open-form>
+            <i class="fa-solid fa-plus"></i> Crear Nueva Materia
+        </button>
+    </section>
 </main>
 
+<footer class="desktop-footer-main">
+    <span><i class="fa-solid fa-circle text-success"></i> Sesión administrativa • Universidad Nexus</span>
+    <span th:text="|Periodo: ${periodo}|">Periodo académico</span>
+</footer>
+<script>
+    document.querySelectorAll('[data-open-form]').forEach((button) => {
+        button.addEventListener('click', () => {
+            const details = document.querySelector('#formulario-materia details');
+            details.open = true;
+            details.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+    });
+</script>
 </body>
 </html>

@@ -109,7 +109,7 @@
                     <div class="icono-acceso-directo azul-pastel-bg"><i class="fa-solid fa-box-archive"></i></div>
                     <h3>Gestión de Materias</h3>
                     <p class="texto-acceso-directo">Crear y editar cursos, cupos, profesores y horarios académicos.</p>
-                    <a href="#" class="card-bottom-link">Configurar catálogo <i class="fa-solid fa-arrow-right"></i></a>
+                    <a th:href="@{/gestion-materias}" class="card-bottom-link">Configurar catálogo <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
 
                 <div class="tarjeta-acceso-directo">
@@ -206,9 +206,9 @@
 
         <p class="count-register-mobile">Mostrando asignaturas activas registradas en el sistema</p>
 
-        <button type="button" class="nueva-materia-boton">
+        <a th:href="@{/gestion-materias}" class="nueva-materia-boton">
             <i class="fa-solid fa-plus"></i> Nueva Materia o Grupo
-        </button>
+        </a>
     </div>
 </main>
 </body>

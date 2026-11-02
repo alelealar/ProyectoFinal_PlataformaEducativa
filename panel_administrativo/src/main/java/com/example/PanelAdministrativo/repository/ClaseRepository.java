@@ -13,4 +13,8 @@ public interface ClaseRepository extends JpaRepository<Clase, Long> {
 
     @Query("SELECT c FROM Clase c JOIN c.materia.planMaterias pm WHERE pm.planEstudio.carrera.nombre = :nombreCarrera")
     List<Clase> findByCarreraNombre(@Param("nombreCarrera") String nombreCarrera);
+
+    List<Clase> findByPeriodoEscolar_Id(Long periodoEscolarId);
+
+    boolean existsByClaveIgnoreCase(String clave);
 }
