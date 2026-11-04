@@ -7,39 +7,25 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/stylesPeriodos.css}">
+    <link rel="stylesheet" href="../static/styles/stylePeriodos.css">
 </head>
 <body>
 
 <div class="app-wrapper">
 
     <!-- Header Desktop -->
-    <header class="desktop-nav-bar">
-        <div class="nav-breadcrumbs">
-            <span>📁 Facultades</span>
-            <span>›</span>
-            <span>Período 2025-I</span>
-            <button class="btn-back-link">↖ Volver a Servicios Escolares</button>
-            <span class="pill-tag">MÓDULO ACADÉMICO</span>
-            <span class="sync-badge">
-                <span class="sync-dot"></span> Sincronizado con Campus Central: Hoy, 09:42 hrs
-            </span>
-        </div>
-
-        <div class="user-profile-header">
-            <button class="icon-btn" aria-label="Buscar">
-                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-            </button>
-            <button class="icon-btn" aria-label="Notificaciones">
-                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
-                <span class="notification-dot"></span>
-            </button>
-            <div class="user-info">
-                <div class="user-name">Dr. Alejandro Ramos</div>
-                <div class="user-role">Administrador Nexus</div>
-            </div>
-            <div class="avatar">AR</div>
-        </div>
+    <header class="workspace-header">
+        <a class="workspace-brand" th:href="@{/panel-administrador}">
+            <span class="workspace-brand-icon"><i class="fa-solid fa-graduation-cap"></i></span>
+            <span><strong>UNIVERSIDAD NEXUS</strong><small>ADMINISTRACIÓN ESCOLAR</small></span>
+        </a>
+        <nav class="workspace-nav" aria-label="Navegación administrativa">
+            <a class="active" th:href="@{/panel-administrador}"><i class="fa-solid fa-chart-line"></i> Panel</a>
+            <a th:href="@{/gestion-materias}"><i class="fa-solid fa-book"></i> Materias y cupos</a>
+            <a th:href="@{/registro-usuarios}"><i class="fa-solid fa-users"></i> Usuarios</a>
+            <a th:href="@{/avisos}"><i class="fa-solid fa-bullhorn"></i> Avisos</a>
+        </nav>
+        <div class="workspace-user"><span class="workspace-avatar">AD</span><strong th:text="${nombreUsuario}">Administrador</strong></div>
     </header>
 
     <!-- Header Mobile -->
