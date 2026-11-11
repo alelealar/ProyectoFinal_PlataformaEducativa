@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Periodos Escolares - Móvil</title>
+    <title>Periodos Escolares</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -13,37 +13,20 @@
 
 <div class="app-wrapper">
 
-    <!-- Header Desktop -->
     <header class="workspace-header">
         <a class="workspace-brand" th:href="@{/panel-administrador}">
             <span class="workspace-brand-icon"><i class="fa-solid fa-graduation-cap"></i></span>
             <span><strong>UNIVERSIDAD NEXUS</strong><small>ADMINISTRACIÓN ESCOLAR</small></span>
         </a>
         <nav class="workspace-nav" aria-label="Navegación administrativa">
-            <a class="active" th:href="@{/panel-administrador}"><i class="fa-solid fa-chart-line"></i> Panel</a>
-            <a th:href="@{/gestion-materias}"><i class="fa-solid fa-book"></i> Materias y cupos</a>
-            <a th:href="@{/registro-usuarios}"><i class="fa-solid fa-users"></i> Usuarios</a>
+            <a th:href="@{/panel-administrador}"><i class="fa-solid fa-chart-line"></i> Panel</a>
+            <a th:href="@{/gestion-materias}"><i class="fa-solid fa-book"></i> Materias</a>
+            <a class="active" th:href="@{/registro-usuarios}"><i class="fa-solid fa-users"></i> Usuarios</a>
             <a th:href="@{/avisos}"><i class="fa-solid fa-bullhorn"></i> Avisos</a>
         </nav>
         <div class="workspace-user"><span class="workspace-avatar">AD</span><strong th:text="${nombreUsuario}">Administrador</strong></div>
     </header>
 
-    <!-- Header Mobile -->
-    <header class="mobile-nav-bar">
-        <div class="mobile-header-left">
-            <button class="btn-mobile-back" aria-label="Volver">←</button>
-            <div class="mobile-title-box">
-                <h2>Periodos Escolares <span class="badge-admin">ADMIN</span></h2>
-                <p>Portal Nexus Administration</p>
-            </div>
-        </div>
-        <div class="mobile-actions">
-            <button class="icon-btn" aria-label="Portal">
-                <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 14l9-5-9-5-9 5 9 5z"></path><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 01-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path></svg>
-            </button>
-            <div class="avatar" style="width:32px; height:32px; font-size:0.75rem;">AR</div>
-        </div>
-    </header>
 
     <!-- Titulo Principal Desktop -->
     <div class="page-title-row">

@@ -57,11 +57,11 @@ public class PanelController {
         return "panel-administrador";
     }
 
-    @GetMapping("/periodos")
+    @GetMapping("/periodos-escolares")
     public String mostrarPeriodos(HttpServletRequest request) {
         if (!AuthInterceptor.tieneSesionAdministrador(request.getSession(false))) {
             return "redirect:/login";
         }
-        return "periodos";
+        return "periodos-escolares";
     }
 }
