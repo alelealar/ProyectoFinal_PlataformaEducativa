@@ -66,6 +66,8 @@ desktop.ini
 *.tar.gz
 *.rar
 
+.properties
+
 # Miscellaneous
 HELP.md
 
