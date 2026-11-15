@@ -82,8 +82,8 @@
                         </div>
                         <div class="stat-content">
                             <span class="stat-label">MATRICULADOS</span>
-                            <span class="stat-value" th:text="${#numbers.formatInteger(matriculados, 1, 'COMMA')}">12,450</span>
-                            <span class="stat-subtext">94% de aforo total</span>
+                            <span class="stat-value" th:text="${#numbers.formatInteger(resumen.matriculados, 1, 'COMMA')}">12,450</span>
+                            <span class="stat-subtext" th:text="${resumen.porcentajeAforo} + '% de aforo total'">94% de aforo total</span>
                         </div>
                     </div>
                 </div>
@@ -91,14 +91,14 @@
                 <div class="hero-progress-box">
                     <div class="progress-header">
                         <span class="title">Avance del ciclo lectivo</span>
-                        <span class="value">Semana 6 de 18 (33%)</span>
+                        <span class="value" th:text="'Semana ' + ${resumen.semanaActual} + ' de ' + ${resumen.totalSemanas} + ' (' + ${resumen.porcentajeAvance} + '%)'">Semana 6 de 18 (33%)</span>
                     </div>
                     <div class="progress-track">
-                        <div class="progress-fill"></div>
+                        <div class="progress-fill" th:style="'width: ' + ${resumen.porcentajeAvance} + '%'"></div>
                     </div>
                     <div class="progress-footer">
-                        <span>Inicio: 15 de Enero</span>
-                        <span>Término de Clases: 28 de Mayo</span>
+                        <span th:text="${periodo == null ? '' : 'Inicio: ' + #temporals.format(periodo.fechaInicio, 'dd MMMM')}">Inicio: 15 de Enero</span>
+                        <span th:text="${periodo == null ? '' : 'Término de Clases: ' + #temporals.format(periodo.fechaFin, 'dd MMMM')}">Término de Clases: 28 de Mayo</span>
                     </div>
                 </div>
             </section>
@@ -185,7 +185,7 @@
                     </div>
                     <div class="accordion-text">
                         <h4>Historial de Períodos Escolares</h4>
-                        <p>2 ciclos archivados y certificados en libro de actas</p>
+                        <p th:text="${resumen.periodosArchivados} + ' ciclos archivados y certificados en libro de actas'">2 ciclos archivados y certificados en libro de actas</p>
                     </div>
                 </div>
                 <div class="accordion-action">
@@ -230,12 +230,12 @@
                 </div>
                 <div class="campus-stats">
                     <div class="campus-stat-row">
-                        <span class="campus-stat-label">Aulas Activas</span>
-                        <span class="campus-stat-val">342 / 360</span>
+                        <span class="campus-stat-label">Clases Activas</span>
+                        <span class="campus-stat-val" th:text="${resumen.clasesActivas}">342</span>
                     </div>
                     <div class="campus-stat-row">
                         <span class="campus-stat-label">Docentes en Asignación</span>
-                        <span class="campus-stat-val">628 Profesores</span>
+                        <span class="campus-stat-val" th:text="${resumen.docentesAsignados} + ' Profesores'">628 Profesores</span>
                     </div>
                     <div class="campus-stat-row">
                         <span class="campus-stat-label">Incidencias de Cruce</span>

@@ -12,4 +12,6 @@ public interface PeriodoEscolarRepository extends JpaRepository<PeriodoEscolar, 
     Optional<PeriodoEscolar> findByActivoTrue();
 
     long countByActivoTrue();
+
+    long countByActivoFalse();
 }
