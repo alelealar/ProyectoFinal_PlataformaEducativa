@@ -1,6 +1,7 @@
 package com.example.PanelAdministrativo.controller;
 
 import com.example.PanelAdministrativo.config.AuthInterceptor;
+import com.example.PanelAdministrativo.service.AlumnoService;
 import com.example.PanelAdministrativo.service.ClaseService;
 import com.example.PanelAdministrativo.service.MateriaService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,10 +20,12 @@ public class PanelController {
 
     private final ClaseService claseService;
     private final MateriaService materiaService;
+    private final AlumnoService alumnoService;
 
-    public PanelController(ClaseService claseService, MateriaService materiaService) {
+    public PanelController(ClaseService claseService, MateriaService materiaService, AlumnoService alumnoService) {
         this.claseService = claseService;
         this.materiaService = materiaService;
+        this.alumnoService = alumnoService;
     }
     /*
     @GetMapping({"/", "/panel"})
@@ -58,10 +61,21 @@ public class PanelController {
     }
 
     @GetMapping("/periodos-escolares")
-    public String mostrarPeriodos(HttpServletRequest request) {
-        if (!AuthInterceptor.tieneSesionAdministrador(request.getSession(false))) {
+    public String mostrarPeriodos(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession(false);
+        if (!AuthInterceptor.tieneSesionAdministrador(session)) {
             return "redirect:/login";
         }
+
+        Object nombreAdmin = session.getAttribute(AuthInterceptor.SESSION_USUARIO_NOMBRE);
+        model.addAttribute("nombreUsuario", nombreAdmin == null ? "Administrador" : nombreAdmin);
+
+        var periodo = materiaService.obtenerPeriodoActivo().orElse(null);
+        model.addAttribute("periodo", periodo);
+
+        long matriculados = periodo == null ? 0L : alumnoService.contarMatriculadosActivos(periodo.getId());
+        model.addAttribute("matriculados", matriculados);
+
         return "periodos-escolares";
     }
 }

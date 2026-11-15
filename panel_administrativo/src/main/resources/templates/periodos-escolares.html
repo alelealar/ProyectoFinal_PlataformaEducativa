@@ -60,7 +60,7 @@
                 </div>
 
                 <div class="hero-header">
-                    <h1>Período Lectivo 2026–1</h1>
+                    <h1 th:text="${periodo != null ? periodo.nombrePeriodo : 'Sin periodo activo'}">Período Lectivo 2026–1</h1>
                     <p>Semestre Primavera • Grado y Posgrado</p>
                 </div>
 
@@ -71,8 +71,8 @@
                         </div>
                         <div class="stat-content">
                             <span class="stat-label">DURACIÓN OFICIAL</span>
-                            <span class="stat-value">15 Ene – 28 May</span>
-                            <span class="stat-subtext">2026 • 18 Semanas</span>
+                            <span class="stat-value" th:text="${periodo == null ? '—' : #temporals.format(periodo.fechaInicio, 'dd MMM') + ' – ' + #temporals.format(periodo.fechaFin, 'dd MMM')}">15 Ene – 28 May</span>
+                            <span class="stat-subtext" th:text="${periodo == null ? '' : #temporals.format(periodo.fechaInicio, 'yyyy')}">2026 • 18 Semanas</span>
                         </div>
                     </div>
 
@@ -82,7 +82,7 @@
                         </div>
                         <div class="stat-content">
                             <span class="stat-label">MATRICULADOS</span>
-                            <span class="stat-value">12,450</span>
+                            <span class="stat-value" th:text="${#numbers.formatInteger(matriculados, 1, 'COMMA')}">12,450</span>
                             <span class="stat-subtext">94% de aforo total</span>
                         </div>
                     </div>
