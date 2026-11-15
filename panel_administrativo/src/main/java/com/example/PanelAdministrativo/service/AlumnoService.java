@@ -96,17 +96,6 @@ public class AlumnoService {
 
     }
 
-    public boolean validarContraseña(Long id, String contraseña){
-        Alumno alumno = alumnoRepository.findById(id).orElse(null);
-        if(alumno != null){
-
-            return BCryptUtils.verificarContraseña(contraseña, alumno.getContraseña());
-        }
-
-
-        throw new ResourceNotFoundException("No se ha encontrado al alumno con id: " + id);
-
-    }
 
     public void cambiarContraseña(Long id, String antiguaContraseña, String nuevaContraseña){
         Alumno alumno = alumnoRepository.findById(id)
@@ -118,6 +107,20 @@ public class AlumnoService {
 
         alumno.setContraseña(BCryptUtils.hashContraseña(nuevaContraseña));
         alumnoRepository.save(alumno);
+    }
+
+    /**
+     * Valida matrícula y contraseña del alumno. La comparación usa BCrypt.
+     *
+     * @return el alumno autenticado, o vacío si las credenciales no son válidas
+     */
+    public Optional<Alumno> autenticarAlumno(String matricula, String contraseña) {
+        if (matricula == null || contraseña == null) {
+            return Optional.empty();
+        }
+
+        return alumnoRepository.findByMatricula(matricula.trim())
+                .filter(alumno -> BCryptUtils.verificarContraseña(contraseña, alumno.getContraseña()));
     }
 
     /**
