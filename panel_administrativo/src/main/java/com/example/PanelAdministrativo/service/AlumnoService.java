@@ -3,6 +3,7 @@ import com.example.PanelAdministrativo.exception.BusinessRuleException;
 import com.example.PanelAdministrativo.exception.ResourceNotFoundException;
 import com.example.PanelAdministrativo.exception.WrongPasswordException;
 import com.example.PanelAdministrativo.model.Alumno;
+import com.example.PanelAdministrativo.model.EstadoInscripcion;
 import com.example.PanelAdministrativo.repository.AlumnoRepository;
 import com.example.PanelAdministrativo.util.BCryptUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -108,20 +109,26 @@ public class AlumnoService {
     }
 
     public void cambiarContraseña(Long id, String antiguaContraseña, String nuevaContraseña){
-        Alumno alumno = alumnoRepository.findById(id).orElse(null);
-        if (alumno != null){
-            if (BCryptUtils.verificarContraseña(antiguaContraseña, alumno.getContraseña()) ){
-                alumno.setContraseña(BCryptUtils.hashContraseña(nuevaContraseña));
-            }
-            else{
-                throw new WrongPasswordException("La contraseña introducida no es correcta.");
-            }
+        Alumno alumno = alumnoRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("No se ha encontrado al alumno con id: " + id));
 
+        if (!BCryptUtils.verificarContraseña(antiguaContraseña, alumno.getContraseña())) {
+            throw new WrongPasswordException("La contraseña introducida no es correcta.");
         }
 
-        throw new ResourceNotFoundException("No se ha encontrado al alumno con id: " + id);
+        alumno.setContraseña(BCryptUtils.hashContraseña(nuevaContraseña));
+        alumnoRepository.save(alumno);
     }
 
-
+    /**
+     * Cuenta los alumnos distintos con al menos una inscripción no dada de baja
+     * en el periodo escolar indicado.
+     *
+     * @param periodoId identificador del periodo escolar
+     * @return número de alumnos matriculados activos en el periodo
+     */
+    public long contarMatriculadosActivos(Long periodoId) {
+        return alumnoRepository.contarMatriculadosActivos(periodoId, EstadoInscripcion.BAJA);
+    }
 
 }
