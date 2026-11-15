@@ -1,5 +1,6 @@
 package com.example.PanelAdministrativo.service;
 
+import com.example.PanelAdministrativo.dto.AvisoDTO;
 import com.example.PanelAdministrativo.exception.BusinessRuleException;
 import com.example.PanelAdministrativo.model.Aviso;
 import com.example.PanelAdministrativo.model.Rol;
@@ -25,6 +26,22 @@ public class AvisoService {
     @Transactional(readOnly = true)
     public List<Aviso> obtenerHistorial() {
         return avisoRepository.findTop10ByOrderByFechaCreacionDesc();
+    }
+
+    /**
+     * Avisos dirigidos a los alumnos: los de toda la comunidad y los de alumnos.
+     */
+    @Transactional(readOnly = true)
+    public List<AvisoDTO> obtenerParaAlumnos() {
+        return avisoRepository.findByDestinatariosInOrderByFechaCreacionDesc(List.of("TODOS", "ALUMNOS"))
+                .stream()
+                .map(aviso -> new AvisoDTO(
+                        aviso.getId(),
+                        aviso.getTitulo(),
+                        aviso.getContenido(),
+                        aviso.getPrioridad(),
+                        aviso.getFechaCreacion()))
+                .toList();
     }
 
     @Transactional(readOnly = true)
