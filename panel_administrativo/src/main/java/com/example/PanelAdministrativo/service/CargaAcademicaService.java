@@ -129,6 +129,39 @@ public class CargaAcademicaService {
         return obtenerInscripcionesActivas(alumnoId);
     }
 
+    @Transactional
+    public void darDeBajaInscripcion(Long alumnoId, Long inscripcionId) {
+        Optional<PeriodoEscolar> periodoOpt = materiaService.obtenerPeriodoActivo();
+        if (periodoOpt.isEmpty()) {
+            throw new BusinessRuleException("No hay un periodo escolar activo.");
+        }
+        PeriodoEscolar periodoActivo = periodoOpt.get();
+
+        Optional<Inscripcion> inscripcionOpt = inscripcionRepository.findById(inscripcionId);
+        if (inscripcionOpt.isEmpty()) {
+            throw new ResourceNotFoundException("No se encontró la inscripción con ID " + inscripcionId + ".");
+        }
+        Inscripcion inscripcion = inscripcionOpt.get();
+
+        //que no quieran dar de baja de clases a otro alumno
+        if (!inscripcion.getAlumno().getId().equals(alumnoId)) {
+            throw new BusinessRuleException("No tienes permiso para dar de baja una inscripción de otro alumno.");
+        }
+
+        //que sea del periodo activo
+        if (!inscripcion.getClase().getPeriodoEscolar().getId().equals(periodoActivo.getId())) {
+            throw new BusinessRuleException("Solo puedes dar de baja materias del periodo escolar activo.");
+        }
+
+        //que no este dada de baja ya
+        if (inscripcion.getEstado() == EstadoInscripcion.BAJA) {
+            throw new BusinessRuleException("La inscripción ya se encuentra dada de baja.");
+        }
+
+        inscripcion.setEstado(EstadoInscripcion.BAJA);
+        inscripcionRepository.save(inscripcion);
+    }
+
     private InscripcionAlumnoDTO aInscripcion(Inscripcion inscripcion) {
         return new InscripcionAlumnoDTO(
                 inscripcion.getId(),

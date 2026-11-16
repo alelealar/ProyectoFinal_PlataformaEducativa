@@ -43,4 +43,11 @@ public class CargaAcademicaApiController {
                                                 @Valid @RequestBody InscripcionRequestDTO request) {
         return cargaAcademicaService.inscribirClases(alumnoId, request.getClaseIDs());
     }
+
+    @DeleteMapping("/alumnos/me/inscripciones/{inscripcionId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void darDeBaja(@AuthenticationPrincipal Long alumnoId,
+                          @PathVariable Long inscripcionId) {
+        cargaAcademicaService.darDeBajaInscripcion(alumnoId, inscripcionId);
+    }
 }
