@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Panel de administración de la Universidad Nexus">
+    <title>Panel administrativo | Universidad Nexus</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/styles/style.css}">
+</head>
+<body class="admin-workspace-page">
+<header class="workspace-header">
+    <a class="workspace-brand" th:href="@{/panel-administrador}">
+        <span class="workspace-brand-icon"><i class="fa-solid fa-graduation-cap"></i></span>
+        <span><strong>UNIVERSIDAD NEXUS</strong><small>ADMINISTRACIÓN ESCOLAR</small></span>
+    </a>
+    <nav class="workspace-nav" aria-label="Navegación administrativa">
+        <a class="active" th:href="@{/panel-administrador}"><i class="fa-solid fa-chart-line"></i> Panel</a>
+        <a th:href="@{/gestion-materias}"><i class="fa-solid fa-book"></i> Materias y cupos</a>
+        <a th:href="@{/registro-usuarios}"><i class="fa-solid fa-users"></i> Usuarios</a>
+        <a th:href="@{/avisos}"><i class="fa-solid fa-bullhorn"></i> Avisos</a>
+    </nav>
+    <div class="workspace-user"><span class="workspace-avatar">AD</span><strong th:text="${nombreUsuario}">Administrador</strong></div>
+</header>
+
+<main class="workspace-main dashboard-main">
+    <section class="workspace-heading dashboard-welcome">
+        <div>
+            <p class="workspace-eyebrow"><i class="fa-solid fa-circle"></i> CONSOLA ADMINISTRATIVA</p>
+            <h1>Hola, <span th:text="${nombreUsuario}">Administrador</span></h1>
+            <p>Resumen operativo del periodo <strong th:text="${periodo}">Sin periodo activo</strong>.</p>
+        </div>
+        <a class="workspace-secondary-button" th:href="@{/logout}"><i class="fa-solid fa-arrow-right-from-bracket"></i> Cerrar sesión</a>
+    </section>
+
+    <section class="dashboard-stats" aria-label="Estadísticas del sistema">
+        <article class="dashboard-stat-card">
+            <span class="dashboard-stat-icon blue"><i class="fa-solid fa-users"></i></span>
+            <div class="dashboard-stat-label">CUENTAS REGISTRADAS</div>
+            <strong th:text="${stats.totalUsuarios}">0</strong>
+            <small th:text="|${stats.totalAlumnos} alumnos • ${stats.totalDocentes} docentes|">Alumnos y docentes</small>
+        </article>
+        <article class="dashboard-stat-card">
+            <span class="dashboard-stat-icon green"><i class="fa-solid fa-user-check"></i></span>
+            <div class="dashboard-stat-label">INSCRIPCIONES ACTIVAS</div>
+            <strong th:text="${stats.totalInscritos}">0</strong>
+            <small th:text="|Capacidad ofertada: ${stats.metaInscritos}|">Capacidad ofertada</small>
+        </article>
+        <article class="dashboard-stat-card">
+            <span class="dashboard-stat-icon purple"><i class="fa-solid fa-book-open"></i></span>
+            <div class="dashboard-stat-label">MATERIAS OFERTADAS</div>
+            <strong th:text="${stats.materiasActivas}">0</strong>
+            <small th:text="|${stats.ocupacionGlobal}% de ocupación • ${stats.gruposLlenos} grupos llenos|">Ocupación y grupos llenos</small>
+            <small th:text="|${stats.periodosActivos} periodo(s) activo(s)|">Periodo activo</small>
+        </article>
+    </section>
+
+    <section class="dashboard-section">
+        <div class="dashboard-section-heading">
+            <div><p class="workspace-eyebrow">ACCESOS DIRECTOS</p><h2>Gestión rápida</h2></div>
+        </div>
+        <div class="dashboard-shortcuts">
+            <a class="dashboard-shortcut" th:href="@{/gestion-materias}">
+                <span class="shortcut-icon blue"><i class="fa-solid fa-book"></i></span>
+                <span><strong>Materias y cupos</strong><small>Oferta, grupos, docentes y aforo</small></span>
+                <i class="fa-solid fa-arrow-right shortcut-arrow"></i>
+            </a>
+            <a class="dashboard-shortcut" th:href="@{/registro-usuarios}">
+                <span class="shortcut-icon purple"><i class="fa-solid fa-user-plus"></i></span>
+                <span><strong>Registro de usuarios</strong><small>Alta individual o importación CSV</small></span>
+                <i class="fa-solid fa-arrow-right shortcut-arrow"></i>
+            </a>
+            <a class="dashboard-shortcut" th:href="@{/periodos-escolares}">
+                <span class="shortcut-icon green"><i class="fa-solid fa-calendar-days"></i></span>
+                <span><strong>Períodos escolares</strong><small>Consulta el calendario académico</small></span>
+                <i class="fa-solid fa-arrow-right shortcut-arrow"></i>
+            </a>
+            <a class="dashboard-shortcut" th:href="@{/avisos}">
+                <span class="shortcut-icon orange"><i class="fa-solid fa-bullhorn"></i></span>
+                <span><strong>Avisos</strong><small>Comunicados e historial administrativo</small></span>
+                <i class="fa-solid fa-arrow-right shortcut-arrow"></i>
+            </a>
+        </div>
+    </section>
+
+    <section class="dashboard-section dashboard-monitor">
+        <div class="dashboard-section-heading monitor-heading">
+            <div><p class="workspace-eyebrow">PERIODO ACTIVO</p><h2>Monitor de cupos</h2>
+                <p>Ocupación calculada con inscripciones que no están dadas de baja.</p></div>
+            <a class="workspace-secondary-button" th:href="@{/gestion-materias}">Administrar grupos <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <div class="monitor-filters">
+            <label for="monitor-search">Buscar materia o docente
+                <input id="monitor-search" type="search" placeholder="Nombre, NRC o docente">
+            </label>
+            <label for="monitor-career">Carrera
+                <select id="monitor-career">
+                    <option value="">Todas las carreras</option>
+                    <option th:each="carrera : ${carrerasMonitor}" th:value="${carrera}" th:text="${carrera}">Carrera</option>
+                </select>
+            </label>
+            <label for="monitor-state">Disponibilidad
+                <select id="monitor-state">
+                    <option value="">Todos los grupos</option>
+                    <option value="SATURADA">Sin cupo</option>
+                    <option value="CASI_LLENA">Casi llenos</option>
+                    <option value="DISPONIBLE">Disponibles</option>
+                </select>
+            </label>
+        </div>
+        <div class="monitor-list" id="monitor-list" th:if="${!#lists.isEmpty(monitorCupos)}">
+            <article class="monitor-course" th:each="grupo : ${monitorCupos}"
+                     th:attr="data-state=${grupo.estado},data-career=${grupo.carrera},data-search=|${grupo.nombreMateria} ${grupo.codigo} ${grupo.profesor}|">
+                <div class="monitor-course-main">
+                    <div class="monitor-course-top">
+                        <span class="monitor-course-code" th:text="|NRC ${grupo.codigo}|">NRC</span>
+                        <span class="monitor-state-pill" th:classappend="${grupo.estado == 'SATURADA' ? ' danger' : (grupo.estado == 'CASI_LLENA' ? ' warning' : ' success')}"
+                              th:text="${grupo.textoEstado}">Disponible</span>
+                    </div>
+                    <h3 th:text="${grupo.nombreMateria}">Materia</h3>
+                    <div class="monitor-course-meta">
+                        <span><i class="fa-regular fa-user"></i> <span th:text="${grupo.profesor}">Docente</span></span>
+                        <span><i class="fa-solid fa-building-columns"></i> <span th:text="${grupo.carrera}">Carrera</span></span>
+                        <span><i class="fa-regular fa-clock"></i> <span th:text="${grupo.horario}">Horario</span></span>
+                    </div>
+                </div>
+                <div class="monitor-course-capacity">
+                    <div><span>Ocupación</span><strong th:text="|${grupo.ocupados} / ${grupo.totalCupos} (${#numbers.formatDecimal(grupo.porcentajeOcupacion, 1, 0)}%)|">0 / 0</strong></div>
+                    <div class="capacity-track"><span th:classappend="${grupo.estado == 'SATURADA' ? ' danger' : (grupo.estado == 'CASI_LLENA' ? ' warning' : '')}"
+                                                          th:style="|width: ${T(java.lang.Math).min(grupo.porcentajeOcupacion, 100.0)}%|"></span></div>
+                </div>
+            </article>
+        </div>
+        <div class="workspace-empty dashboard-empty" th:if="${#lists.isEmpty(monitorCupos)}">
+            <i class="fa-solid fa-book-open"></i><strong>No hay grupos para el periodo activo</strong>
+            <span>Activa un periodo y registra grupos para consultar su ocupación.</span>
+            <a class="workspace-primary-button" th:href="@{/gestion-materias}">Ir a materias y cupos</a>
+        </div>
+        <p id="monitor-no-results" class="monitor-no-results" hidden>No hay grupos que coincidan con los filtros.</p>
+    </section>
+</main>
+<script>
+    const monitorFilters = ['monitor-search', 'monitor-career', 'monitor-state'].map((id) => document.getElementById(id));
+    const courseRows = [...document.querySelectorAll('.monitor-course')];
+    const emptyResult = document.getElementById('monitor-no-results');
+    function filterMonitor() {
+        const [search, career, state] = monitorFilters.map((input) => input.value.trim().toLowerCase());
+        let visible = 0;
+        courseRows.forEach((row) => {
+            const matches = row.dataset.search.toLowerCase().includes(search)
+                && (!career || row.dataset.career.toLowerCase() === career)
+                && (!state || row.dataset.state === state.toUpperCase());
+            row.hidden = !matches;
+            if (matches) visible++;
+        });
+        if (emptyResult) emptyResult.hidden = visible !== 0;
+    }
+    monitorFilters.forEach((input) => input.addEventListener('input', filterMonitor));
+    monitorFilters.forEach((input) => input.addEventListener('change', filterMonitor));
+</script>
+</body>
+</html>

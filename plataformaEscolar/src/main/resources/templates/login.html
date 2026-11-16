@@ -29,19 +29,9 @@
                 Portal de Carga Académica y Servicios Escolares
             </p>
         </header>
-        <section class="role-toggle" aria-label="Tipo de usuario">
-            <button type="button" class="role-btn is-active" aria-pressed="true">
-                <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
-                <span>Alumno</span>
-            </button>
-            <button type="button" class="role-btn" aria-pressed="false">
-                <i class="fa-solid fa-user-tie" aria-hidden="true"></i>
-                <span>Administrador</span>
-            </button>
-        </section>
 
         <section class="card login-form-card">
-            <form action="#" method="post">
+            <form id="login-form" action="#" method="post" novalidate>
                 <div class="form-group">
                     <label class="form-label" for="student-id">Matrícula Estudiantil</label>
                     <div class="input-wrapper">
@@ -67,6 +57,7 @@
                     </label>
                     <a href="#">¿Olvidaste tu contraseña?</a>
                 </div>
+                <p id="login-error" class="input-helper" role="alert" hidden></p>
                 <button type="submit" class="btn-primary">
                     <span>Iniciar sesión</span>
                     <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
@@ -97,5 +88,60 @@
         </footer>
     </div>
 </main>
+
+<script>
+    (function () {
+        // Base del backend (panel_administrativo) que expone /api/sesiones.
+        const API_BASE = 'http://localhost:8080';
+
+        const form = document.getElementById('login-form');
+        const errorBox = document.getElementById('login-error');
+        const submitBtn = form.querySelector('button[type="submit"]');
+
+        function mostrarError(mensaje) {
+            errorBox.textContent = mensaje;
+            errorBox.hidden = false;
+        }
+
+        form.addEventListener('submit', async function (event) {
+            event.preventDefault();
+            errorBox.hidden = true;
+
+            const matricula = document.getElementById('student-id').value.trim();
+            const contraseña = document.getElementById('password').value;
+            if (!/^\d{10}$/.test(matricula) || contraseña === '') {
+                mostrarError('Ingresa tu matrícula de 10 dígitos y tu contraseña.');
+                return;
+            }
+
+            submitBtn.disabled = true;
+            try {
+                const respuesta = await fetch(API_BASE + '/api/sesiones', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ matricula: matricula, contraseña: contraseña })
+                });
+
+                if (respuesta.status === 401) {
+                    mostrarError('Matrícula o contraseña incorrectas.');
+                    return;
+                }
+                if (!respuesta.ok) {
+                    mostrarError('No se pudo iniciar sesión. Intenta más tarde.');
+                    return;
+                }
+
+                const sesion = await respuesta.json();
+                sessionStorage.setItem('token', sesion.token);
+                sessionStorage.setItem('nombreAlumno', sesion.nombre);
+                window.location.href = '/tablero';
+            } catch (error) {
+                mostrarError('No hay conexión con el servidor de la plataforma.');
+            } finally {
+                submitBtn.disabled = false;
+            }
+        });
+    })();
+</script>
 </body>
 </html>

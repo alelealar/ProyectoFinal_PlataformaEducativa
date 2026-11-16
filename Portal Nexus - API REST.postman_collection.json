@@ -1,0 +1,282 @@
+{
+  "info": {
+    "_postman_id": "14717c4b-78ad-439b-862a-444713924cb9",
+    "name": "Portal Nexus - API REST",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "57777117",
+    "_collection_link": "https://go.postman.co/collection/57777117-14717c4b-78ad-439b-862a-444713924cb9?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "01 - Autenticación",
+      "item": [
+        {
+          "name": "Iniciar sesión (Alumno)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.response.code === 200) {\r\n    const data = pm.response.json();\r\n    pm.environment.set(\"jwt_token\", data.token);\r\n}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"matricula\": \"0021000099\",\r\n  \"contraseña\": \"123456\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/sesiones",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "sesiones"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "02 - Alumno y Seguridad",
+      "item": [
+        {
+          "name": "Obtener perfil del alumno",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/alumnos/me",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "alumnos",
+                "me"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Cambiar contraseña",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"contraseñaActual\": \"123456\",\r\n  \"contraseñaNueva\": \"12345678\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/alumnos/me/contrasena",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "alumnos",
+                "me",
+                "contrasena"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "03 - Carga Académica e Historial",
+      "item": [
+        {
+          "name": "Consultar catálogo de clases",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/clases",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "clases"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Consultar inscripciones activas",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/alumnos/me/inscripciones",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "alumnos",
+                "me",
+                "inscripciones"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Inscribir clases",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"claseIDs\": [2]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/alumnos/me/inscripciones",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "alumnos",
+                "me",
+                "inscripciones"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Dar de baja inscripcion",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/alumnos/me/inscripciones/24",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "alumnos",
+                "me",
+                "inscripciones",
+                "24"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Consultar historial academico",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "04 - Institucional",
+      "item": [
+        {
+          "name": "Consultar periodo escolar activo",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Consultar avisos para alumnos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/avisos",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "avisos"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{jwt_token}}",
+        "type": "string"
+      }
+    ]
+  }
+}
