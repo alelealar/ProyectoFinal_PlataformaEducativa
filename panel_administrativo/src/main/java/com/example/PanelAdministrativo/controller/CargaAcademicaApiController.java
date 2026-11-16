@@ -3,11 +3,12 @@ package com.example.PanelAdministrativo.controller;
 import com.example.PanelAdministrativo.dto.ClaseCatalogoDTO;
 import com.example.PanelAdministrativo.dto.HistorialItemDTO;
 import com.example.PanelAdministrativo.dto.InscripcionAlumnoDTO;
+import com.example.PanelAdministrativo.dto.InscripcionRequestDTO;
 import com.example.PanelAdministrativo.service.CargaAcademicaService;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,5 +35,12 @@ public class CargaAcademicaApiController {
     @GetMapping("/alumnos/me/historial")
     public List<HistorialItemDTO> historial(@AuthenticationPrincipal Long alumnoId) {
         return cargaAcademicaService.obtenerHistorial(alumnoId);
+    }
+
+    @PostMapping("/alumnos/me/inscripciones")
+    @ResponseStatus(HttpStatus.CREATED)
+    public List<InscripcionAlumnoDTO> inscribir(@AuthenticationPrincipal Long alumnoId,
+                                                @Valid @RequestBody InscripcionRequestDTO request) {
+        return cargaAcademicaService.inscribirClases(alumnoId, request.getClaseIDs());
     }
 }

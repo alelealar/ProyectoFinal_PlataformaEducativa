@@ -135,6 +135,14 @@ public class Inscripcion {
         this.clase = clase;
     }
 
+    public Alumno getAlumno() {
+        return alumno;
+    }
+
+    public void setAlumno(Alumno alumno) {
+        this.alumno = alumno;
+    }
+
     @Override
     public String toString() {
         return "Inscripcion{" +
